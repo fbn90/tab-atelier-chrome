@@ -164,9 +164,9 @@ test('backup round trip and repeated restore retain entries and existing user ch
   assert.equal((await fresh.store.list()).length,2);assert.equal((await fresh.store.get('video1')).status,'keep');assert.equal(fresh.created.length,0);assert.equal(fresh.removed.length,0);
 });
 
-test('opening an inbox video reuses a matching tab, preserves status, and never opens arbitrary URLs',async()=>{
+test('opening an inbox video reuses a matching tab, consumes its entry, and never opens arbitrary URLs',async()=>{
   const f=fixture([video(1,{url:'https://youtu.be/video1?t=88'})]);await f.store.merge([entry(1),entry(2)]);await f.store.setStatus('video1','keep');
-  assert.equal((await f.request('inbox-open',{videoId:'video1'})).ok,true);assert.equal(f.created.length,0);assert.equal((await f.store.get('video1')).status,'keep');
+  assert.equal((await f.request('inbox-open',{videoId:'video1'})).ok,true);assert.equal(f.created.length,0);assert.equal(await f.store.get('video1'),null);
   await f.request('inbox-open',{videoId:'video2'});assert.equal(f.created.length,1);
   assert.equal((await f.request('inbox-open',{videoId:'javascript:alert(1)'})).ok,false);
   const rejected=await f.request('inbox-capture',{closeTabs:true},{id:'test',url:'https://youtube.com',tab:{id:1}});assert.equal(rejected.ok,false);assert.equal((await f.tasks.list()).tasks.length,0);
@@ -293,6 +293,7 @@ test('single open carries its Inbox title to Parker and repairs a generic existi
   await f.store.merge([entry(1,{title,channel:'Unbekannt'})]);
   assert.equal((await f.request('inbox-open',{videoId:'video1'})).ok,true);
   assert.equal(new URL(f.created[0].url).searchParams.get('title'),title);
+  assert.equal(await f.store.get('video1'),null);await f.store.merge([entry(1,{title,channel:'Unbekannt'})]);
   const tab=f.live.get(f.created[0].id);tab.url=`chrome-extension://${TAB_PARKER_STORE_ID}/parked.html#https://youtu.be/video1?t=90`;
   assert.equal((await f.request('inbox-open',{videoId:'video1'})).ok,true);
   assert.equal(f.created.length,1);assert.equal(new URL(f.live.get(tab.id).url).searchParams.get('title'),title);
@@ -327,4 +328,17 @@ test('legacy parked title placeholders become searchable using known Inbox metad
  const f=fixture([video(1,{url,title:'YouTube-Video geparkt'})]);await f.store.merge([entry(1,{title:'Michael Every on trade',channel:'Reinvent Money'})]);
  const preview=await f.request('inbox-preview',{titleSearch:'Michael Every',parkedOnly:true});assert.equal(preview.tabCount,1);assert.equal(preview.videos[0].title,'Michael Every on trade');
  const job=await f.request('inbox-capture',{titleSearch:'Michael Every',parkedOnly:true});assert.equal((await finish(f,job.taskId)).result.closedTabs,1);
+});
+
+test('late metadata cannot reinsert an opened video; repeated imports still merge by ID',async()=>{
+  const f=fixture();await f.store.merge([entry(1)]);
+  await f.request('inbox-open',{videoId:'video1'});
+  await f.store.merge([entry(1)],{metadata:true,existingOnly:true});
+  assert.deepEqual(await f.store.list(),[]);
+  const items=[entry(1),entry(1,{url:'https://youtu.be/video1?t=80'}),entry(1,{url:'https://youtube.com/shorts/video1'})];
+  for(let attempt=0;attempt<2;attempt++){
+    const result=await f.request('inbox-restore',{backup:{format:'tab-atelier-inbox',version:2,items}});
+    assert.equal((await finish(f,result.taskId)).status,'done');
+  }
+  assert.deepEqual((await f.store.list()).map(item=>item.videoId),['video1']);
 });

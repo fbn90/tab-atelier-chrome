@@ -42,9 +42,11 @@ export function duplicatePairs(tabs, order) {
   });
 }
 
-export function windowSortPlan(tabs, order, dissolveGroups = false) {
+export function windowSortPlan(tabs, order, dissolveGroups = false, byDomain = false) {
   const byAge = (a, b) => (order[a.id] ?? a.id) - (order[b.id] ?? b.id) || a.id - b.id;
-  const pinned = tabs.filter(tab => tab.pinned).sort(byAge);
+  const hosts = byDomain ? new Map(tabs.map(tab=>[tab.id,domainOf(tab)])) : null;
+  const compare = hosts ? (a,b)=>hosts.get(a.id).localeCompare(hosts.get(b.id)) || a.index-b.index : byAge;
+  const pinned = tabs.filter(tab => tab.pinned).sort(compare);
   const groups = new Map();
   for (const tab of tabs.filter(tab => !tab.pinned)) {
     const groupId = !dissolveGroups && Number.isInteger(tab.groupId) && tab.groupId >= 0 ? tab.groupId : null;
@@ -53,8 +55,8 @@ export function windowSortPlan(tabs, order, dissolveGroups = false) {
     groups.get(key).tabs.push(tab);
   }
   const blocks = [...groups.values()];
-  for (const block of blocks) block.tabs.sort(byAge);
-  blocks.sort((a, b) => byAge(a.tabs[0], b.tabs[0]));
+  for (const block of blocks) block.tabs.sort(compare);
+  blocks.sort((a, b) => compare(a.tabs[0], b.tabs[0]));
   return [...pinned.map(tab => ({ groupId: null, tabs: [tab] })), ...blocks];
 }
 

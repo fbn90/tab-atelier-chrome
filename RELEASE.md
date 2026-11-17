@@ -1,6 +1,12 @@
-# Tab Atelier for Chrome 3.1.18
+# Tab Atelier for Chrome 3.1.20
 
-Confirmed group exceptions can survive Chrome session restore when the group and its local protection tab are restored.
+The popup now expands **Group tabs** and **Close tabs** underneath the selected domain. Live tab counts preserve your selection and keyboard focus. Press Escape to collapse the actions.
+
+- Use **Sort** to alphabetize the current window or distribute ungrouped web tabs across domain windows. Select multiple domains to gather them into one new window.
+- Open the global and YouTube limit settings from their counters. The header provides direct access to the Video Inbox and dashboard.
+- Opening a video from the Inbox removes its entry once the tab is confirmed, including when an existing tab is reused. Skipped videos stay saved. Saving or importing the same YouTube video ID still creates only one entry.
+
+This release requires no new Chrome permissions.
 
 1. Download the extension ZIP from Releases and extract it to a permanent folder.
 2. Open `chrome://extensions` and enable **Developer mode**.

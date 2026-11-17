@@ -1,7 +1,7 @@
 import './i18n.js';
 import {runExclusive} from './action-coordinator.js';
 import {taskService} from './task-runner.js';
-import {isTrustedPage} from './extension-pages.js';
+import {isTrustedPage,validateWindowId} from './extension-pages.js';
 import {installDomainRouting} from './domain-routing.js';
 import {readTabSettings,validateTabSettings,AUTOMATION_SETTINGS,isLimitPage} from './tab-settings.js';
 
@@ -202,8 +202,9 @@ export function installTabAutomation(api,{inbox,flushEvents=async()=>{},flushEve
     const action=async()=>{
       await ready;
       if(message.type==='tab-automation-sort'){
-        if(!(await readTabSettings(api)).domainRouting)throw Error(globalThis.atelierI18n.t("ui_please_enable_domain_sorting_first_625c47"));
-        return router.start((await api.tabs.query({})).map(tab=>tab.id));
+        validateWindowId(message.windowId);
+        const scoped=await api.tabs.query(message.windowId===undefined?{}:{windowId:message.windowId});
+        return router.start(scoped.map(tab=>tab.id),true);
       }
       if(message.type==='tab-limit-disable'){
         const settings=await readTabSettings(api);settings.totalLimitEnabled=false;configuration=settings;

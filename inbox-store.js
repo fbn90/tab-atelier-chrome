@@ -92,12 +92,19 @@ export function createInboxStore(storage) {
     await storage.set({[marker]:true});
   }
   return {get revision(){return revision},invalidate,list,get,compactStored,
-    merge(rawItems,{metadata=false,fillMissing=false,restore=false,repairTitle=false}={}) {
+    removeOpened(videoId) {
+      return queue(async()=>{
+        await storage.remove(key(videoId));
+        invalidate();
+      });
+    },
+    merge(rawItems,{metadata=false,fillMissing=false,restore=false,repairTitle=false,existingOnly=false}={}) {
       return queue(async()=>{
         const incoming=rawItems.map(item=>normalizeInboxItem(item));
         const previous=await storage.get(incoming.map(item=>key(item.videoId))),updates={};
         for(const item of incoming) {
           const k=key(item.videoId),old=updates[k]||(previous[k]?normalizeInboxItem(previous[k]):null);
+          if(!old&&existingOnly)continue;
           if(!old)updates[k]=item;
           else {
             const improve=!fillMissing&&item.metadataComplete&&(metadata||!old.metadataComplete);

@@ -268,6 +268,17 @@ test('regression: pending navigation cannot sacrifice a loaded original',async()
   await mock.request('get-domains');assert.equal(mock.tabs.size,2);
 });
 
+test('selected domains share one new window per privacy context; unrelated tabs stay put',async()=>{
+  const mock=mockChrome([tab(1),tab(2,{url:'https://news.example/',windowId:2}),
+    tab(3,{url:'https://other.example/'}),tab(4,{url:'https://news.example/private',incognito:true,windowId:3})]);
+  globalThis.chrome=mock.api;await import('../tab-manager.js?multiDomain');
+  const result=await mock.request('domain-window',{domains:['youtube.com','news.example']});
+  assert.equal(result.count,3);assert.equal(result.windowsCreated,2);
+  assert.equal(mock.tabs.get(1).windowId,mock.tabs.get(2).windowId);
+  assert.notEqual(mock.tabs.get(4).windowId,mock.tabs.get(1).windowId);
+  assert.equal(mock.tabs.get(3).windowId,1);assert.equal(mock.tabs.size,4);
+});
+
 test('regression: extension reload and browser startup never close existing tabs',async()=>{
   const mock=mockChrome([tab(1),tab(2)]);globalThis.chrome=mock.api;
   await import('../tab-manager.js?lifecycle-safe');

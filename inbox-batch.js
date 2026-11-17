@@ -148,6 +148,10 @@ export function registerInboxBatch({api,tasks,store}) {
           if(videoId(live)!==record.videoId||live.windowId!==job.windowId)throw Error(globalThis.atelierI18n.t("ui_a_video_tab_changed_during_grouping_please_open_the_db0bfb"));
           await api.tabs.group({tabIds:[live.id],groupId:job.groupId});
         }
+        const grouped=await api.tabs.get(live.id);
+        if(videoId(grouped)!==record.videoId||grouped.windowId!==job.windowId||grouped.groupId!==job.groupId)
+          throw Error(globalThis.atelierI18n.t('inboxOpenUnconfirmed'));
+        await store.removeOpened(record.videoId);
         if(job.firstTabId===undefined){job.firstTabId=live.id;job.firstVideoId=record.videoId}
         job.grouped++;job.cursor++;job.processed=job.cursor;summarize();
       });

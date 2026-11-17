@@ -33,6 +33,8 @@ function element(tag,className,text){const node=document.createElement(tag);node
 async function openVideo(videoId){
   try {
     const result=await window.atelierTasks.send('inbox-open',{videoId});
+    if(result.skipped)notice(globalThis.atelierI18n.t('inboxOpenUnconfirmed'),true);
+    await load();
     if(result.limitSkipped)notice(globalThis.atelierI18n.t('inboxReviewLimited',[result.limitSkipped]));
   }catch(error){notice(error.message,true)}
 }
@@ -178,7 +180,7 @@ $('reviewForm').addEventListener('submit',async event=>{
     const result=await window.atelierTasks.send('inbox-review-start',{filters,groupKey,amount,count,selectionKey,target,bypass:needsException});
     notice(tr('reviewResult',[result.groupedTabs,result.createdTabs,result.reusedTabs,result.skipped+result.limitSkipped]));
   }catch(error){notice(error.message,true)}
-  finally{batchBusy=false;updateBatchControls();await loadWindows()}
+  finally{batchBusy=false;updateBatchControls();await Promise.all([load(),loadWindows()])}
 });
 $('openBatch').addEventListener('click',()=>showReview(collection.matched));
 $('doneBatch').addEventListener('click',async()=>{

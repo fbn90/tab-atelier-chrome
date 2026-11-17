@@ -3,19 +3,58 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title data-i18n="ui_tab_atelier_01e1cc">Tab Atelier</title>
+    <title>Tab Atelier</title>
     <link rel="stylesheet" href="popup.css" />
     <link rel="icon" href="icons/logo.svg?v=20261110">
 </head>
   <body>
     <main class="popup">
       <header class="app-header">
-        <div class="brand">
-          <img class="brand-mark" src="icons/logo.svg" width="28" height="28" alt="">
-          <div class="brand-copy">
-            <strong class="brand-title" data-i18n="ui_tab_atelier_01e1cc">Tab Atelier</strong>
-          </div>
+        <div class="brand"><img class="brand-mark" src="icons/logo.svg" width="24" height="24" alt=""><strong class="brand-title">Tab Atelier</strong></div>
+        <div class="header-links">
+          <button id="openInbox" class="row-button" type="button" data-i18n="ui_video_inbox_353952">Video Inbox</button>
+          <button id="openDashboard" class="row-button" type="button">Dashboard</button>
         </div>
+      </header>
+      <p id="dashboardOpenStatus" class="subtle-status" role="status"></p>
+      <div class="popup-nav">
+        <button id="organizeView" class="mode-button is-active" aria-controls="organizePane" aria-pressed="true" data-i18n="popupOrganize">Organize tabs</button>
+        <button id="rulesView" class="mode-button" aria-controls="rulesPane" aria-pressed="false" data-i18n="ui_your_rules_157b08">Your rules</button>
+      </div>
+      <div id="popupContent">
+      <div class="limit-strip">
+        <button id="totalMeter" class="text-button" aria-controls="rulesPane">Tabs …</button>
+        <button id="videoMeter" class="text-button" aria-controls="rulesPane">YouTube …</button>
+      </div>
+      <div id="organizePane">
+      <section class="section domain-section" aria-labelledby="domainsTitle">
+        <h1 id="domainsTitle" class="scope-heading"><span id="domainScopeLabel" data-i18n="ui_all_windows_7d53f7">All windows</span><span aria-hidden="true"> · </span><span id="totalTabs">…</span></h1>
+        <details class="sort-disclosure">
+          <summary data-i18n="popupSort">Sort</summary>
+          <div class="sort-commands">
+            <button id="sortDomainOrder" class="text-button" type="button" data-i18n="sortDomainOrder">Sort this window A–Z</button>
+            <button id="sortDomainsNow" class="text-button" type="button" disabled data-i18n="domainSortNow">One window per domain</button>
+          </div>
+        </details>
+        <input id="domainSearch" class="threshold-input" type="search" placeholder="Search domains" aria-label="Search domains" autocomplete="off" data-i18n-placeholder="ui_search_domains_50c4f9" data-i18n-aria-label="ui_search_domains_50c4f9">
+        <div class="scope-filters">
+          <label class="sort-option"><input id="domainCurrentWindow" type="checkbox"><span data-i18n="ui_only_this_window_2488d8">Only this window</span></label>
+          <label class="sort-option"><input id="domainSubdomains" type="checkbox"><span data-i18n="popupSubdomains">Include subdomains</span></label>
+        </div>
+        <p id="sortDomainsStatus" class="subtle-status" role="status"></p>
+        <p id="domainStatus" class="subtle-status" aria-live="polite" data-i18n="ui_loading_domains_1d34f4">Loading domains …</p>
+        <ul id="domainList" class="domain-list" aria-label="Domains" data-i18n-aria-label="ui_domains_ced677"></ul>
+        <p class="section-copy" data-i18n="ui_window_collects_all_tabs_from_a_domain_in_a_new_wind_065488">“Window” collects all tabs from a domain in a new window, with no per-window tab limit. Regular and private tabs stay separate.</p>
+      </section>
+
+      </div>
+      <section id="taskPanel" class="section" hidden aria-label="Running tasks" data-i18n-aria-label="ui_running_tasks_72aebd">
+        <h2 class="section-title" data-i18n="ui_tasks_1351ad">Tasks</h2>
+        <p class="section-copy" data-i18n="ui_tasks_continue_when_the_popup_is_closed_cancel_stops_1f901c">Tasks continue when the popup is closed. Cancel stops further steps; completed steps are preserved.</p>
+        <ul id="taskList" class="alias-list" aria-live="polite"></ul>
+      </section>
+      <div id="rulesPane" hidden>
+      <div class="rules-meta"><span id="rulesVersion"></span>
         <button
           id="refreshChannelsButton"
           class="icon-button"
@@ -25,37 +64,7 @@
          data-i18n-aria-label="ui_refresh_channel_list_3b2a48" data-i18n-title="ui_refresh_channel_list_3b2a48">
           ↻
         </button>
-      </header>
-
-      <section class="section launch-section"><button id="openDashboard" class="primary-button" type="button" data-i18n="ui_open_dashboard_ef1f6f">Open dashboard ↗</button><button id="openInbox" class="text-button" type="button" data-i18n="ui_open_video_inbox_27ca3d">Open Video Inbox ↗</button><button id="openDonate" class="donate-button" type="button" data-i18n="donatePopup">♡ Support development</button><p id="dashboardOpenStatus" class="subtle-status" role="status"></p></section>
-
-      <section id="taskPanel" class="section" hidden aria-label="Running tasks" data-i18n-aria-label="ui_running_tasks_72aebd">
-        <h2 class="section-title" data-i18n="ui_tasks_1351ad">Tasks</h2>
-        <p class="section-copy" data-i18n="ui_tasks_continue_when_the_popup_is_closed_cancel_stops_1f901c">Tasks continue when the popup is closed. Cancel stops further steps; completed steps are preserved.</p>
-        <ul id="taskList" class="alias-list" aria-live="polite"></ul>
-      </section>
-      <section class="section domain-section" aria-labelledby="domainsTitle">
-        <div class="section-head section-head-tight">
-          <div><p id="domainScopeLabel" class="section-label" data-i18n="ui_all_windows_7d53f7">All windows</p><h1 id="domainsTitle" class="section-title" data-i18n="ui_your_tabs_d26e6d">Your tabs</h1></div>
-          <span id="totalTabs" class="total-tabs">…</span>
-        </div>
-        <label class="search-label" for="domainSearch" data-i18n="ui_search_domains_50c4f9">Search domains</label>
-        <input id="domainSearch" class="threshold-input" type="search" placeholder="youtube.com, jamesedition.com …" autocomplete="off"  data-i18n-placeholder="ui_youtube_com_jamesedition_com_dd9957"/>
-        <label class="sort-option"><input id="domainCurrentWindow" type="checkbox" /> <span data-i18n="ui_only_this_window_2488d8">Only this window</span></label>
-        <label class="sort-option"><input id="domainSubdomains" type="checkbox" /> <span data-i18n="ui_include_subdomains_under_the_parent_domain_3f9785">Include subdomains under the parent domain</span></label>
-        <p id="domainStatus" class="subtle-status" aria-live="polite" data-i18n="ui_loading_domains_1d34f4">Loading domains …</p>
-        <ul id="domainList" class="channel-list domain-list" aria-label="Domains" data-i18n-aria-label="ui_domains_ced677"></ul>
-        <p class="section-copy" data-i18n="ui_window_collects_all_tabs_from_a_domain_in_a_new_wind_065488">“Window” collects all tabs from a domain in a new window, with no per-window tab limit. Regular and private tabs stay separate.</p>
-        <button id="deduplicateButton" class="text-button" type="button" data-i18n="ui_clean_up_duplicates_now_09c595">Clean up duplicates now</button>
-        <label class="sort-option"><input id="automaticDuplicates" type="checkbox" disabled /> <span data-i18n="ui_automatically_close_new_duplicates_8d43cd">Automatically close new duplicates</span></label>
-        <p class="section-copy" data-i18n="ui_only_newly_opened_fully_loaded_tabs_youtube_duplicat_b028fe">Only newly opened, fully loaded tabs. YouTube duplicates are matched by video without timestamps; playlist contexts stay separate. Other sites use the complete URL. Pinned tabs take priority; otherwise the newer tab stays. No automatic full cleanup on startup.</p>
-        <details class="topic-editor">
-          <summary data-i18n="ui_duplicate_cleanup_log_da631e">Duplicate cleanup log</summary>
-          <p class="section-copy" data-i18n="ui_the_last_20_actions_in_this_session_earlier_closures_8e6afc">The last 20 actions in this session. Earlier closures were not recorded.</p>
-          <ul id="duplicateCloseLog" class="alias-list" aria-label="Duplicate cleanup log" data-i18n-aria-label="ui_duplicate_cleanup_log_da631e"></ul>
-        </details>
-      </section>
-
+      </div>
       <section class="section automation-section" aria-labelledby="automationTitle">
         <div class="section-head"><div><p class="section-label" data-i18n="ui_your_rules_157b08">Your rules</p><h2 id="automationTitle" class="section-title" data-i18n="ui_automation_tab_limit_9d3f57">Automation &amp; tab limit</h2></div><span class="inline-value" data-i18n="ui_on_off_f0d2ca">On / Off</span></div>
         <label class="search-label" for="youtubeGrouping" data-i18n="ui_auto_youtube_grouping">Group YouTube tabs automatically</label>
@@ -66,7 +75,6 @@
         </select>
         <label class="sort-option"><input id="automaticDomainRouting" type="checkbox" disabled /> <span data-i18n="ui_automatically_collect_new_tabs_by_domain_10e7bf">Automatically collect new tabs by domain</span></label>
         <p class="section-copy" data-i18n="ui_one_destination_window_per_domain_with_no_per_window_e5dd87">One destination window per domain, with no per-window tab limit. Groups and pinned tabs stay where they are. Internal pages are not moved.</p>
-        <button id="sortDomainsNow" class="text-button" type="button" disabled data-i18n="ui_collect_existing_ungrouped_tabs_by_domain_a2d2bc">Collect existing ungrouped tabs by domain</button>
         <label class="sort-option"><input id="totalTabLimitEnabled" type="checkbox" disabled /> <span data-i18n="ui_limit_the_total_number_of_open_tabs_b460c8">Limit the total number of open tabs</span></label>
         <label class="search-label" for="totalTabLimit" data-i18n="ui_maximum_open_tabs_all_windows_724283">Maximum open tabs (all windows)</label>
         <div class="input-row"><input id="totalTabLimit" class="threshold-input" type="number" min="1" max="10000" step="1" value="40" required disabled /><button id="saveTotalTabLimit" class="text-button" type="button" disabled data-i18n="ui_save_f6b2ff">Save</button></div>
@@ -79,6 +87,16 @@
         <p id="tabAutomationStatus" class="subtle-status" role="status"></p>
       </section>
 
+      <section class="section">
+        <button id="deduplicateButton" class="text-button" type="button" data-i18n="ui_clean_up_duplicates_now_09c595">Clean up duplicates now</button>
+        <label class="sort-option"><input id="automaticDuplicates" type="checkbox" disabled /> <span data-i18n="ui_automatically_close_new_duplicates_8d43cd">Automatically close new duplicates</span></label>
+        <p class="section-copy" data-i18n="ui_only_newly_opened_fully_loaded_tabs_youtube_duplicat_b028fe">Only newly opened, fully loaded tabs. YouTube duplicates are matched by video without timestamps; playlist contexts stay separate. Other sites use the complete URL. Pinned tabs take priority; otherwise the newer tab stays. No automatic full cleanup on startup.</p>
+        <details class="topic-editor">
+          <summary data-i18n="ui_duplicate_cleanup_log_da631e">Duplicate cleanup log</summary>
+          <p class="section-copy" data-i18n="ui_the_last_20_actions_in_this_session_earlier_closures_8e6afc">The last 20 actions in this session. Earlier closures were not recorded.</p>
+          <ul id="duplicateCloseLog" class="alias-list" aria-label="Duplicate cleanup log" data-i18n-aria-label="ui_duplicate_cleanup_log_da631e"></ul>
+        </details>
+      </section>
       <section class="section" aria-labelledby="sortWindowTitle">
         <h2 id="sortWindowTitle" class="section-title" data-i18n="ui_sort_this_window_6c2d7c">Sort this window</h2>
         <button id="sortWindowButton" class="primary-button" type="button" data-i18n="ui_sort_tabs_oldest_newest_8925d5">Sort tabs: oldest → newest</button>
@@ -190,6 +208,10 @@ Palantir CEO" maxlength="8000" required data-i18n-placeholder="ui_alexander_karp
           <p class="section-copy" data-i18n="ui_clear_cached_titles_and_channels_your_topic_rules_ar_8ff29d">Clear cached titles and channels. Your topic rules are preserved.</p>
         </details>
       </section>
+      <section class="section"><button id="openDonate" class="donate-button" type="button" data-i18n="donatePopup">♡ Support development</button></section>
+      </div>
+      </div>
+      <div id="selectionBar" hidden><button id="moveSelected" class="primary-button" type="button" disabled></button></div>
     </main>
     <script src="i18n-core.js"></script>
 <dialog id="domainGroupDialog" class="domain-group-dialog" aria-labelledby="domainGroupLabel">

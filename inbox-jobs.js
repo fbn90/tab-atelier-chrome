@@ -76,7 +76,7 @@ export function registerInboxJobs({api,tasks,store,getMetadata,selectGroup,chang
           title,metadataPrivate:record.incognito,channel:record.tabChannel||metadata?.channel||'Unbekannt',
           metadataComplete:!!meaningfulYouTubeTitle(title,record.videoId)&&!!metadata?.channel&&metadata.channel!=='Unbekannt'};
       }));
-      const stored=await store.merge(items,{metadata:true});
+      const stored=await store.merge(items,{metadata:true,existingOnly:true});
       job.incomplete+=stored.filter(item=>!item.metadataComplete).length;
       job.cursor+=selected.length;job.processed=job.cursor;summarize();changed();
       if(job.cursor<plan.videos.length)return false;

@@ -156,6 +156,10 @@ export function installInboxReview({api,tasks,store}){
         if(destination?.groupId!==job.groupId||destination.windowId!==job.windowId||
           (await api.tabGroups.get(job.groupId)).shared)throw Error(t('reviewWindowChanged'));
         if(live.groupId!==job.groupId)await api.tabs.group({tabIds:[live.id],groupId:job.groupId});
+        const grouped=await getTab(api,live.id);
+        if(reviewId(grouped)!==id||grouped.groupId!==job.groupId||grouped.windowId!==job.windowId)
+          throw Error(t('inboxOpenUnconfirmed'));
+        await store.removeOpened(id);
         protection.members.push(id);
         delete protection.pending;
         await saveReview(api,job.id,protection);

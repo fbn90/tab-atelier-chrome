@@ -18,6 +18,14 @@ async function scope() {
   return {windowId,includeSubdomains:domainSubdomains.checked};
 }
 let domains = [];
+const domainSelection=new Set();
+const moveSelected=document.getElementById("moveSelected");
+const selectionBar=document.getElementById("selectionBar");
+const updateSelection=()=>{
+  selectionBar.hidden=!domainSelection.size||document.getElementById("organizePane").hidden;
+  moveSelected.disabled=domainBusy||!domainSelection.size;
+  moveSelected.textContent=globalThis.atelierI18n.t(domainSelection.size===1?"popupMoveOne":"popupMoveMany",[domainSelection.size]);
+};
 let domainBusy = false;
 let domainRefreshTimer;
 let domainRequest = 0;
@@ -33,37 +41,98 @@ async function domainMessage(type, payload = {}) {
   return result;
 }
 
+const rowsByDomain=new Map();
+let expandedDomain=null;
+let rowSequence=0;
+const emptyDomainRow=document.createElement("li");
+emptyDomainRow.className="section-copy";
+emptyDomainRow.textContent=globalThis.atelierI18n.t("ui_no_matching_domains_10a591");
+
+function setExpanded(domain) {
+  const previous=rowsByDomain.get(expandedDomain);
+  if(previous){previous.actions.hidden=true;previous.toggle.setAttribute("aria-expanded","false")}
+  expandedDomain=domain;
+  const next=rowsByDomain.get(domain);
+  if(next){
+    next.actions.hidden=false;next.toggle.setAttribute("aria-expanded","true");
+    next.row.scrollIntoView({block:"nearest"});
+  }
+}
+
+function makeDomainRow(domain){
+  const t=globalThis.atelierI18n.t;
+  const row=document.createElement("li"),identity=document.createElement("div");
+  row.className="domain-row";identity.className="domain-identity";
+  const id="domain-"+(++rowSequence);
+  const checkbox=document.createElement("input"),label=document.createElement("label"),count=document.createElement("span");
+  checkbox.id=id;checkbox.type="checkbox";checkbox.setAttribute("aria-label",t("domainSelect",[domain]));
+  label.htmlFor=id;label.textContent=globalThis.atelierI18n.label(domain);label.title=label.textContent;
+  count.className="domain-count";identity.append(label,count);
+  checkbox.addEventListener("change",()=>{
+    if(checkbox.checked)domainSelection.add(domain);else domainSelection.delete(domain);
+    updateSelection();
+  });
+  function actionButton(action,key){
+    const button=document.createElement("button");
+    button.type="button";button.dataset.domain=domain;button.dataset.action=action;
+    button.className="row-button"+(action==="close"?" close-button":"");
+    button.textContent=t(key);
+    return button;
+  }
+  const windowButton=actionButton("window","actionWindow"),group=actionButton("group","popupGroup"),close=actionButton("close","popupClose");
+  const toggle=document.createElement("button"),actions=document.createElement("div");
+  toggle.type="button";toggle.className="row-button domain-toggle";toggle.textContent="•••";
+  toggle.setAttribute("aria-label",t("domainMore",[domain]));
+  toggle.setAttribute("aria-expanded","false");toggle.setAttribute("aria-controls",id+"-actions");
+  toggle.addEventListener("click",()=>setExpanded(expandedDomain===domain?null:domain));
+  actions.className="domain-actions";actions.id=id+"-actions";actions.hidden=true;
+  actions.append(group,close);row.append(checkbox,identity,windowButton,toggle,actions);
+  return {row,checkbox,count,toggle,actions,windowButton,group,close};
+}
+
+document.addEventListener("keydown",event=>{
+  if(event.key!=="Escape"||!expandedDomain||document.getElementById("organizePane").hidden||document.querySelector("dialog[open]"))return;
+  const trigger=rowsByDomain.get(expandedDomain)?.toggle;
+  event.preventDefault();event.stopPropagation();setExpanded(null);trigger?.focus();
+});
+
 function renderDomains() {
-  const filter = domainSearch.value.trim().toLowerCase();
-  const rows = domains.filter(item => item.domain.toLowerCase().includes(filter));
-  domainList.replaceChildren();
-  for (const item of rows) {
-    const row = document.createElement("li");
-    row.className = "channel-item";
-    const label = document.createElement("span");
-    label.className = "channel-name";
-    label.textContent = `${globalThis.atelierI18n.label(item.domain)} (${item.count})`;
-    label.title = label.textContent;
-    row.append(label);
-    for (const action of ["window", "group", "close"]) {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = `row-button ${action === "close" ? "close-button" : "move-button"}`;
-      button.textContent = globalThis.atelierI18n.t({window:'actionWindow',close:'actionClose',group:'actionGroup'}[action]);
-      button.dataset.domain = item.domain;
-      button.dataset.action = action;
-      button.disabled = domainBusy;
-      button.setAttribute("aria-label", globalThis.atelierI18n.t("ui_tabs_from_04f5ab", [item.count, item.domain, action === "group" ? globalThis.atelierI18n.t("actionGroup") : action === "close" ? globalThis.atelierI18n.t("ui_close_e0b9f0") : globalThis.atelierI18n.t("ui_collect_in_a_new_window_with_no_per_window_tab_limit_dc3187")]));
-      row.append(button);
+  const filter=domainSearch.value.trim().toLowerCase();
+  const visible=domains.filter(item=>item.domain.toLowerCase().includes(filter));
+  const names=new Set(visible.map(item=>item.domain));
+  const focused=document.activeElement,focusedRow=focused?.closest(".domain-row");
+  const scroller=document.getElementById("popupContent");
+  const scrollerBounds=scroller.getBoundingClientRect();
+  const oldTop=focusedRow?.getBoundingClientRect().top;
+  const anchored=oldTop>=scrollerBounds.top&&oldTop<scrollerBounds.bottom;
+  for(const domain of domainSelection)if(!names.has(domain))domainSelection.delete(domain);
+  if(!names.has(expandedDomain))setExpanded(null);
+  for(const [domain,view] of rowsByDomain)if(!names.has(domain)){view.row.remove();rowsByDomain.delete(domain)}
+  updateSelection();
+  if(!visible.length){if(!emptyDomainRow.isConnected)domainList.append(emptyDomainRow)}
+  else emptyDomainRow.remove();
+  let cursor=domainList.firstElementChild;
+  for(const item of visible){
+    let view=rowsByDomain.get(item.domain);
+    if(!view){view=makeDomainRow(item.domain);rowsByDomain.set(item.domain,view)}
+    if(view.lastCount!==item.count){
+      view.count.textContent="("+item.count+")";
+      const params=[item.count,item.domain];
+      for(const [button,key] of [[view.windowButton,"popupWindowLabel"],[view.group,"popupGroupLabel"],[view.close,"popupCloseLabel"]])
+        button.setAttribute("aria-label",globalThis.atelierI18n.t(item.count===1?key+"One":key,params));
+      view.lastCount=item.count;
     }
-    domainList.append(row);
+    view.checkbox.checked=domainSelection.has(item.domain);
+    for(const control of [view.checkbox,view.windowButton,view.group,view.close,view.toggle])control.disabled=domainBusy;
+    if(view.row!==cursor){
+      if(view.row.isConnected&&domainList.moveBefore)domainList.moveBefore(view.row,cursor);
+      else domainList.insertBefore(view.row,cursor);
+    }
+    cursor=view.row.nextElementSibling;
   }
-  if (!rows.length) {
-    const empty = document.createElement("li");
-    empty.className = "section-copy";
-    empty.textContent = globalThis.atelierI18n.t("ui_no_matching_domains_10a591");
-    domainList.append(empty);
-  }
+  if(focusedRow&&focused.isConnected&&!focused.disabled&&document.activeElement!==focused)focused.focus({preventScroll:true});
+  if(focusedRow&&!focused.isConnected)domainSearch.focus({preventScroll:true});
+  if(anchored&&focusedRow.isConnected)scroller.scrollTop+=focusedRow.getBoundingClientRect().top-oldTop;
 }
 
 async function refreshDomains() {
@@ -73,8 +142,11 @@ async function refreshDomains() {
     if (request !== domainRequest) return;
     domains = result.domains;
     document.getElementById("domainScopeLabel").textContent=domainCurrentWindow.checked?globalThis.atelierI18n.t("ui_this_window_e8cb28"):globalThis.atelierI18n.t("ui_all_windows_7d53f7");
-    totalTabs.textContent = String(result.total);
-    totalTabs.setAttribute("aria-label", globalThis.atelierI18n.t("ui_open_tabs_dfe13d", [result.total]));
+    const off=globalThis.atelierI18n.t("ui_off_2337c3");
+    document.getElementById("totalMeter").textContent=globalThis.atelierI18n.t("totalMeterLabel",[result.totalCount,result.totalCap??off]);
+    document.getElementById("videoMeter").textContent="YouTube "+result.videoCount+" / "+(result.videoCap??off);
+    totalTabs.textContent = globalThis.atelierI18n.t(result.scopeTotal===1?"popupTabOne":"popupTabCount",[result.scopeTotal]);
+    totalTabs.setAttribute("aria-label", globalThis.atelierI18n.t("ui_open_tabs_dfe13d", [result.scopeTotal]));
     renderDomains();
     if (!autoSettingBusy) {
       automaticDuplicates.checked = result.automaticEnabled;
@@ -94,7 +166,7 @@ async function refreshDomains() {
       empty.textContent = globalThis.atelierI18n.t("ui_no_actions_recorded_yet_2da3c0");
       duplicateCloseLog.append(empty);
     }
-    if (domainStatus.textContent === globalThis.atelierI18n.t("ui_loading_domains_1d34f4")) domainFeedback(globalThis.atelierI18n.t("ui_domains_tabs_selected_eb1429", [domains.length, result.scopeTotal]));
+    if (domainStatus.textContent === globalThis.atelierI18n.t("ui_loading_domains_1d34f4")) domainFeedback("");
   } catch (error) { domainFeedback(error.message, true); }
 }
 
@@ -116,6 +188,21 @@ async function runDomainAction(type, payload = {}) {
   }
 }
 
+document.getElementById("sortDomainOrder").addEventListener("click",async event=>{
+  const button=event.currentTarget;button.disabled=true;
+  try{
+    const result=await domainMessage("sort-window-domain",{windowId:await popupWindowId,dissolveGroups:false});
+    domainFeedback(globalThis.atelierI18n.t("sortDomainResult",[result.count]));
+  }catch(error){domainFeedback(error.message,true)}
+  finally{button.disabled=false}
+});
+document.addEventListener("limits-changed",refreshDomains);
+moveSelected.addEventListener("click",async()=>{
+  try{
+    const names=[...domainSelection];if(!names.length)return;
+    await runDomainAction("domain-window",{domains:names,...await scope()});
+  }catch(error){domainFeedback(error.message,true)}
+});
 domainSearch.addEventListener("input", renderDomains);
 deduplicateButton.addEventListener("click", () => runDomainAction("deduplicate-tabs"));
 automaticDuplicates.addEventListener("change", async () => {
@@ -161,8 +248,8 @@ chrome.runtime.onMessage.addListener(message => {
 });
 refreshDomains();
 
-domainCurrentWindow.addEventListener("change",()=>{domainFeedback(globalThis.atelierI18n.t("ui_loading_domains_1d34f4"));refreshDomains()});
-domainSubdomains.addEventListener("change",()=>{domainFeedback(globalThis.atelierI18n.t("ui_loading_domains_1d34f4"));refreshDomains()});
+domainCurrentWindow.addEventListener("change",()=>{domainSelection.clear();renderDomains();domainFeedback(globalThis.atelierI18n.t("ui_loading_domains_1d34f4"));refreshDomains()});
+domainSubdomains.addEventListener("change",()=>{domainSelection.clear();renderDomains();domainFeedback(globalThis.atelierI18n.t("ui_loading_domains_1d34f4"));refreshDomains()});
 const cacheDetails=document.getElementById("cacheDetails"),cacheStatus=document.getElementById("cacheStatus");
 async function refreshCache() {
   try{const result=await domainMessage("metadata-cache-stats");cacheStatus.textContent=globalThis.atelierI18n.t("ui_videos_kb_stored_2fa94d", [result.entries, result.maxEntries, (result.bytes/1024).toFixed(1)]);}catch(error){cacheStatus.textContent=error.message;}

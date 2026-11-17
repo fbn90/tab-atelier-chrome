@@ -4,7 +4,7 @@ import {parseYouTubeTab as parseYouTubeVideo} from './youtube-url.js';
 // Checkpointed moves of existing tabs. Optional named-group merging only closes
 // confirmed duplicate videos in the destination; it never reopens URLs.
 export function resumableTransfer(job) {
-  return ['domain-window','move-group-to-window','automatic-window-limit','automatic-domain-routing'].includes(job.type) && job.transfer?.version === 1;
+  return ['domain-window','move-group-to-window','automatic-window-limit','automatic-domain-routing','manual-domain-routing'].includes(job.type) && job.transfer?.version === 1;
 }
 
 export async function transferStep(job, ctx, records, {api=chrome, matches, groupTitle=null, onMoved=async()=>{},reuseGroups=false,reusePlan=null,contexts=null,sourceWindowId,maxTabsPerWindow=null,destinationMatches=()=>true,destinationKey=tab=>String(!!tab.incognito),initialDestinations={},countsTowardLimit=()=>true,groupForRecord=null}={}) {

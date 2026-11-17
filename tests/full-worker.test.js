@@ -87,8 +87,7 @@ test('real worker entry point routes popup messages and completes an export thro
       assert.notEqual(batchTask.status,'failed',batchTask.error);await new Promise(r=>setImmediate(r));
     }
     assert.equal(batchTask.status,'done');assert.equal(batchTask.result.reusedTabs,2);assert.equal(batchTask.result.groupedTabs,2);assert.equal(created,1);
-    assert.equal((await message('inbox-set-status-batch',{videoIds:['video1','video2'],status:'done'},inboxSender)).count,2);
-    assert.equal((await message('inbox-list',{},inboxSender)).items.filter(item=>item.status==='done').length,2);
+    assert.deepEqual((await message('inbox-list',{},inboxSender)).items,[]);
     const closed=[];
     api.tabs.remove=async id=>{closed.push(id);open.splice(open.findIndex(tab=>tab.id===id),1);api.tabs.onRemoved.fire(id)};
     const capture=await message('inbox-capture',{},inboxSender);assert.ok(capture.taskId);
@@ -97,6 +96,8 @@ test('real worker entry point routes popup messages and completes an export thro
       if(task.status==='done'){assert.equal(task.result.closedTabs,2);break}
       assert.notEqual(task.status,'failed',task.error);await new Promise(r=>setImmediate(r));
     }
+    assert.equal((await message('inbox-set-status-batch',{videoIds:['video1','video2'],status:'done'},inboxSender)).count,2);
+    assert.equal((await message('inbox-list',{},inboxSender)).items.filter(item=>item.status==='done').length,2);
     assert.deepEqual(closed,[1,2]);assert.equal((await message('inbox-list',{},inboxSender)).items.filter(item=>item.status==='done').length,2);
 
     let parkedFetches=0,injections=0;

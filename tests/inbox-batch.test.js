@@ -65,6 +65,8 @@ test('opening a saved batch reuses parked video tabs without reopening their URL
 test('repeated batches from one channel reuse the same group and window without reopening videos',async()=>{
   const f=fixture();await f.store.merge([entry(1,{channel:'Asmongold TV'}),entry(2,{channel:'Asmongold TV'}),entry(3,{channel:'Asmongold TV'})]);
   const first=await finish(f.tasks,await start(f,['video1','video2'],{title:'asmongold'}));
+  assert.equal(await f.store.get('video2'),null);
+  await f.store.merge([entry(2,{channel:'Asmongold TV'})]);
   const second=await finish(f.tasks,await start(f,['video2','video3'],{title:'a different search'}));
   assert.equal(second.status,'done');assert.equal(second.result.windowId,first.result.windowId);assert.equal(second.result.groupId,first.result.groupId);
   assert.equal(second.result.groupReused,true);assert.equal(second.result.createdTabs,1);assert.equal(second.result.reusedTabs,1);assert.equal(f.calls.windows.length,1);assert.equal(f.calls.created.length,3);assert.equal(f.live.size,3);
@@ -96,6 +98,7 @@ test('a target group video wins over an ungrouped copy and the copy is not globa
 test('mixed-channel batches keep their chosen subject group rather than using one channel name',async()=>{
   const f=fixture();await f.store.merge([entry(1,{channel:'Channel A'}),entry(2,{channel:'Channel B'})]);
   const first=await finish(f.tasks,await start(f,['video1','video2'],{title:'Polyglot'}));
+  await f.store.merge([entry(1,{channel:'Channel A'}),entry(2,{channel:'Channel B'})]);
   const second=await finish(f.tasks,await start(f,['video1','video2'],{title:'Polyglot'}));
   assert.equal(second.status,'done');assert.equal(first.result.groupId,second.result.groupId);assert.equal(f.groups.get(first.result.groupId).title,'Polyglot');assert.equal(f.calls.windows.length,1);
 });
@@ -115,12 +118,14 @@ test('50 filtered videos open only the first ten and preserve the rest of the In
   assert.equal(task.status,'done');assert.equal(task.result.groupedTabs,10);assert.equal(task.result.createdTabs,0);assert.equal(task.result.reusedTabs,10);
   assert.equal(f.calls.windows.length,1);assert.equal(f.groups.size,1);assert.equal(f.calls.closed.length,0);assert.equal(f.live.size,26);assert.equal(f.live.get(999).windowId,1);
   assert.equal([...f.groups.values()][0].title,'A channel');assert.equal([...f.live.values()].filter(t=>t.groupId===task.result.groupId).length,10);
-  assert.deepEqual(await f.store.list(),before);assert.ok(f.calls.queries<=12);
+  const opened=new Set(selection.slice(0,10).map(item=>item.videoId));
+  assert.deepEqual(await f.store.list(),before.filter(item=>!opened.has(item.videoId)));assert.ok(f.calls.queries<=12);
 });
 
 test('rerunning open reuses videos, pending loads and duplicate selected IDs without creating duplicates',async()=>{
   const f=fixture([video(1,{url:'about:blank',pendingUrl:'https://youtube.com/watch?v=video1'})]);await f.store.merge([entry(1),entry(2)]);
   assert.equal((await finish(f.tasks,await start(f,['video1','video2','video1']))).status,'done');
+  assert.deepEqual(await f.store.list(),[]);await f.store.merge([entry(1),entry(2)]);
   assert.equal((await finish(f.tasks,await start(f,['video1','video2']))).result.createdTabs,0);assert.equal(f.calls.created.length,1);assert.equal(f.live.size,2);
 });
 
@@ -161,7 +166,7 @@ test('a disappeared destination stops remaining opens, retaining already opened 
   const f=fixture();await f.store.merge(Array.from({length:12},(_,i)=>entry(i+1)));
   const id=await start(f,Array.from({length:12},(_,i)=>`video${i+1}`));await f.tasks.pump();await f.tasks.pump();
   assert.equal(f.calls.created.length,5);f.windows.delete(100);
-  const task=await finish(f.tasks,id);assert.equal(task.status,'failed');assert.match(task.error,/Zielfenster/);assert.equal(f.calls.created.length,5);assert.equal(f.calls.windows.length,1);
+  const task=await finish(f.tasks,id);assert.equal(task.status,'failed');assert.equal((await f.store.list()).length,7);assert.match(task.error,/Zielfenster/);assert.equal(f.calls.created.length,5);assert.equal(f.calls.windows.length,1);
 });
 
 test('grouping errors retain opened videos with separate creation counts',async()=>{
@@ -248,16 +253,18 @@ test('a new batch sends saved titles to Parker and repairs reused placeholder ti
   await f.store.merge([entry(1,{title:'Is France First? – David Betz 🎬'}),entry(2,{title:'A second title & more'})]);
   const task=await finish(f.tasks,await start(f,['video1','video2'],{target:'current',windowId:1}));
   assert.equal(task.status,'done',task.error);assert.equal(task.result.createdTabs,2);
-  for(const tab of f.calls.created){const url=new URL(tab.url);assert.equal(url.protocol,'chrome-extension:');assert.equal(url.searchParams.get('title'),(await f.store.get(tab.url.includes('video1')?'video1':'video2')).title);}
+  assert.deepEqual(await f.store.list(),[]);
+  for(const tab of f.calls.created){const url=new URL(tab.url);assert.equal(url.protocol,'chrome-extension:');assert.equal(url.searchParams.get('title'),tab.url.includes('video1')?'Is France First? – David Betz 🎬':'A second title & more');}
   const first=[...f.live.values()].find(tab=>tab.url.includes('video1'));
   first.url=`chrome-extension://${TAB_PARKER_STORE_ID}/parked.html#https://youtu.be/video1?t=99`;
   const count=f.calls.created.length;
+  await f.store.merge([entry(1,{title:'Is France First? – David Betz 🎬'}),entry(2,{title:'A second title & more'})]);
   const reopened=await finish(f.tasks,await start(f,['video1','video2'],{target:'current',windowId:1}));
   assert.equal(reopened.status,'done',reopened.error);assert.equal(reopened.result.createdTabs,0);assert.equal(reopened.result.reusedTabs,2);
   assert.equal(f.calls.created.length,count);assert.equal(new URL(f.live.get(first.id).url).searchParams.get('title'),'Is France First? – David Betz 🎬');
 });
 
-test('a new-window batch seeds Parker with the saved title and keeps Inbox metadata intact',async()=>{
+test('a new-window batch seeds Parker with the saved title before consuming the Inbox entry',async()=>{
   const f=fixture();f.api.runtime.sendMessage=async(id,message)=>message?.type==='tab-parker-identify'&&id===TAB_PARKER_STORE_ID?
     {app:'youtube-tab-parker',protocol:1,id,version:'1.3.4'}:undefined;
   await f.store.merge([entry(1,{title:'Saved title',status:'keep'})]);const before=await f.store.get('video1');
@@ -265,7 +272,7 @@ test('a new-window batch seeds Parker with the saved title and keeps Inbox metad
   assert.equal(task.status,'done',task.error);assert.equal(task.result.createdTabs,1);
   assert.equal(new URL(f.calls.windows[0].url).searchParams.get('title'),before.title);
   assert.equal(new URL(f.calls.windows[0].url).hash.slice(1),before.openUrl);
-  assert.deepEqual(await f.store.get('video1'),before);
+  assert.equal(await f.store.get('video1'),null);
 });
 
 test('navigation during Parker verification skips batch title repair and preserves the new page',async()=>{
@@ -298,7 +305,7 @@ test('a review batch opens only the available slots and leaves every remaining e
   await f.store.merge(Array.from({length:10},(_,i)=>entry(i+1)));
   const task=await finish(f.tasks,await start(f,Array.from({length:10},(_,i)=>'video'+(i+1)),{target:'current'}));
   assert.equal(task.status,'done');assert.equal(task.result.createdTabs,2);assert.equal(task.result.limitSkipped,8);
-  assert.equal((await f.store.list()).length,10);assert.equal(f.calls.closed.length,0);
+  assert.deepEqual((await f.store.list()).map(item=>item.videoId),Array.from({length:8},(_,i)=>'video'+(i+3)));assert.equal(f.calls.closed.length,0);
 });
 
 test('a cancelled review resumes in its exact existing group without opening more copies',async()=>{
@@ -320,5 +327,5 @@ test('a cancelled review resumes in its exact existing group without opening mor
   assert.equal(finished.status,'done',finished.error);
   assert.equal(finished.result.groupedTabs,11);assert.equal(finished.result.skipped,1);
   assert.equal(f.calls.windows.length,1);assert.equal(f.calls.created.length,12); // 11 fresh videos and the protection tab.
-  assert.equal(f.calls.closed.length,0);assert.equal((await f.store.list()).length,12);
+  assert.equal(f.calls.closed.length,0);assert.deepEqual((await f.store.list()).map(item=>item.videoId),['video11']);
 });

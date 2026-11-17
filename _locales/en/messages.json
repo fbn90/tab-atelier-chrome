@@ -704,7 +704,7 @@
     }
   },
   "ui_videos_newly_opened_existing_tabs_reused_inbox_statu_bc3e8c": {
-    "message": "$arg0$ videos $arg1$ · $arg2$ newly opened · $arg3$ existing tabs reused.$arg4$$arg5$ Inbox status stays unchanged.",
+    "message": "$arg0$ videos $arg1$ · $arg2$ newly opened · $arg3$ existing tabs reused.$arg4$$arg5$ Confirmed videos leave the Inbox.",
     "placeholders": {
       "arg0": {
         "content": "$1"
@@ -1910,7 +1910,7 @@
     "message": "Mark all as done ✓"
   },
   "ui_applies_to_all_matches_an_existing_channel_group_is_beed82": {
-    "message": "Applies to all matches. An existing channel group is reused; open groups with the same name are merged, even across windows. Duplicate videos in these groups are closed. Selected pinned tabs are unpinned for grouping. Opening does not change Inbox status; marking as done does not close tabs."
+    "message": "Applies to all matches. An existing channel group is reused; open groups with the same name are merged, even across windows. Duplicate videos in these groups are closed. Selected pinned tabs are unpinned for grouping. Confirmed videos leave the Inbox; marking as done does not close tabs."
   },
   "ui_loading_collection_fd4ce2": {
     "message": "Loading collection …"
@@ -2295,7 +2295,7 @@
     "message": "Checking the selection …"
   },
   "reviewHint": {
-    "message": "Choose how many videos to open. Marking as done applies to all matches."
+    "message": "Opening a video removes it from the Inbox once its tab is confirmed. Skipped videos stay saved. Each YouTube video ID is saved only once."
   },
   "reviewExceptionHint": {
     "message": "This group can exceed the tab limits. Its videos still count toward the total and stay protected from automatic archiving."
@@ -2329,5 +2329,74 @@
   },
   "reviewProtectionStop": {
     "message": "End group protection"
+  },
+  "popupOrganize": {
+    "message": "Organize tabs"
+  },
+  "domainSortNow": {
+    "message": "One window per domain"
+  },
+  "domainMoveSelected": {
+    "message": "Selection → one window"
+  },
+  "domainSelect": {
+    "message": "Select $1"
+  },
+  "domainMore": {
+    "message": "More actions for $1"
+  },
+  "totalMeterLabel": {
+    "message": "Tabs $1 / $2"
+  },
+  "inboxOpenUnconfirmed": {
+    "message": "The video tab changed. Its Inbox entry has been kept."
+  },
+  "sortDomainOrder": {
+    "message": "Sort this window A–Z"
+  },
+  "sortDomainResult": {
+    "message": "Sorted $1 tabs by domain."
+  },
+  "popupSort": {
+    "message": "Sort"
+  },
+  "popupSubdomains": {
+    "message": "Include subdomains"
+  },
+  "popupMoveOne": {
+    "message": "Move 1 domain to a new window"
+  },
+  "popupMoveMany": {
+    "message": "Move $1 domains into one new window"
+  },
+  "popupGroup": {
+    "message": "Group tabs"
+  },
+  "popupClose": {
+    "message": "Close tabs"
+  },
+  "popupWindowLabel": {
+    "message": "Move $1 tabs from $2 into a new window"
+  },
+  "popupGroupLabel": {
+    "message": "Group $1 tabs from $2"
+  },
+  "popupCloseLabel": {
+    "message": "Close $1 tabs from $2"
+  },
+  "popupTabCount": {
+    "message": "$1 tabs"
+  },
+  "popupTabOne": {
+    "message": "1 tab"
+  },
+  "popupCloseLabelOne": {
+    "message": "Close 1 tab from $2"
+  },
+  "popupWindowLabelOne": {
+    "message": "Move 1 tab from $2 into a new window"
+  },
+  "popupGroupLabelOne": {
+    "message": "Group 1 tab from $2"
   }
 }

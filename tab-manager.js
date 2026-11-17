@@ -9,7 +9,7 @@ import { runExclusive } from "./action-coordinator.js";
 import { createTabIndex } from "./tab-index.js";
 import { groupNameKey } from "./group-reuse.js";
 import { taskService } from "./task-runner.js";
-import {assertTabCapacity} from "./tab-settings.js";
+import {readTabSettings,isLimitPage,assertTabCapacity} from "./tab-settings.js";
 import {isGrouped,rememberDomainWindow,domainWindowTargets,domainContext} from './window-policy.js';
 const index = createTabIndex(chrome);
 const tasks = taskService();
@@ -172,9 +172,25 @@ async function reconcile(triggerId = null, providedPairs = null) {
 function validateScope(payload) {
   validateWindowId(payload.windowId);
 }
+function domainFilter(payload) {
+  if(payload.domains!==undefined && (payload.type!=='domain-window'||!Array.isArray(payload.domains)||!payload.domains.length))
+    throw Error(globalThis.atelierI18n.t("ui_invalid_domain_f8ac0a"));
+  const names=new Set(payload.domains??[payload.domain]);
+  if([...names].some(name=>typeof name!=='string'||!name.length||name.length>512))
+    throw Error(globalThis.atelierI18n.t("ui_invalid_domain_f8ac0a"));
+  return tab=>{
+    const host=domainOf(tab);
+    if(names.has(host))return true;
+    if(!payload.includeSubdomains || !/^https?:/.test(tabParkerTarget(tabUrl(tab))||tabUrl(tab)))return false;
+    const labels=host.split('.');
+    for(let offset=1;offset<labels.length;offset++)if(names.has(labels.slice(offset).join('.')))return true;
+    return false;
+  };
+}
 function selectedTabs(tabs, payload) {
+  const matches=domainFilter(payload);
   return tabs.filter(tab => (payload.windowId === undefined || tab.windowId === payload.windowId) &&
-    domainMatches(tab, payload.domain, payload.includeSubdomains === true));
+    matches(tab));
 }
 async function groupDomainTabs(payload) {
   validateScope(payload);
@@ -244,9 +260,9 @@ async function groupDomainTabs(payload) {
 
 async function domainStep(job, ctx) {
   const p = job.payload;
+  const matches=domainFilter(p);
   if (!job.prepared) {
     validateScope(p);
-    if (typeof p.domain !== "string" || !p.domain || p.domain.length > 512) throw Error(globalThis.atelierI18n.t("ui_invalid_domain_f8ac0a"));
     await index.refresh();
     const tabs = selectedTabs(await ensureIndex(), p).sort((a,b) => Number(a.incognito)-Number(b.incognito) || Number(b.pinned)-Number(a.pinned) || a.windowId-b.windowId || a.index-b.index);
     const nativeGroups=new Map();
@@ -265,11 +281,11 @@ async function domainStep(job, ctx) {
     const registered=await domainWindowTargets(chrome);
 
     const done=await transferStep(job,ctx,selected,{matches:(tab,original)=>
-      tabUrl(tab)===tabUrl(original) && !!tab.incognito===!!original.incognito && domainMatches(tab,p.domain,p.includeSubdomains),
-      destinationMatches:tab=>domainMatches(tab,p.domain,p.includeSubdomains),groupForRecord:record=>record.nativeGroup||null,
+      tabUrl(tab)===tabUrl(original) && !!tab.incognito===!!original.incognito && matches(tab),
+      destinationMatches:matches,groupForRecord:record=>record.nativeGroup||null,
       onMoved:async id=>{
         const tab=await getTab(id);
-        if(tab&&registered[domainContext(tab)]!==tab.windowId){
+        if(tab&&(!p.domains||p.domains.length===1)&&registered[domainContext(tab)]!==tab.windowId){
           await rememberDomainWindow(chrome,tab.windowId,tab);registered[domainContext(tab)]=tab.windowId;
         }
         await index.refreshTab(id);
@@ -305,7 +321,7 @@ async function sortStep(job, ctx) {
     const all = await ensureIndex();
     const tabs = all.filter(t=>t.windowId===windowId);
     if (!tabs.length) throw Error(globalThis.atelierI18n.t("ui_this_window_is_no_longer_open_87f6c8"));
-    const plan = windowSortPlan(tabs,state.order,dissolveGroups);
+    const plan = windowSortPlan(tabs,state.order,dissolveGroups,job.type==="sort-window-domain");
     const expected = plan.flatMap(b=>b.tabs);
     const starts = {}; let position=0;
     for(const block of plan) { if(block.groupId !== null) starts[position]=block.groupId; position+=block.tabs.length; }
@@ -314,7 +330,7 @@ async function sortStep(job, ctx) {
     job.grouped=Object.keys(starts).length>0;job.prepared=true;
   }
   const {expected,starts}=await ctx.read();
-  job.phase=globalThis.atelierI18n.t("ui_sort_oldest_newest_acb08f");
+  job.phase=globalThis.atelierI18n.t(job.type==="sort-window-domain"?"sortDomainOrder":"ui_sort_oldest_newest_acb08f");
   for (let end=Math.min(job.cursor+20,expected.length);job.cursor<end;) {
     if(ctx.cancelled()) break;
     const original=expected[job.cursor],live=await getTab(original.id);
@@ -356,6 +372,7 @@ async function duplicateStep(job,ctx) {
 tasks.register("domain-window",domainStep);
 tasks.register("domain-close",domainStep);
 tasks.register("sort-window-oldest",sortStep);
+tasks.register("sort-window-domain",sortStep);
 tasks.register("deduplicate-tabs",duplicateStep);
 
 async function flushEvents() {
@@ -413,7 +430,7 @@ async function initializeSession(startup=false) {
 }
 chrome.runtime.onInstalled.addListener(()=>{enqueue(()=>initializeSession()).catch(console.warn)});
 chrome.runtime.onStartup.addListener(()=>{enqueue(()=>initializeSession(true)).catch(console.warn)});
-const messages=new Set(["get-dashboard-tabs","open-dashboard","open-donate","focus-dashboard-tab","get-domains","domain-window","domain-close","domain-group","deduplicate-tabs","sort-window-oldest","set-automatic-duplicates"]);
+const messages=new Set(["get-dashboard-tabs","open-dashboard","open-donate","focus-dashboard-tab","get-domains","domain-window","domain-close","domain-group","deduplicate-tabs","sort-window-oldest","sort-window-domain","set-automatic-duplicates"]);
 chrome.runtime.onMessage.addListener((message,sender,reply)=>{
   if(!messages.has(message?.type))return false;
   if(!isTrustedPage(sender)) {
@@ -422,9 +439,9 @@ chrome.runtime.onMessage.addListener((message,sender,reply)=>{
   // A pause takes effect immediately, even while another job owns the queue.
   if(message.type==="set-automatic-duplicates" && message.enabled===false) {automaticEnabled=false;settingsLoaded=true;}
   const action=async()=>{
-    if(["domain-window","domain-close","deduplicate-tabs","sort-window-oldest"].includes(message.type)) {
+    if(["domain-window","domain-close","deduplicate-tabs","sort-window-oldest","sort-window-domain"].includes(message.type)) {
       await enqueue(flushEvents);
-      return tasks.start(message.type,message,message.type.startsWith("domain-")?message.domain:message.type==="deduplicate-tabs"?globalThis.atelierI18n.t("ui_clean_up_duplicates_eb1066"):globalThis.atelierI18n.t("ui_sort_window_c2f810"));
+      return tasks.start(message.type,message,message.type.startsWith("domain-")?(message.domain||globalThis.atelierI18n.t("domainMoveSelected")):message.type==="deduplicate-tabs"?globalThis.atelierI18n.t("ui_clean_up_duplicates_eb1066"):globalThis.atelierI18n.t("ui_sort_window_c2f810"));
     }
     return enqueue(async()=>{
       await flushEvents();await loadAutoSetting();
@@ -452,7 +469,12 @@ chrome.runtime.onMessage.addListener((message,sender,reply)=>{
       if(message.type==="get-domains") {
         const all=await index.snapshot();validateScope(message);
         const tabs=all.filter(t=>message.windowId===undefined || t.windowId===message.windowId);
-        return {ok:true,total:all.length,scopeTotal:tabs.length,domains:domainSummary(tabs,message.includeSubdomains),automaticEnabled,closeLog:state.closeLog};
+        const settings=await readTabSettings(chrome);
+        const {markerTabs,protectedTabs}=await reviewProtection(chrome,all);
+        const totalCount=all.filter(tab=>!markerTabs.has(tab.id)&&!isLimitPage(chrome,tab)).length;
+        const videoCount=all.filter(tab=>!tab.incognito&&!protectedTabs.has(tab.id)&&parseYouTubeTab(tabUrl(tab))).length;
+        return {ok:true,totalCount,videoCount,totalCap:settings.totalLimitEnabled?settings.totalLimit:null,
+          videoCap:settings.youtubeLimitEnabled?settings.youtubeLimit:null,total:all.length,scopeTotal:tabs.length,domains:domainSummary(tabs,message.includeSubdomains),automaticEnabled,closeLog:state.closeLog};
       }
       if(typeof message.enabled!=="boolean")throw Error(globalThis.atelierI18n.t("ui_invalid_setting_144cc6"));
       await chrome.storage.local.set({[AUTO_KEY]:message.enabled});automaticEnabled=message.enabled;settingsLoaded=true;

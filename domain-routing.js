@@ -10,8 +10,8 @@ export function installDomainRouting(api,{flushEventsInAction=async()=>{}}={}){
   const tasks=taskService(api);
   // Retire persisted jobs from the old ten-tabs-per-window rule without moving anything.
   tasks.register('automatic-window-limit',async()=>true);
-  tasks.register('automatic-domain-routing',async(job,ctx)=>{
-    if(!(await readTabSettings(api)).domainRouting)return true;
+  const route=async(job,ctx)=>{
+    if(job.type==='automatic-domain-routing'&&!(await readTabSettings(api)).domainRouting)return true;
     await flushEventsInAction();
     if(!job.prepared){
       const all=await api.tabs.query({}),wanted=new Set(job.payload.tabIds);
@@ -62,6 +62,8 @@ export function installDomainRouting(api,{flushEventsInAction=async()=>{}}={}){
       job.focusDone=true;
     });
     job.phase=globalThis.atelierI18n.t("ui_tabs_collected_by_domain_fe01cf");return true;
-  });
-  return {async start(tabIds){return tasks.start('automatic-domain-routing',{tabIds},globalThis.atelierI18n.t("ui_automatically_collect_tabs_by_domain_f5b1b5"))}};
+  };
+  tasks.register('manual-domain-routing',route);
+  tasks.register('automatic-domain-routing',route);
+  return {start:(tabIds,manual=false)=>tasks.start(manual?'manual-domain-routing':'automatic-domain-routing',{tabIds},globalThis.atelierI18n.t(manual?'domainSortNow':'ui_automatically_collect_tabs_by_domain_f5b1b5'))};
 }

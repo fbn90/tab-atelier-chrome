@@ -6,10 +6,24 @@ Organize open tabs by domain, save YouTube videos to a local Inbox, and reopen v
 
 ## Features
 
-- Group open tabs by website, YouTube channel or topic.
-- Save videos before closing tabs, then search and review them in the Video Inbox.
-- Open ten, twenty or all matching videos in a group. The opt-in tab protection can archive older videos and protect explicitly approved groups.
-- Import or export an Inbox backup as JSON.
+### Organize tabs and windows
+
+- **See what is open.** The toolbar badge shows the total tab count. The popup and dashboard list tabs by domain across windows, with a filter for the current window.
+- **Move a website into its own window.** Use **Window** beside a domain to gather its tabs into one new window. Select one or more domains to show the button that moves the selection into a single new window. Regular and private windows stay separate. Choose **•••** to show **Group tabs** and **Close tabs** underneath that domain. Press Escape to collapse the row.
+- **Sort tabs by domain.** Under **Sort**, choose **Sort this window A–Z** to keep groups together, or **One window per domain** to distribute ungrouped, unpinned web tabs, even with automatic routing off. Enable automatic domain routing to send new tabs to their matching windows.
+- **Sort by opening order.** Sort the current window from oldest to newest. Clean up duplicate tabs manually or enable automatic duplicate cleanup.
+
+### Protect your tab limits
+
+- **Set two independent limits.** Choose a maximum for all open tabs and a separate maximum for open YouTube videos, including parked Tab Parker videos.
+- **Save older videos automatically.** When the YouTube limit is exceeded, Tab Atelier saves the oldest eligible videos to the Video Inbox and verifies the saved link before closing the tab.
+- **Make an exception for a group.** Approve a larger Inbox group explicitly. The group's videos are protected from automatic archiving and still count toward the total limit.
+
+### Manage YouTube videos
+
+- Group open videos by channel or topic, automatically or from the dashboard.
+- Save and search videos in the local Video Inbox. Open individual videos or 10, 20 or all matches as a group. Each confirmed opening removes that video from the Inbox, including when an existing tab is reused. Failed and skipped videos stay saved. Saving or importing multiple links with the same YouTube video ID creates a single entry, regardless of timestamp or URL format.
+- Export open YouTube videos as JSON, or export and import a separate Video Inbox backup.
 
 ## Install
 
@@ -19,7 +33,9 @@ Organize open tabs by domain, save YouTube videos to a local Inbox, and reopen v
 
 For an update, keep the same local extension directory so Chrome retains the extension ID and its local settings. Back up your Inbox before changing installations.
 
-## Screenshot
+## Screenshots
+
+![Popup with two domains, one selected and one with its actions expanded](docs/popup.png)
 
 ![Tab Atelier for Chrome with sample data](docs/screenshot.png)
 
@@ -30,6 +46,8 @@ Browser tab details and Inbox backups stay on your device. Optional metadata loo
 ## Development
 
 Run the JavaScript checks with `npm test`.
+
+With Playwright and a recent Chromium installed, run `node tests/popup-domains-browser.mjs` to check domain actions and keyboard focus in the toolbar popup. Set `CHROME_PATH` to use a different Chromium executable. The test creates its own temporary profile.
 
 ## License
 

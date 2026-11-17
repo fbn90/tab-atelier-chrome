@@ -267,6 +267,7 @@ async function loadGroupActions({
   silentError = false,
   keepStatus = false
 } = {}) {
+  if (document.getElementById("rulesPane").hidden) return;
   if (groupLoadPromise) {
     return groupLoadPromise;
   }
@@ -620,4 +621,20 @@ topicAliasList.addEventListener("click", event => {
   if (button) editAliases("remove-topic-alias", { alias: button.dataset.alias });
 });
 sendMessage("get-topic-aliases").then(result => renderAliases(result.rules), error => aliasStatus(error.message, true));
-initializePopup();
+document.getElementById("rulesVersion").textContent="Tab Atelier · v"+chrome.runtime.getManifest().version;
+function popupView(rules,focusId) {
+  document.getElementById("popupContent").scrollTop=0;
+  document.getElementById("selectionBar").hidden=rules||document.getElementById("moveSelected").disabled;
+  document.getElementById("organizePane").hidden=rules;
+  document.getElementById("rulesPane").hidden=!rules;
+  for(const [id,active] of [["organizeView",!rules],["rulesView",rules]]){
+    const button=document.getElementById(id);
+    button.setAttribute("aria-pressed",String(active));button.classList.toggle("is-active",active);
+  }
+  UI.refreshChannelsButton.hidden=!rules;
+  if(rules)initializePopup();
+  if(focusId)document.getElementById(focusId).focus();
+}
+for(const [id,rules,focusId] of [["organizeView",false],["rulesView",true],["totalMeter",true,"totalTabLimitEnabled"],["videoMeter",true,"youtubeLimitEnabled"]])
+  document.getElementById(id).addEventListener("click",()=>popupView(rules,focusId));
+popupView(false);

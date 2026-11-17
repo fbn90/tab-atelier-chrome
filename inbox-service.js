@@ -42,7 +42,7 @@ export function installInbox({api,tasks,getMetadata,selectGroup,decorate,enrichM
       if(ctx.cancelled())return false;
       const info=results[index];
       const existing=await store.get(record.videoId);
-      if(existing)await store.merge([{...existing,...info}],{fillMissing:true,repairTitle:true});
+      if(existing)await store.merge([{...existing,...info}],{fillMissing:true,repairTitle:true,existingOnly:true});
       if(info.channel&&info.channel!=='Unbekannt')job.enriched++;
       job.cursor++;job.processed=job.cursor;
     }
@@ -161,7 +161,12 @@ export function installInbox({api,tasks,getMetadata,selectGroup,decorate,enrichM
       }
       const tab=existing?await api.tabs.update(existing.id,{active:true,...(repair?{url:repair}:{})}):
         await api.tabs.create({url:inboxParkedUrl(parkerBase,item.openUrl,item.title,item.channel)});
-      await api.windows.update(tab.windowId,{focused:true});return {ok:true};
+      await api.windows.update(tab.windowId,{focused:true});
+      const checked=await api.tabs.get(tab.id);
+      if(checked.incognito||parseYouTubeTab(checked.pendingUrl||checked.url)?.videoId!==item.videoId)
+        throw Error(globalThis.atelierI18n.t('inboxOpenUnconfirmed'));
+      await store.removeOpened(item.videoId);
+      return {ok:true};
       },api);
     },
     'inbox-export':async()=>({ok:true,backup:{format:'tab-atelier-inbox',version:2,exportedAt:new Date().toISOString(),items:(await store.list()).map(compactInboxItem)}}),

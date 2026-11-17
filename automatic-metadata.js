@@ -107,7 +107,7 @@ export function installAutomaticMetadata({api,store,getLocalMetadata,fetchMetada
         const old=await store.get(info.videoId);
         if(!old||old.metadataPrivate)continue;
         if(info.title&&info.title!==old.title||info.channel&&info.channel!==old.channel||info.channelKey&&info.channelKey!==old.channelKey||info.channelHandle&&info.channelHandle!==old.channelHandle){
-          await store.merge([{...old,...info}],{fillMissing:true,repairTitle:true});changed=true;
+          await store.merge([{...old,...info}],{fillMissing:true,repairTitle:true,existingOnly:true});changed=true;
         }
       }
       // Keep recent attempts for still relevant records to resume without repeating successful lookups.
