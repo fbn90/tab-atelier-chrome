@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="donatePageTitle">Support Tab Atelier</title>
+  <link rel="icon" href="icons/logo.svg?v=20261110">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="donate.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="dashboard.html"><img src="icons/logo.svg" width="36" height="36" alt=""><span>Tab Atelier<small data-i18n="donateBrand">SUPPORT DEVELOPMENT</small></span></a>
+    <nav class="view-nav" aria-label="View" data-i18n-aria-label="ui_view_a6d610">
+      <a href="dashboard.html" data-i18n="ui_open_tabs_59c324">Open tabs</a>
+      <a href="inbox.html" data-i18n="ui_video_inbox_353952">Video Inbox</a>
+      <a href="donate.html" aria-current="page" data-i18n="donateNav">Donate</a>
+    </nav>
+  </header>
+  <main class="donate-main">
+    <section class="donate-intro" aria-labelledby="donateTitle">
+      <div class="support-mark" aria-hidden="true">♡</div>
+      <p class="eyebrow" data-i18n="donateEyebrow">A LITTLE SUPPORT GOES A LONG WAY</p>
+      <h1 id="donateTitle" data-i18n="donateHeading">Enjoying Tab Atelier?</h1>
+      <p class="intro-copy" data-i18n="donateIntro">A voluntary donation helps support development and maintenance. Every feature stays available without donating.</p>
+    </section>
+    <section class="donation-card" aria-labelledby="bitcoinTitle">
+      <div class="donation-card-heading"><div class="coin-mark" aria-hidden="true">₿</div><div><h2 id="bitcoinTitle">Bitcoin <span class="coin-code">BTC</span></h2><p data-i18n="donateNetwork">Network: Bitcoin mainnet</p></div><span class="optional-tag" data-i18n="donateOptional">Optional</span></div>
+      <div class="donation-content">
+        <figure class="payment-qr"><img src="donations/bitcoin-qr.png" width="220" height="220" alt="Bitcoin payment QR code" data-i18n-alt="donateBitcoinQrAlt"><figcaption data-i18n="donateScan">Scan with your wallet app</figcaption></figure>
+        <div class="payment-details">
+          <label for="bitcoinAddress" data-i18n="donateAddressLabel">Public Bitcoin receiving address</label>
+          <textarea id="bitcoinAddress" class="wallet-address" rows="2" readonly spellcheck="false" autocomplete="off" aria-describedby="bitcoinNetworkNote"></textarea>
+          <div class="donation-actions">
+            <button id="copyBitcoin" class="primary-action" type="button" disabled data-i18n="donateCopy">Copy address</button>
+            <a id="openBitcoinWallet" class="wallet-link" hidden data-i18n="donateWallet">Open in wallet ↗</a>
+          </div>
+          <p id="copyStatus" class="copy-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <p id="bitcoinNetworkNote" class="donation-note" data-i18n="donateNetworkNote">Send BTC only on the Bitcoin network. The amount is up to you; you confirm any payment in your own wallet.</p>
+    </section>
+    <section class="donation-card" aria-labelledby="moneroTitle">
+      <div class="donation-card-heading"><div class="coin-mark monero-mark" aria-hidden="true">M</div><div><h2 id="moneroTitle">Monero <span class="coin-code">XMR</span></h2><p data-i18n="donateMoneroNetwork">Network: Monero mainnet</p></div><span class="optional-tag" data-i18n="donateOptional">Optional</span></div>
+      <div class="donation-content">
+        <figure class="payment-qr"><img src="donations/monero-qr.png" width="220" height="220" alt="Monero payment QR code" data-i18n-alt="donateMoneroQrAlt"><figcaption data-i18n="donateScan">Scan with your wallet app</figcaption></figure>
+        <div class="payment-details">
+          <label for="moneroAddress" data-i18n="donateMoneroAddressLabel">Public Monero receiving address</label>
+          <textarea id="moneroAddress" class="wallet-address" rows="3" readonly spellcheck="false" autocomplete="off" aria-describedby="moneroNetworkNote"></textarea>
+          <div class="donation-actions">
+            <button id="copyMonero" class="primary-action" type="button" disabled data-i18n="donateCopy">Copy address</button>
+            <a id="openMoneroWallet" class="wallet-link" hidden data-i18n="donateWallet">Open in wallet ↗</a>
+          </div>
+          <p id="moneroCopyStatus" class="copy-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <p id="moneroNetworkNote" class="donation-note" data-i18n="donateMoneroNetworkNote">Send XMR only on the Monero network. This donation subaddress remains usable even if Cake Wallet later displays another receiving address.</p>
+    </section>
+    <footer class="donation-footer"><p data-i18n="donatePrivacy">Tab Atelier does not connect to your wallet or check your balance or transactions. This page only displays public receiving addresses; QR codes are bundled locally.</p><p data-i18n="donateWalletHint">QR codes and wallet links do not set an amount. Choose an amount and confirm in a compatible wallet.</p><p data-i18n="donateThanks">Thank you for supporting Tab Atelier.</p></footer>
+  </main>
+  <script src="i18n-core.js"></script>
+  <script src="i18n-page.js"></script>
+  <script type="module" src="donate.js"></script>
+</body>
+</html>

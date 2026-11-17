@@ -1,0 +1,33 @@
+:root{color-scheme:light dark;font-family:system-ui,-apple-system,sans-serif;color:#141414;background:#f3f8ff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:32px}main{max-width:680px;padding:48px;background:#fff;border:1px solid #d8e6f4;border-radius:24px;box-shadow:0 16px 50px #17324d09}.eyebrow{font-size:12px;letter-spacing:.16em;font-weight:700;color:#526b83}h1{font-size:clamp(32px,5vw,46px);line-height:1.1;margin:26px 0}p{line-height:1.65}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0}a,button{font:inherit;font-weight:600;text-decoration:none;border:1px solid #aacdeb;border-radius:10px;padding:12px 16px;cursor:pointer}a{background:#0b4e91;color:white}button{background:#f6faff;color:#0b4e91}.note{font-size:13px;color:#526b83}button:disabled{opacity:.5}a:focus-visible,button:focus-visible{outline:3px solid #147dcc;outline-offset:3px}@media(prefers-color-scheme:dark){:root{color:#e5f2ff;background:#101f30}main{background:#162b40;border-color:#36506c}.eyebrow,.note{color:#abc3da}button{background:#223c58;color:#e5f2ff;border-color:#526f8d}}
+
+/* A calm pause screen with clear primary and secondary actions. */
+:root { background: #f6f8fb; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+main { width: min(100%, 660px); border-color: #e0e7ef; border-radius: 22px; box-shadow: 0 8px 32px #17324d06; padding: 42px; }
+.eyebrow { font-size: 10px; letter-spacing: .14em; color: #52677e; }
+h1 { font-weight: 650; letter-spacing: -1.4px; margin: 20px 0; }
+#limitCount { display: inline-block; padding: 6px 10px; margin-top: 0; border-radius: 8px; background: #eef4fa; color: #365670; font-size: 13px; font-variant-numeric: tabular-nums; }
+.actions { gap: 10px; margin: 25px 0; }
+a, button { min-height: 44px; border-radius: 11px; padding: 12px 17px; font-size: 14px; line-height: 1.35; }
+a { border-color: #0b4e91; box-shadow: 0 2px 4px #176bb014; }
+a:hover { background: #125c99; border-color: #125c99; }
+button { background: #fff; color: #365670; border-color: #dce5ef; }
+button:hover:not(:disabled) { background: #f3f7fb; border-color: #b9ccdf; }
+a:focus-visible, button:focus-visible { outline: 2px solid #0b4e91; outline-offset: 4px; }
+.note { font-size: 12px; line-height: 1.7; border-top: 1px solid #e8edf3; padding-top: 18px; }
+@media (max-width: 520px) { body { padding: 20px; } main { padding: 28px 24px; } .actions > * { width: 100%; text-align: center; } }
+@media (prefers-color-scheme: dark) {
+  :root { background: #101f30; }
+  main { border-color: #36506c; box-shadow: none; }
+  #limitCount { background: #223c58; color: #d5e6f6; }
+  .eyebrow { color: #abc3da; }
+  button { background: #223c58; color: #e5f2ff; border-color: #526f8d; }
+  button:hover:not(:disabled) { background: #294763; border-color: #6d89a4; }
+  .note { border-top-color: #36506c; }
+}
+
+/* Match the extension icon palette and control outlines. */
+@media (prefers-color-scheme: light) { :root { background: #fff; } }
+.actions > :is(a, button), .actions > :is(a, button):is(:hover, :active):not(:disabled) {
+  border: 1px solid #000;
+}

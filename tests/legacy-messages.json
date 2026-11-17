@@ -1,0 +1,2333 @@
+{
+  "ui_on_ea325d": {
+    "message": "an"
+  },
+  "ui_timed_out_while_reading_the_tab_782dd5": {
+    "message": "Zeitüberschreitung beim Lesen des Tabs."
+  },
+  "ui_oembed_request_failed_c9aa25": {
+    "message": "oEmbed fehlgeschlagen ($arg0$)",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_analysis_has_not_finished_yet_f55447": {
+    "message": "Die Analyse ist noch nicht abgeschlossen."
+  },
+  "ui_group_name_is_missing_2c8f3d": {
+    "message": "Gruppenname fehlt."
+  },
+  "ui_analyzing_youtube_8a9877": {
+    "message": "YouTube analysieren"
+  },
+  "ui_closing_group_0b5167": {
+    "message": "Gruppe schließen"
+  },
+  "ui_moving_group_f5f12b": {
+    "message": "Gruppe verschieben"
+  },
+  "ui_preparing_export_7eea02": {
+    "message": "Export vorbereiten"
+  },
+  "ui_ready_to_save_c90fc6": {
+    "message": "Bereit zum Speichern"
+  },
+  "ui_the_export_is_not_ready_yet_8ce1b4": {
+    "message": "Der Export ist noch nicht bereit."
+  },
+  "ui_saving_was_interrupted_check_chrome_downloads_first_4ba870": {
+    "message": "Speichern wurde unterbrochen. Bitte zuerst die Chrome-Downloads prüfen und bei Bedarf einen neuen Export starten."
+  },
+  "ui_unauthorized_message_source_674efb": {
+    "message": "Nicht autorisierte Nachrichtenquelle."
+  },
+  "ui_could_not_save_the_topic_rule_cd2e2b": {
+    "message": "Zuordnung konnte nicht gespeichert werden."
+  },
+  "ui_youtube_export_7dd80b": {
+    "message": "YouTube-Export"
+  },
+  "ui_export_failed_e6a141": {
+    "message": "Export fehlgeschlagen."
+  },
+  "ui_could_not_load_groups_431aa3": {
+    "message": "Gruppen konnten nicht geladen werden."
+  },
+  "ui_move_youtube_group_95bb22": {
+    "message": "YouTube-Gruppe verschieben"
+  },
+  "ui_could_not_move_the_group_8180cc": {
+    "message": "Verschieben der Gruppe fehlgeschlagen."
+  },
+  "ui_close_youtube_group_f01ecb": {
+    "message": "YouTube-Gruppe schließen"
+  },
+  "ui_could_not_close_the_group_6228c8": {
+    "message": "Schließen der Gruppe fehlgeschlagen."
+  },
+  "ui_could_not_load_settings_456203": {
+    "message": "Einstellungen konnten nicht geladen werden."
+  },
+  "ui_could_not_save_the_threshold_74ac9e": {
+    "message": "Schwellenwert konnte nicht gespeichert werden."
+  },
+  "ui_wait_for_the_current_youtube_analysis_in_the_dashboa_6afac7": {
+    "message": "Bitte die laufende YouTube-Analyse im Dashboard zuerst abschließen lassen."
+  },
+  "ui_resuming_tasks_fb1fc1": {
+    "message": "Aufgabenfortsetzung:"
+  },
+  "ui_could_not_open_the_view_5395c1": {
+    "message": "Ansicht konnte nicht geöffnet werden."
+  },
+  "ui_could_not_connect_to_the_extension_please_reload_the_723eee": {
+    "message": "Verbindung zur Erweiterung fehlgeschlagen. Bitte Erweiterung neu laden."
+  },
+  "ui_all_windows_7d53f7": {
+    "message": "Alle Fenster"
+  },
+  "ui_private_window_15bea0": {
+    "message": "Privates Fenster"
+  },
+  "ui_window_22c978": {
+    "message": "Fenster"
+  },
+  "ui_tabs_aff2cf": {
+    "message": "$arg0$ $arg1$ · $arg2$ Tabs",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_window_closed_1b0866": {
+    "message": "Fenster $arg0$ · geschlossen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_windows_d519c3": {
+    "message": "$arg0$ Fenster",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_saving_videos_ccc208": {
+    "message": "Videos werden abgelegt"
+  },
+  "ui_closing_tabs_8b467f": {
+    "message": "Tabs werden geschlossen"
+  },
+  "ui_moving_tabs_83140e": {
+    "message": "Tabs werden verschoben"
+  },
+  "ui_changed_or_unavailable_tabs_skipped_7c9f14": {
+    "message": " $arg0$ veränderte oder nicht verfügbare Tabs übersprungen.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_videos_saved_to_the_video_inbox_source_tabs_closed_2f48ef": {
+    "message": "$arg0$ Videos in der Video-Inbox gespeichert · $arg1$ zugehörige Tabs geschlossen.$arg2$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_closed_da731d": {
+    "message": "geschlossen"
+  },
+  "ui_processed_14493b": {
+    "message": "verarbeitet"
+  },
+  "ui_duplicate_videos_closed_878ef0": {
+    "message": " $arg0$ doppelte Videos geschlossen.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_changed_tabs_skipped_0b1b55": {
+    "message": " $arg0$ veränderte Tabs übersprungen.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_see_the_task_list_for_details_d378c1": {
+    "message": " Hinweise stehen in der Aufgabenliste."
+  },
+  "ui_tabs_cd6028": {
+    "message": "$arg0$: $arg1$ Tabs $arg2$.$arg3$$arg4$$arg5$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      },
+      "arg3": {
+        "content": "$4"
+      },
+      "arg4": {
+        "content": "$5"
+      },
+      "arg5": {
+        "content": "$6"
+      }
+    }
+  },
+  "ui_analyzing_youtube_groups_will_appear_here_as_they_ar_2de02f": {
+    "message": "YouTube wird analysiert. Erkannte Gruppen erscheinen hier nach und nach."
+  },
+  "ui_no_matching_groups_d24db9": {
+    "message": "Keine passenden Gruppen."
+  },
+  "ui_no_groups_for_this_selection_77e588": {
+    "message": "Keine Gruppen für diese Auswahl."
+  },
+  "ui_save_to_the_video_inbox_and_close_after_storage_is_v_95a725": {
+    "message": "in der Video-Inbox ablegen und nach bestätigter Speicherung schließen"
+  },
+  "ui_close_e0b9f0": {
+    "message": "schließen"
+  },
+  "ui_collect_in_a_new_window_with_no_per_window_tab_limit_dc3187": {
+    "message": "in einem neuen Fenster sammeln, ohne Zehnergrenze"
+  },
+  "ui_collect_in_one_group_merge_matching_groups_and_close_a4172d": {
+    "message": "in einer Gruppe sammeln; passende Gruppen zusammenführen und doppelte Videos schließen"
+  },
+  "ui_tabs_from_1e2286": {
+    "message": "$arg0$ Tabs von „$arg1$“ $arg2$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_show_more_8824bc": {
+    "message": "Weitere anzeigen ($arg0$)",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_window_0cd291": {
+    "message": "Fenster $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_tabs_selected_20a80e": {
+    "message": "$arg0$ · $arg1$ Tabs in der Auswahl",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_youtube_analysis_tabs_group_actions_available_when_f_e0bc22": {
+    "message": "YouTube-Analyse · $arg0$ / $arg1$ Tabs · Gruppenaktionen nach Abschluss",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_youtube_tabs_analyzed_view_up_to_date_78fc28": {
+    "message": "$arg0$ YouTube-Tabs analysiert · Ansicht aktuell",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_youtube_cache_01777e": {
+    "message": "YouTube-Zwischenspeicher: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_tabs_collected_by_domain_fe01cf": {
+    "message": "Tabs nach Domain gesammelt"
+  },
+  "ui_automatically_collect_tabs_by_domain_f5b1b5": {
+    "message": "Tabs automatisch nach Domain sammeln"
+  },
+  "ui_could_not_identify_the_window_c6032f": {
+    "message": "Fenster konnte nicht bestimmt werden."
+  },
+  "ui_could_not_connect_to_the_extension_6ecfcb": {
+    "message": "Verbindung zur Erweiterung fehlgeschlagen."
+  },
+  "ui_tabs_from_04f5ab": {
+    "message": "$arg0$ Tabs von $arg1$ $arg2$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_no_matching_domains_10a591": {
+    "message": "Keine passenden Domains."
+  },
+  "ui_this_window_e8cb28": {
+    "message": "Dieses Fenster"
+  },
+  "ui_open_tabs_dfe13d": {
+    "message": "$arg0$ offene Tabs",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_no_actions_recorded_yet_2da3c0": {
+    "message": "Noch keine protokollierten Vorgänge."
+  },
+  "ui_loading_domains_1d34f4": {
+    "message": "Lade Domains …"
+  },
+  "ui_domains_tabs_selected_eb1429": {
+    "message": "$arg0$ Domains · $arg1$ Tabs in der Auswahl",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_working_330f60": {
+    "message": "Wird ausgeführt …"
+  },
+  "ui_duplicates_closed_987d56": {
+    "message": "$arg0$ Duplikate geschlossen.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_moved_to_new_windows_793514": {
+    "message": "in $arg0$ neue Fenster verschoben",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_tabs_da90fb": {
+    "message": "$arg0$ Tabs $arg1$.$arg2$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_automatic_duplicate_closing_is_on_for_newly_opened_t_2ada06": {
+    "message": "Automatik für künftig geöffnete Tabs aktiv."
+  },
+  "ui_automatic_closing_paused_0dbaf1": {
+    "message": "Automatisches Schließen pausiert."
+  },
+  "ui_sorting_a59b10": {
+    "message": "Sortiere …"
+  },
+  "ui_groups_stay_together_751e2e": {
+    "message": " Gruppen bleiben zusammen."
+  },
+  "ui_for_tabs_the_order_is_based_on_when_they_were_first_8b97b5": {
+    "message": " Bei $arg0$ Tabs anhand der Erfassungsreihenfolge.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_tabs_sorted_from_oldest_to_newest_d0a7a1": {
+    "message": "$arg0$ Tabs von alt nach neu sortiert.$arg1$$arg2$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_videos_kb_stored_2fa94d": {
+    "message": "$arg0$/$arg1$ Videos · $arg2$ KB gespeichert",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_invalid_window_1b1226": {
+    "message": "Ungültiges Fenster."
+  },
+  "ui_the_destination_window_is_no_longer_available_tabs_a_838988": {
+    "message": "Das Zielfenster ist nicht mehr verfügbar. Bereits geöffnete Tabs bleiben erhalten."
+  },
+  "ui_a_selected_video_is_no_longer_in_the_inbox_please_re_710771": {
+    "message": "Ein ausgewähltes Video ist nicht mehr in der Inbox. Bitte aktualisieren."
+  },
+  "ui_merging_existing_groups_with_the_same_name_814a0a": {
+    "message": "Bestehende gleichnamige Gruppen zusammenführen"
+  },
+  "ui_existing_groups_8653ef": {
+    "message": "Bestehende Gruppen · $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_existing_groups_could_not_be_fully_merged_see_the_ta_858cbb": {
+    "message": "Die bestehenden Gruppen konnten nicht vollständig zusammengeführt werden. Hinweise stehen in der Aufgabenliste. Bitte erneut starten."
+  },
+  "ui_the_destination_group_is_no_longer_available_please_bfd4e0": {
+    "message": "Die bestehende Zielgruppe ist nicht mehr verfügbar. Bitte erneut starten."
+  },
+  "ui_the_saved_selection_is_missing_please_restart_the_ac_8f8877": {
+    "message": "Die gespeicherte Auswahl fehlt. Bitte die Aktion neu starten."
+  },
+  "ui_the_tab_group_was_closed_renamed_or_moved_tabs_alrea_edb847": {
+    "message": "Die Tabgruppe wurde geschlossen, umbenannt oder verschoben. Bereits geöffnete Tabs bleiben erhalten."
+  },
+  "ui_opening_videos_and_collecting_them_in_one_group_4bb35c": {
+    "message": "Videos öffnen & in einer Gruppe sammeln"
+  },
+  "ui_the_existing_video_tab_cannot_be_moved_into_a_regula_7db004": {
+    "message": "Der vorhandene Video-Tab kann nicht in eine normale Tabgruppe verschoben werden."
+  },
+  "ui_could_not_verify_the_new_window_please_check_the_ope_7312c2": {
+    "message": "Neues Fenster konnte nicht bestätigt werden. Bitte die geöffneten Tabs prüfen."
+  },
+  "ui_could_not_verify_the_new_video_tab_please_check_the_baf11f": {
+    "message": "Der neue Video-Tab konnte nicht bestätigt werden. Bitte die geöffneten Tabs prüfen."
+  },
+  "ui_a_video_tab_changed_during_grouping_please_open_the_db0bfb": {
+    "message": "Ein Video-Tab wurde während der Gruppierung verändert. Bitte erneut öffnen."
+  },
+  "ui_videos_opened_in_one_tab_group_d9e04e": {
+    "message": "Videos in einer Tabgruppe geöffnet"
+  },
+  "ui_invalid_option_for_closing_tabs_6a2920": {
+    "message": "Ungültige Schließoption."
+  },
+  "ui_invalid_private_tab_selection_c0260f": {
+    "message": "Ungültige Privatauswahl."
+  },
+  "ui_invalid_group_5527a3": {
+    "message": "Ungültige Gruppe."
+  },
+  "ui_import_backup_1da417": {
+    "message": "Sicherung einlesen"
+  },
+  "ui_safely_saving_titles_and_links_7bb4ca": {
+    "message": "Titel und Links sicher ablegen"
+  },
+  "ui_adding_channels_and_titles_a8166b": {
+    "message": "Kanäle und Titel ergänzen"
+  },
+  "ui_closing_saved_tabs_972dca": {
+    "message": "Gespeicherte Tabs schließen"
+  },
+  "ui_the_saved_link_could_not_be_verified_the_tab_will_st_d18651": {
+    "message": "Der gespeicherte Link konnte nicht bestätigt werden. Tab bleibt geöffnet."
+  },
+  "ui_saved_to_the_inbox_5d970d": {
+    "message": "In der Inbox gespeichert"
+  },
+  "ui_topic_a191e1": {
+    "message": " · Thema: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_channel_added_48793e": {
+    "message": "Kanal: $arg0$$arg1$ · Hinzugefügt: $arg2$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_title_channel_incomplete_58bb63": {
+    "message": "Titel/Kanal unvollständig"
+  },
+  "ui_done_92efac": {
+    "message": "Erledigt: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_mark_as_done_d6ed71": {
+    "message": "Als erledigt abhaken"
+  },
+  "ui_status_of_998755": {
+    "message": "Status von $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_open_64509e": {
+    "message": "Offen"
+  },
+  "ui_done_467e01": {
+    "message": "Erledigt"
+  },
+  "ui_keep_27d1d9": {
+    "message": "Behalten"
+  },
+  "ui_open_e8b31f": {
+    "message": "Öffnen ↗"
+  },
+  "ui_all_matches_0aa9cc": {
+    "message": "Alle $arg0$ Treffer",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_open_in_group_1b20e4": {
+    "message": "$arg0$ in Gruppe öffnen ↗",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_mark_as_open_66470f": {
+    "message": "$arg0$ als offen markieren",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_mark_as_done_4565c7": {
+    "message": "$arg0$ als erledigt markieren ✓",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_still_open_6d052b": {
+    "message": "$arg0$ noch offen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_channels_d459d5": {
+    "message": "Kanäle"
+  },
+  "ui_topics_6de8f4": {
+    "message": "Themen"
+  },
+  "ui_of_videos_a8a0d6": {
+    "message": "$arg0$ von $arg1$ Videos$arg2$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_nothing_here_right_now_239caa": {
+    "message": "Hier ist gerade nichts."
+  },
+  "ui_a_good_place_for_later_b2851a": {
+    "message": "Ein guter Platz für später."
+  },
+  "ui_try_a_different_search_or_status_filter_028b2b": {
+    "message": "Ändere die Suche oder den Statusfilter."
+  },
+  "ui_save_your_open_youtube_videos_above_you_can_choose_w_c0129f": {
+    "message": "Lege oben deine offenen YouTube-Videos ab. Deine Tabs bleiben auf Wunsch geöffnet."
+  },
+  "ui_videos_5331a0": {
+    "message": "$arg0$ Videos",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_only_open_videos_in_one_group_5e6657": {
+    "message": "Nur $arg0$: $arg1$ Videos in Gruppe öffnen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_opens_only_the_matching_videos_in_this_group_uses_th_2d9308": {
+    "message": "Öffnet nur die gefilterten Videos dieser Gruppe. Das Öffnungsziel oben gilt auch hier."
+  },
+  "ui_show_more_22b897": {
+    "message": "Weitere $arg0$ anzeigen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_show_more_groups_b2b6b2": {
+    "message": "Weitere Gruppen anzeigen ($arg0$)",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_collecting_videos_in_one_tab_group_you_can_follow_pr_d95fc6": {
+    "message": "$arg0$ Videos werden in einer Tabgruppe gesammelt. Du kannst den Fortschritt unten verfolgen und abbrechen.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_in_an_existing_group_6a40d2": {
+    "message": "in vorhandener Gruppe"
+  },
+  "ui_in_one_group_45488a": {
+    "message": "in einer Gruppe"
+  },
+  "ui_duplicate_video_tabs_closed_651252": {
+    "message": " $arg0$ doppelte Video-Tabs geschlossen.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_tabs_skipped_because_they_changed_292f65": {
+    "message": " $arg0$ inzwischen veränderte Tabs übersprungen.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_videos_newly_opened_existing_tabs_reused_inbox_statu_bc3e8c": {
+    "message": "$arg0$ Videos $arg1$ · $arg2$ neu geöffnet · $arg3$ vorhandene Tabs verwendet.$arg4$$arg5$ Der Inbox-Status bleibt unverändert.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      },
+      "arg3": {
+        "content": "$4"
+      },
+      "arg4": {
+        "content": "$5"
+      },
+      "arg5": {
+        "content": "$6"
+      }
+    }
+  },
+  "ui_tabs_already_opened_are_kept_opening_again_reuses_ex_5a4c7d": {
+    "message": " Bereits geöffnete Tabs bleiben erhalten. Erneutes Öffnen verwendet vorhandene Video-Tabs."
+  },
+  "ui_done_967f15": {
+    "message": "erledigt"
+  },
+  "ui_open_9a8089": {
+    "message": "offen"
+  },
+  "ui_videos_marked_as_titles_channels_links_and_dates_add_8c77ba": {
+    "message": "$arg0$ Videos als $arg1$ markiert. Titel, Kanal, Links und Hinzufügedatum bleiben erhalten.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_currently_youtube_tabs_unique_videos_ae6b7c": {
+    "message": "Aktuell $arg0$ YouTube-Tabs · $arg1$ verschiedene Videos",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_window_tabs_9ef06a": {
+    "message": "Fenster $arg0$ · $arg1$ Tabs",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_saving_videos_follow_progress_in_the_task_list_3ef094": {
+    "message": "Die Videos werden abgelegt. Der Fortschritt steht in der Aufgabenliste."
+  },
+  "ui_changed_or_unavailable_tabs_skipped_d374fa": {
+    "message": " · $arg0$ veränderte oder nicht verfügbare Tabs übersprungen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_title_or_channel_information_is_still_missing_for_vi_1e0877": {
+    "message": " Bei $arg0$ Videos fehlen noch Titel- oder Kanalinformationen.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_unique_videos_saved_tabs_closed_34844e": {
+    "message": "$arg0$ verschiedene Videos gespeichert · $arg1$ Tabs geschlossen$arg2$.$arg3$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      },
+      "arg3": {
+        "content": "$4"
+      }
+    }
+  },
+  "ui_videos_already_saved_stay_in_the_inbox_4af5df": {
+    "message": " Bereits gespeicherte Videos bleiben in der Inbox."
+  },
+  "ui_save_close_tabs_9a28ef": {
+    "message": "Ablegen & Tabs schließen"
+  },
+  "ui_save_videos_060866": {
+    "message": "Videos ablegen"
+  },
+  "ui_backup_sent_to_chrome_check_downloads_for_completion_363084": {
+    "message": "Sicherung an Chrome übergeben. Den Abschluss findest du in den Downloads."
+  },
+  "ui_the_backup_must_not_exceed_6_mb_903f1b": {
+    "message": "Die Sicherung darf höchstens 6 MB groß sein."
+  },
+  "ui_entries_imported_existing_videos_were_merged_and_the_5d849c": {
+    "message": "$arg0$ Einträge eingelesen. Vorhandene Videos wurden zusammengeführt; ihre Zustände bleiben erhalten.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_save_videos_to_inbox_a96fb0": {
+    "message": "Videos in die Inbox"
+  },
+  "ui_invalid_destination_window_3c5bc5": {
+    "message": "Ungültiges Zielfenster."
+  },
+  "ui_please_open_the_inbox_in_a_regular_browser_window_7b131e": {
+    "message": "Bitte die Inbox in einem normalen Browserfenster öffnen."
+  },
+  "ui_open_inbox_videos_e8f4cd": {
+    "message": "$arg0$ Inbox-Videos öffnen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_video_not_in_the_inbox_e458e2": {
+    "message": "Video nicht in der Inbox."
+  },
+  "ui_open_video_in_existing_channel_group_928af5": {
+    "message": "Video in vorhandener Kanalgruppe öffnen"
+  },
+  "ui_invalid_saved_link_1ae2b3": {
+    "message": "Ungültiger gespeicherter Link."
+  },
+  "ui_backup_too_large_maximum_6_mb_515e64": {
+    "message": "Sicherung zu groß (höchstens 6 MB)."
+  },
+  "ui_import_inbox_backup_f6bf3e": {
+    "message": "Inbox-Sicherung einlesen"
+  },
+  "ui_inbox_action_failed_54b600": {
+    "message": "Inbox-Aktion fehlgeschlagen."
+  },
+  "ui_please_select_between_1_and_10_000_saved_videos_645de8": {
+    "message": "Bitte 1 bis 10.000 gespeicherte Videos auswählen."
+  },
+  "ui_invalid_inbox_entry_e9770d": {
+    "message": "Ungültiger Inbox-Eintrag."
+  },
+  "ui_invalid_youtube_link_or_mismatched_video_id_fbfe60": {
+    "message": "Ungültiger YouTube-Link oder widersprüchliche Video-ID."
+  },
+  "ui_invalid_source_link_d3bad6": {
+    "message": "Ungültiger Originallink."
+  },
+  "ui_invalid_inbox_status_aae1c6": {
+    "message": "Ungültiger Inbox-Status."
+  },
+  "ui_please_select_a_valid_tab_atelier_inbox_backup_versi_5d8fa1": {
+    "message": "Bitte eine gültige Tab-Atelier-Inbox-Sicherung (Version 1, höchstens 10.000 Videos) wählen."
+  },
+  "ui_local_storage_is_full_back_up_your_inbox_as_json_and_1dad54": {
+    "message": "Der lokale Speicher ist voll. Bitte die Inbox als JSON sichern und den YouTube-Metadaten-Cache leeren. Es werden keine weiteren Tabs geschlossen."
+  },
+  "ui_could_not_verify_inbox_storage_no_more_tabs_will_be_4c2125": {
+    "message": "Inbox-Speicherung konnte nicht bestätigt werden. Es werden keine weiteren Tabs geschlossen."
+  },
+  "ui_invalid_status_a78b4e": {
+    "message": "Ungültiger Status."
+  },
+  "ui_video_no_longer_in_the_inbox_f20f42": {
+    "message": "Video nicht mehr in der Inbox."
+  },
+  "ui_youtube_by_topic_a98d90": {
+    "message": "YouTube nach Thema"
+  },
+  "ui_clusters_c137a7": {
+    "message": "Cluster"
+  },
+  "ui_scanning_topics_d70495": {
+    "message": "Scanne Cluster..."
+  },
+  "ui_only_topics_with_more_than_tabs_858dc7": {
+    "message": "Nur Cluster > $arg0$ Tabs.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_no_topics_with_more_than_tabs_ba669e": {
+    "message": "Keine Cluster > $arg0$ Tabs.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_youtube_by_channel_bb31ab": {
+    "message": "YouTube nach Kanal"
+  },
+  "ui_scanning_channels_c5bd18": {
+    "message": "Scanne Kanäle..."
+  },
+  "ui_only_channels_with_more_than_tabs_193309": {
+    "message": "Nur Kanäle > $arg0$ Tabs.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_no_channels_with_more_than_tabs_691722": {
+    "message": "Keine Kanäle > $arg0$ Tabs.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_please_enter_a_number_greater_than_or_equal_to_0_ce901e": {
+    "message": "Bitte eine Zahl groesser oder gleich 0 eingeben."
+  },
+  "ui_unknown_error_617580": {
+    "message": "Unbekannter Fehler"
+  },
+  "ui_collect_in_one_group_merge_matching_groups_and_close_2193f3": {
+    "message": "$arg0$ in einer Gruppe sammeln; passende Gruppen zusammenführen und doppelte Videos schließen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_close_b808f6": {
+    "message": "Schließen"
+  },
+  "ui_close_tabs_from_89c01a": {
+    "message": "$arg0$ Tabs schliessen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_loading_more_1e2096": {
+    "message": "$arg0$ | lade weiter...",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_refreshing_9fd451": {
+    "message": "Aktualisiere..."
+  },
+  "ui_saving_196132": {
+    "message": "Speichere..."
+  },
+  "ui_moving_090cad": {
+    "message": "Verschiebe $arg0$...",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_could_not_move_the_group_a68314": {
+    "message": "Gruppe konnte nicht verschoben werden."
+  },
+  "ui_in_windows_5d6096": {
+    "message": " in $arg0$ Fenster",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_grouped_360adf": {
+    "message": "; $arg0$ gruppiert",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_tabs_from_processed_f4cf0b": {
+    "message": "$arg0$ Tabs von $arg1$ verarbeitet$arg2$$arg3$.$arg4$$arg5$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      },
+      "arg3": {
+        "content": "$4"
+      },
+      "arg4": {
+        "content": "$5"
+      },
+      "arg5": {
+        "content": "$6"
+      }
+    }
+  },
+  "ui_closing_f6dabe": {
+    "message": "Schließe $arg0$...",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_could_not_close_the_group_d3db6a": {
+    "message": "Gruppe konnte nicht geschlossen werden."
+  },
+  "ui_tabs_from_closed_225d09": {
+    "message": "$arg0$ Tabs von $arg1$ geschlossen.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_exporting_1c4ed9": {
+    "message": "Exportiere..."
+  },
+  "ui_export_videos_84fc95": {
+    "message": "Export: $arg0$ Videos.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_youtube_tabs_6baaf9": {
+    "message": "YouTube-Tabs: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_videos_ed7d0e": {
+    "message": "Videos: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_file_a578ba": {
+    "message": "Datei: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_remove_382837": {
+    "message": "Entfernen"
+  },
+  "ui_remove_rule_for_5082f7": {
+    "message": "Zuordnung für $arg0$ entfernen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_saving_topic_rule_d37db9": {
+    "message": "Speichere Zuordnung …"
+  },
+  "ui_topic_rule_removed_5255f1": {
+    "message": "Zuordnung entfernt."
+  },
+  "ui_saved_the_rule_will_also_apply_to_future_titles_231095": {
+    "message": "Gespeichert. Zukünftige Titel werden ebenfalls zugeordnet."
+  },
+  "ui_refreshing_topics_96bd61": {
+    "message": "Aktualisiere Themen …"
+  },
+  "ui_off_2337c3": {
+    "message": "aus"
+  },
+  "ui_retry_pending_05e90e": {
+    "message": " · Erneute Prüfung ausstehend: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_tabs_open_domain_sorting_global_limit_36f3ff": {
+    "message": "$arg0$ Tabs offen · Domain-Sortierung $arg1$ · Gesamtlimit $arg2$$arg3$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      },
+      "arg3": {
+        "content": "$4"
+      }
+    }
+  },
+  "ui_sorting_failed_2dcc1d": {
+    "message": "Sortierung fehlgeschlagen."
+  },
+  "ui_collecting_existing_ungrouped_tabs_by_domain_see_tas_6f97b6": {
+    "message": "Vorhandene einzelne Tabs werden nach Domain gesammelt. Fortschritt siehe Aufgaben."
+  },
+  "ui_automatic_check_failed_265747": {
+    "message": "Automatikprüfung fehlgeschlagen."
+  },
+  "ui_retrying_tab_atelier_automation_c12295": {
+    "message": "Tab-Atelier-Automatik wird erneut geprüft:"
+  },
+  "ui_please_enable_domain_sorting_first_625c47": {
+    "message": "Bitte zuerst die Domain-Sortierung einschalten."
+  },
+  "ui_settings_cannot_be_changed_from_here_53bcc4": {
+    "message": "Einstellungen dürfen hier nicht geändert werden."
+  },
+  "ui_status_unavailable_2cee92": {
+    "message": "Status nicht verfügbar."
+  },
+  "ui_tabs_open_your_limit_6e26d6": {
+    "message": "$arg0$ Tabs offen · Dein Limit: $arg1$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_tabs_open_the_global_limit_is_off_910829": {
+    "message": "$arg0$ Tabs offen · Das Gesamtlimit ist ausgeschaltet.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_you_can_open_new_tabs_again_260733": {
+    "message": "Du kannst wieder neue Tabs öffnen."
+  },
+  "ui_there_is_room_again_open_your_desired_link_once_more_b34971": {
+    "message": "Es ist wieder Platz. Öffne deinen gewünschten Link erneut."
+  },
+  "ui_could_not_turn_off_the_limit_feebcf": {
+    "message": "Limit konnte nicht ausgeschaltet werden."
+  },
+  "ui_tab_atelier_open_tabs_959d90": {
+    "message": "Tab Atelier · $arg0$ offene Tabs",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_manual_cleanup_ee815c": {
+    "message": "Manuelle Bereinigung"
+  },
+  "ui_new_tab_with_the_same_url_youtube_video_without_time_af6740": {
+    "message": "Neuer Tab mit gleicher Adresse / YouTube-Video ohne Zeitmarke"
+  },
+  "ui_invalid_domain_f8ac0a": {
+    "message": "Ungültige Domain."
+  },
+  "ui_could_not_read_the_tab_group_no_tabs_have_been_moved_51fd79": {
+    "message": "Die Tabgruppe konnte nicht gelesen werden. Es wurden noch keine Tabs verschoben: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_closing_tabs_f7357c": {
+    "message": "Tabs schließen"
+  },
+  "ui_moving_tabs_f721b2": {
+    "message": "Tabs verschieben"
+  },
+  "ui_could_not_identify_the_window_to_sort_fc2418": {
+    "message": "Das zu sortierende Fenster konnte nicht bestimmt werden."
+  },
+  "ui_this_window_is_no_longer_open_87f6c8": {
+    "message": "Dieses Fenster ist nicht mehr geöffnet."
+  },
+  "ui_sort_oldest_newest_acb08f": {
+    "message": "Alt → Neu sortieren"
+  },
+  "ui_tabs_changed_while_sorting_completed_steps_are_prese_b79e57": {
+    "message": "Tabs wurden während des Sortierens verändert. Bisherige Schritte bleiben erhalten."
+  },
+  "ui_tabs_changed_while_sorting_c6495e": {
+    "message": "Tabs wurden während des Sortierens verändert."
+  },
+  "ui_a_tab_was_moved_while_sorting_e647bc": {
+    "message": "Tab wurde während des Sortierens verschoben."
+  },
+  "ui_the_order_changed_during_the_action_please_sort_agai_ca71f8": {
+    "message": "Reihenfolge hat sich während der Aktion geändert. Bitte erneut sortieren."
+  },
+  "ui_checking_duplicates_a13d94": {
+    "message": "Duplikate prüfen"
+  },
+  "ui_clean_up_duplicates_eb1066": {
+    "message": "Duplikate bereinigen"
+  },
+  "ui_sort_window_c2f810": {
+    "message": "Fenster sortieren"
+  },
+  "ui_invalid_tab_3edee0": {
+    "message": "Ungültiger Tab."
+  },
+  "ui_invalid_setting_144cc6": {
+    "message": "Ungültige Einstellung."
+  },
+  "ui_action_failed_028a4a": {
+    "message": "Aktion fehlgeschlagen."
+  },
+  "ui_invalid_settings_436f7c": {
+    "message": "Ungültige Einstellungen."
+  },
+  "ui_unknown_setting_4b469c": {
+    "message": "Unbekannte Einstellung."
+  },
+  "ui_please_enter_a_whole_number_of_tabs_between_1_and_10_18b2ba": {
+    "message": "Bitte eine ganze Tabzahl zwischen 1 und 10.000 eingeben."
+  },
+  "ui_invalid_switch_value_b20ed9": {
+    "message": "Ungültiger Schalter."
+  },
+  "ui_maximum_tab_count_reached_close_tabs_first_or_turn_o_af0b88": {
+    "message": "Maximale Tabzahl erreicht ($arg0$). Bitte zuerst Tabs schließen oder das Gesamtlimit im Popup ausschalten. Bereits geöffnete Videos bleiben erhalten.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_invalid_maximum_tab_count_per_window_4de0c8": {
+    "message": "Ungültige maximale Tabzahl pro Fenster."
+  },
+  "ui_this_older_task_cannot_be_resumed_safely_please_sele_1f4474": {
+    "message": "Diese ältere Aufgabe kann nicht sicher fortgesetzt werden. Bitte die übrigen Tabs neu auswählen."
+  },
+  "ui_tab_was_moved_to_another_window_and_will_be_left_the_575823": {
+    "message": "Tab wurde in ein anderes Fenster verschoben; nicht erneut angefasst."
+  },
+  "ui_the_destination_window_no_longer_exists_remaining_ta_e565fa": {
+    "message": "Zielfenster nicht mehr vorhanden. Übrige Tabs erhalten ein neues Fenster; geschlossene Tabs werden nicht wieder geöffnet."
+  },
+  "ui_the_tab_or_source_group_changed_and_will_remain_wher_d72bed": {
+    "message": "Tab oder Quellgruppe wurde verändert und bleibt an seinem aktuellen Platz."
+  },
+  "ui_the_destination_group_changed_please_restart_the_act_8ff210": {
+    "message": "Die bestehende Zielgruppe wurde verändert. Bitte die Aktion erneut starten."
+  },
+  "ui_chrome_did_not_return_a_destination_window_3cd1f9": {
+    "message": "Chrome hat kein Zielfenster zurückgegeben."
+  },
+  "ui_the_tab_did_not_arrive_in_the_destination_window_d082f8": {
+    "message": "Der Tab ist nicht im Zielfenster angekommen."
+  },
+  "ui_the_destination_window_was_closed_during_the_move_57e13c": {
+    "message": "Zielfenster wurde während des Verschiebens geschlossen."
+  },
+  "ui_move_interrupted_tabs_already_moved_are_kept_resume_2c182d": {
+    "message": "Verschieben unterbrochen: $arg0$. Bereits verschobene Tabs bleiben erhalten; „Fortsetzen“ prüft den aktuellen Stand.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_checking_pinned_tabs_31ca2a": {
+    "message": "Angeheftete Tabs prüfen"
+  },
+  "ui_could_not_restore_pinning_b222f2": {
+    "message": "Anheften nicht wiederhergestellt: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_grouping_moved_tabs_a6349a": {
+    "message": "Verschobene Tabs gruppieren"
+  },
+  "ui_the_existing_group_was_renamed_please_restart_the_ac_4add14": {
+    "message": "Die bestehende Gruppe wurde umbenannt. Bitte die Aktion erneut starten."
+  },
+  "ui_manual_group_changes_are_preserved_fe63f0": {
+    "message": "Manuell geänderte Gruppenzuordnung bleibt erhalten."
+  },
+  "ui_the_destination_group_changed_dc7c67": {
+    "message": "Zielgruppe wurde verändert."
+  },
+  "ui_the_tab_changed_during_grouping_e18c36": {
+    "message": "Tab wurde während der Gruppierung verändert."
+  },
+  "ui_moved_but_grouping_is_incomplete_b433db": {
+    "message": "Verschoben, aber Gruppierung nicht vollständig: $arg0$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_done_with_warnings_c17e0e": {
+    "message": "Fertig mit Hinweisen"
+  },
+  "ui_done_25d52d": {
+    "message": "Fertig"
+  },
+  "ui_checking_move_progress_847fc9": {
+    "message": "Verschiebestand prüfen"
+  },
+  "ui_interrupted_during_a_tab_action_completed_steps_are_80a6df": {
+    "message": "Unterbrochen während einer Tab-Aktion. Bereits ausgeführte Schritte bleiben erhalten; bitte den aktuellen Zustand prüfen."
+  },
+  "ui_task_9938af": {
+    "message": "Aufgabe:"
+  },
+  "ui_unknown_task_c95351": {
+    "message": "Unbekannte Aufgabe."
+  },
+  "ui_please_finish_the_running_tasks_first_455dbc": {
+    "message": "Bitte laufende Aufgaben zuerst beenden."
+  },
+  "ui_preparing_64dfc2": {
+    "message": "Vorbereiten"
+  },
+  "ui_this_task_cannot_be_resumed_712d99": {
+    "message": "Diese Aufgabe kann nicht fortgesetzt werden."
+  },
+  "ui_task_no_longer_available_7f7ade": {
+    "message": "Aufgabe nicht mehr verfügbar."
+  },
+  "ui_cancelled_b9731e": {
+    "message": "Abgebrochen"
+  },
+  "ui_error_f6cc01": {
+    "message": "Fehler"
+  },
+  "ui_interrupted_d8135c": {
+    "message": "Unterbrochen"
+  },
+  "ui_queued_cff729": {
+    "message": "Wartet"
+  },
+  "ui_tabs_closed_7f820a": {
+    "message": " · $arg0$ Tabs geschlossen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_videos_saved_efbc49": {
+    "message": " · $arg0$ Videos gespeichert$arg1$",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      }
+    }
+  },
+  "ui_skipped_3f817b": {
+    "message": " · $arg0$ übersprungen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_moved_e0a2d9": {
+    "message": "verschoben"
+  },
+  "ui_grouped_43af80": {
+    "message": " · $arg0$ gruppiert",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_newly_opened_reused_grouped_5ec8b5": {
+    "message": " · $arg0$ neu geöffnet · $arg1$ wiederverwendet · $arg2$ gruppiert",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_duplicate_videos_closed_b48298": {
+    "message": " · $arg0$ doppelte Videos geschlossen",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_warnings_a29594": {
+    "message": "Hinweise ($arg0$)",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      }
+    }
+  },
+  "ui_cancelling_8e02e5": {
+    "message": "Wird abgebrochen …"
+  },
+  "ui_cancel_f7ff11": {
+    "message": "Abbrechen"
+  },
+  "ui_resume_76f6db": {
+    "message": "Fortsetzen"
+  },
+  "ui_save_json_ffd67c": {
+    "message": "JSON speichern"
+  },
+  "ui_cancelled_f629eb": {
+    "message": "Abgebrochen."
+  },
+  "ui_steps_processed_63aa5e": {
+    "message": "$arg0$ $arg1$/$arg2$ Schritte verarbeitet.",
+    "placeholders": {
+      "arg0": {
+        "content": "$1"
+      },
+      "arg1": {
+        "content": "$2"
+      },
+      "arg2": {
+        "content": "$3"
+      }
+    }
+  },
+  "ui_variant_is_missing_5f8c77": {
+    "message": "Variante fehlt."
+  },
+  "ui_topic_name_enter_1_72_characters_e3d2c9": {
+    "message": "Themenname: 1–72 Zeichen eingeben."
+  },
+  "ui_please_enter_1_50_variants_one_per_line_46bbce": {
+    "message": "Bitte 1–50 Varianten angeben, jeweils in einer eigenen Zeile."
+  },
+  "ui_each_variant_must_contain_1_160_characters_4e1888": {
+    "message": "Jede Variante muss 1–160 Zeichen enthalten."
+  },
+  "ui_you_can_save_up_to_500_variants_5ff547": {
+    "message": "Maximal 500 gespeicherte Varianten möglich."
+  },
+  "ui_this_rule_creates_a_cycle_please_choose_another_targ_c06714": {
+    "message": "Diese Zuordnung erzeugt einen Kreis. Bitte ein anderes Ziel wählen."
+  },
+  "ui_all_videos_0aed7a": {
+    "message": "Alle Videos"
+  },
+  "ui_video_inbox_353952": {
+    "message": "Video-Inbox"
+  },
+  "ui_tab_limit_reached_tab_atelier_716431": {
+    "message": "Maximale Tabzahl erreicht · Tab Atelier"
+  },
+  "ui_tab_atelier_take_a_breather_941fbf": {
+    "message": "TAB ATELIER · KURZ DURCHATMEN"
+  },
+  "ui_tab_limit_reached_f3450f": {
+    "message": "Maximale Tabzahl erreicht."
+  },
+  "ui_loading_your_tab_limit_46171a": {
+    "message": "Lade dein Tablimit …"
+  },
+  "ui_close_a_tab_first_or_save_open_youtube_videos_to_the_572354": {
+    "message": "Schließe zuerst einen Tab oder lege offene YouTube-Videos in der Video-Inbox ab. Danach kannst du wieder neue Tabs öffnen."
+  },
+  "ui_open_video_inbox_27ca3d": {
+    "message": "Video-Inbox öffnen ↗"
+  },
+  "ui_turn_off_global_limit_02ed43": {
+    "message": "Gesamtlimit ausschalten"
+  },
+  "ui_this_local_notice_replaces_the_rejected_new_tab_furt_83cb0c": {
+    "message": "Diese lokale Hinweisseite ersetzt den abgewiesenen neuen Tab. Weitere Öffnungsversuche verwenden sie erneut. Deine bisherigen Tabs bleiben offen. Die Hinweisseite selbst zählt nicht zum Limit."
+  },
+  "ui_tab_atelier_01e1cc": {
+    "message": "Tab Atelier"
+  },
+  "ui_refresh_channel_list_3b2a48": {
+    "message": "Kanalliste aktualisieren"
+  },
+  "ui_open_dashboard_ef1f6f": {
+    "message": "Dashboard öffnen ↗"
+  },
+  "ui_running_tasks_72aebd": {
+    "message": "Laufende Aufgaben"
+  },
+  "ui_tasks_1351ad": {
+    "message": "Aufgaben"
+  },
+  "ui_tasks_continue_when_the_popup_is_closed_cancel_stops_1f901c": {
+    "message": "Laufen auch bei geschlossenem Popup weiter. Abbrechen stoppt weitere Schritte; bereits ausgeführte bleiben erhalten."
+  },
+  "ui_your_tabs_d26e6d": {
+    "message": "Deine Tabs"
+  },
+  "ui_search_domains_50c4f9": {
+    "message": "Domain suchen"
+  },
+  "ui_youtube_com_jamesedition_com_dd9957": {
+    "message": "youtube.com, jamesedition.com …"
+  },
+  "ui_only_this_window_2488d8": {
+    "message": "Nur dieses Fenster"
+  },
+  "ui_include_subdomains_under_the_parent_domain_3f9785": {
+    "message": "Subdomains bei der übergeordneten Domain einbeziehen"
+  },
+  "ui_domains_ced677": {
+    "message": "Domains"
+  },
+  "ui_window_collects_all_tabs_from_a_domain_in_a_new_wind_065488": {
+    "message": "„Fenster“ sammelt alle Tabs einer Domain in einem neuen Fenster, ohne Zehnergrenze. Normale und private Tabs bleiben getrennt."
+  },
+  "ui_clean_up_duplicates_now_09c595": {
+    "message": "Duplikate jetzt bereinigen"
+  },
+  "ui_automatically_close_new_duplicates_8d43cd": {
+    "message": "Neue Duplikate automatisch schließen"
+  },
+  "ui_only_newly_opened_fully_loaded_tabs_youtube_duplicat_b028fe": {
+    "message": "Nur neu geöffnete, fertig geladene Tabs. Bei YouTube zählen gleiche Videos ohne Zeitmarke als Duplikat; Playlist-Angaben bleiben getrennt. Bei anderen Seiten gilt die vollständige URL. Angeheftete Tabs haben Vorrang, sonst bleibt der neuere. Keine automatische Gesamtbereinigung beim Start."
+  },
+  "ui_duplicate_cleanup_log_da631e": {
+    "message": "Protokoll der Duplikatbereinigung"
+  },
+  "ui_the_last_20_actions_in_this_session_earlier_closures_8e6afc": {
+    "message": "Die letzten 20 Vorgänge dieser Sitzung. Ältere Schließungen wurden nicht protokolliert."
+  },
+  "ui_your_rules_157b08": {
+    "message": "Deine Regeln"
+  },
+  "ui_automation_tab_limit_9d3f57": {
+    "message": "Automatik & Tablimit"
+  },
+  "ui_on_off_f0d2ca": {
+    "message": "An / Aus"
+  },
+  "ui_automatically_collect_new_tabs_by_domain_10e7bf": {
+    "message": "Neue Tabs automatisch nach Domain sammeln"
+  },
+  "ui_one_destination_window_per_domain_with_no_per_window_e5dd87": {
+    "message": "Pro Domain ein Zielfenster, ohne Tabgrenze. Gruppen und angeheftete Tabs bleiben an ihrem Platz. Interne Seiten werden nicht verschoben."
+  },
+  "ui_collect_existing_ungrouped_tabs_by_domain_a2d2bc": {
+    "message": "Vorhandene einzelne Tabs jetzt nach Domain sammeln"
+  },
+  "ui_limit_the_total_number_of_open_tabs_b460c8": {
+    "message": "Gesamtzahl offener Tabs begrenzen"
+  },
+  "ui_maximum_open_tabs_all_windows_724283": {
+    "message": "Maximal offene Tabs (alle Fenster)"
+  },
+  "ui_save_f6b2ff": {
+    "message": "Speichern"
+  },
+  "ui_new_tabs_are_rejected_when_the_limit_is_reached_one_20b3f6": {
+    "message": "Bei erreichtem Limit werden neue Tabs abgewiesen. Eine wiederverwendete Hinweisseite zählt zusätzlich. Bestehende Tabs bleiben offen; auch Inbox-Öffnungen beachten das Limit."
+  },
+  "ui_reconnect_c278e2": {
+    "message": "Erneut verbinden"
+  },
+  "ui_sort_this_window_6c2d7c": {
+    "message": "Dieses Fenster sortieren"
+  },
+  "ui_sort_tabs_oldest_newest_8925d5": {
+    "message": "Tabs sortieren: Alt → Neu"
+  },
+  "ui_ungroup_tabs_for_one_continuous_sort_order_fedb8e": {
+    "message": "Tabgruppen für durchgehende Sortierung auflösen"
+  },
+  "ui_pinned_tabs_stay_at_the_front_groups_stay_together_o_c48495": {
+    "message": "Angeheftete Tabs bleiben vorne. Sonst bleiben Gruppen zusammen, nach ihrem ältesten Tab sortiert; innerhalb jeder Gruppe gilt Alt → Neu. Bei älteren Tabs ist nur die Erfassungsreihenfolge bekannt."
+  },
+  "ui_youtube_minimum_eab892": {
+    "message": "YT-Minimum"
+  },
+  "ui_only_groups_above_this_number_1bca2a": {
+    "message": "Nur Gruppen über dem Wert."
+  },
+  "ui_more_than_x_video_tabs_eb7428": {
+    "message": "Mehr als X Watch-Tabs"
+  },
+  "ui_export_366489": {
+    "message": "Export"
+  },
+  "ui_export_json_259d05": {
+    "message": "JSON exportieren"
+  },
+  "ui_open_youtube_videos_shorts_live_streams_and_short_li_250607": {
+    "message": "Offene YouTube-Videos, Shorts, Live- und Kurzlinks."
+  },
+  "ui_ready_3fd371": {
+    "message": "Bereit."
+  },
+  "ui_grouping_mode_109f16": {
+    "message": "Sortiermodus"
+  },
+  "ui_channel_fe59ab": {
+    "message": "Kanal"
+  },
+  "ui_topic_91e1f3": {
+    "message": "Thema"
+  },
+  "ui_only_channels_with_more_than_2_video_tabs_1fd38f": {
+    "message": "Nur Kanäle mit mehr als 2 Watch-Tabs."
+  },
+  "ui_loading_groups_b64cb8": {
+    "message": "Lade Gruppen..."
+  },
+  "ui_merge_topics_4a741f": {
+    "message": "Themen zusammenführen"
+  },
+  "ui_use_one_name_for_different_spellings_applies_immedia_8373d7": {
+    "message": "Ein gemeinsamer Name für mehrere Schreibweisen. Gilt sofort und auch für zukünftige Titel. Alles bleibt lokal."
+  },
+  "ui_shared_topic_name_7ef9f0": {
+    "message": "Gemeinsamer Themenname"
+  },
+  "ui_e_g_alex_karp_21fa26": {
+    "message": "z. B. Alex Karp"
+  },
+  "ui_add_an_existing_topic_71bac9": {
+    "message": "Vorhandenes Thema hinzufügen"
+  },
+  "ui_select_an_existing_topic_af3708": {
+    "message": "Vorhandenes Thema auswählen"
+  },
+  "ui_add_cbb95c": {
+    "message": "Hinzufügen"
+  },
+  "ui_variants_one_per_line_1b5b06": {
+    "message": "Varianten – eine pro Zeile"
+  },
+  "ui_alexander_karp_alexander_c_karp_palantir_ceo_e107a1": {
+    "message": "Alexander Karp\nAlexander C. Karp\nPalantir CEO"
+  },
+  "ui_merge_remember_7cfc3a": {
+    "message": "Zusammenführen & merken"
+  },
+  "ui_saved_topic_rules_47aa5b": {
+    "message": "Gespeicherte Themenzuordnungen"
+  },
+  "ui_alex_karp_and_joachim_steinh_fel_are_already_recogni_b70886": {
+    "message": "Alex Karp und Joachim Steinhöfel werden bereits automatisch erkannt. Eigene Zuordnungen haben Vorrang. Entfernen stellt die ursprüngliche Erkennung wieder her."
+  },
+  "ui_currently_no_channels_with_more_than_2_tabs_5a4705": {
+    "message": "Aktuell keine Kanäle mit mehr als 2 Tabs."
+  },
+  "ui_youtube_cache_12046d": {
+    "message": "YouTube-Zwischenspeicher"
+  },
+  "ui_clear_metadata_cache_9616ef": {
+    "message": "Metadaten-Cache leeren"
+  },
+  "ui_clear_cached_titles_and_channels_your_topic_rules_ar_8ff29d": {
+    "message": "Gespeicherte Titel und Kanäle löschen. Eigene Themenregeln bleiben erhalten."
+  },
+  "ui_tab_atelier_dashboard_0b15b3": {
+    "message": "Tab Atelier · Dashboard"
+  },
+  "ui_your_tab_dashboard_f18596": {
+    "message": "DEIN TAB-DASHBOARD"
+  },
+  "ui_view_a6d610": {
+    "message": "Ansicht"
+  },
+  "ui_open_tabs_59c324": {
+    "message": "Offene Tabs"
+  },
+  "ui_refresh_8f8431": {
+    "message": "↻ Aktualisieren"
+  },
+  "ui_more_clarity_less_searching_81ffad": {
+    "message": "MEHR ÜBERBLICK, WENIGER SUCHEN"
+  },
+  "ui_everything_in_its_place_19bc5b": {
+    "message": "Alles an seinem Platz."
+  },
+  "ui_your_tabs_by_website_channel_and_topic_expand_collec_c859ac": {
+    "message": "Deine Tabs nach Website, Kanal und Thema. Gruppen aufklappen, bündeln oder schließen."
+  },
+  "ui_total_tabs_d57ecb": {
+    "message": "Tabs insgesamt"
+  },
+  "ui_windows_3183fc": {
+    "message": "— Fenster"
+  },
+  "ui_filter_view_4d22cc": {
+    "message": "Ansicht filtern"
+  },
+  "ui_search_dd097e": {
+    "message": "Suchen"
+  },
+  "ui_domain_channel_topic_or_video_title_9856ee": {
+    "message": "Domain, Kanal, Thema oder Videotitel …"
+  },
+  "ui_youtube_group_minimum_30382a": {
+    "message": "YT-Gruppen ab"
+  },
+  "ui_1_tab_7d0e09": {
+    "message": "1 Tab"
+  },
+  "ui_2_tabs_7226d1": {
+    "message": "2 Tabs"
+  },
+  "ui_3_tabs_4faf6f": {
+    "message": "3 Tabs"
+  },
+  "ui_5_tabs_50626a": {
+    "message": "5 Tabs"
+  },
+  "ui_10_tabs_23963e": {
+    "message": "10 Tabs"
+  },
+  "ui_sort_order_59ff9e": {
+    "message": "Sortierung"
+  },
+  "ui_most_tabs_first_b68cbe": {
+    "message": "Meiste Tabs zuerst"
+  },
+  "ui_name_a_z_7ed966": {
+    "message": "Name A–Z"
+  },
+  "ui_preparing_youtube_1b1ed5": {
+    "message": "YouTube wird vorbereitet …"
+  },
+  "ui_youtube_analysis_c3e653": {
+    "message": "YouTube-Analyse"
+  },
+  "ui_tasks_progress_5b9508": {
+    "message": "Aufgaben & Fortschritt"
+  },
+  "ui_tasks_continue_when_the_dashboard_is_closed_cancel_s_52bbda": {
+    "message": "Aufgaben laufen auch bei geschlossenem Dashboard weiter. Abbrechen stoppt die nächsten Schritte."
+  },
+  "ui_your_websites_c595ea": {
+    "message": "Deine Websites"
+  },
+  "ui_youtube_channels_d0bae3": {
+    "message": "YT-Kanäle"
+  },
+  "ui_grouped_by_creator_07b71c": {
+    "message": "Nach Absender sortiert"
+  },
+  "ui_topics_keywords_e29c63": {
+    "message": "Themen & Kennwörter"
+  },
+  "ui_people_terms_and_connections_954ed9": {
+    "message": "Personen, Begriffe und Zusammenhänge"
+  },
+  "ui_domains_window_collects_all_tabs_from_a_domain_in_a_f8d8cc": {
+    "message": "Domains: „Fenster“ sammelt alle Tabs einer Domain in einem neuen Fenster ohne Zehnergrenze · „Schließen“ schließt die ganze Gruppe, auch angeheftete Tabs."
+  },
+  "ui_search_filters_groups_actions_affect_every_tab_in_th_d3f75c": {
+    "message": "Die Suche filtert Gruppen; die Aktionen betreffen jeweils alle Tabs der Gruppe im gewählten Fenster. Themen werden lokal aus Titeln und deinen Zuordnungen erkannt."
+  },
+  "ui_tab_atelier_video_inbox_14df7e": {
+    "message": "Tab Atelier · Video-Inbox"
+  },
+  "ui_your_video_collection_0b9861": {
+    "message": "DEINE VIDEO-SAMMLUNG"
+  },
+  "ui_save_for_later_without_keeping_tabs_open_903630": {
+    "message": "MERKEN, OHNE ALLES OFFEN ZU HALTEN"
+  },
+  "ui_your_video_inbox_836e07": {
+    "message": "Deine Video-Inbox."
+  },
+  "ui_titles_channels_and_topics_saved_even_after_the_tabs_8a8fc8": {
+    "message": "Titel, Kanäle und Themen – gespeichert, auch wenn die Tabs längst geschlossen sind."
+  },
+  "ui_videos_saved_2733f2": {
+    "message": "Videos gespeichert"
+  },
+  "ui_still_open_fe4844": {
+    "message": "— noch offen"
+  },
+  "ui_save_youtube_tabs_to_the_inbox_a17548": {
+    "message": "YouTube-Tabs in die Inbox übernehmen"
+  },
+  "ui_from_these_windows_8e3964": {
+    "message": "Aus diesen Fenstern"
+  },
+  "ui_also_save_private_tabs_permanently_8dbfea": {
+    "message": "Private Tabs dauerhaft mit speichern"
+  },
+  "ui_close_after_storage_is_verified_including_pinned_tab_f57efe": {
+    "message": "Nach bestätigter Speicherung schließen – auch angeheftete Tabs"
+  },
+  "ui_counting_open_youtube_videos_eaf1c8": {
+    "message": "Offene YouTube-Videos werden gezählt …"
+  },
+  "ui_each_video_is_saved_once_done_and_keep_statuses_are_82f3a9": {
+    "message": "Gleiche Videos werden einmal abgelegt. „Erledigt“ und „Behalten“ bleiben bei erneutem Ablegen erhalten. Zuerst werden Titel und Links gesichert, danach Kanäle ergänzt und erst dann auf Wunsch Tabs geschlossen."
+  },
+  "ui_you_can_close_this_page_videos_already_saved_are_kep_b0fca1": {
+    "message": "Du kannst diese Seite schließen. Bereits gespeicherte Videos bleiben erhalten. „Abbrechen“ stoppt weitere Schritte."
+  },
+  "ui_filter_collection_91d4a2": {
+    "message": "Sammlung filtern"
+  },
+  "ui_video_title_channel_topic_or_link_9025f3": {
+    "message": "Videotitel, Kanal, Thema oder Link …"
+  },
+  "ui_status_920e41": {
+    "message": "Status"
+  },
+  "ui_group_by_ebd093": {
+    "message": "Gruppieren nach"
+  },
+  "ui_youtube_channel_34040a": {
+    "message": "YouTube-Kanal"
+  },
+  "ui_topic_keyword_4f284f": {
+    "message": "Thema / Kennwort"
+  },
+  "ui_all_in_one_list_2b7cc7": {
+    "message": "Alle als Liste"
+  },
+  "ui_sort_videos_6cd5a6": {
+    "message": "Videos sortieren"
+  },
+  "ui_recently_saved_52c1da": {
+    "message": "Zuletzt abgelegt"
+  },
+  "ui_title_a_z_c380f6": {
+    "message": "Titel A–Z"
+  },
+  "ui_oldest_saved_45a62c": {
+    "message": "Zuerst abgelegt"
+  },
+  "ui_actions_for_all_matching_videos_408b8c": {
+    "message": "Aktionen für alle gefilterten Videos"
+  },
+  "ui_all_matches_ea0cb8": {
+    "message": "Alle Treffer"
+  },
+  "ui_if_no_matching_group_exists_yet_8d7cad": {
+    "message": "Falls noch keine passende Gruppe existiert"
+  },
+  "ui_otherwise_new_window_6b1160": {
+    "message": "Sonst neues Fenster"
+  },
+  "ui_otherwise_this_window_57bf0d": {
+    "message": "Sonst dieses Fenster"
+  },
+  "ui_open_all_in_group_701d5e": {
+    "message": "Alle in Gruppe öffnen ↗"
+  },
+  "ui_mark_all_as_done_597682": {
+    "message": "Alle als erledigt markieren ✓"
+  },
+  "ui_applies_to_all_matches_an_existing_channel_group_is_beed82": {
+    "message": "Gilt für alle Treffer. Eine vorhandene Kanalgruppe wird ergänzt; gleichnamige offene Gruppen werden auch über Fenster hinweg zusammengeführt. Doppelte Videos in diesen Gruppen werden geschlossen. Für die Gruppierung werden angeheftete ausgewählte Tabs gelöst. Öffnen ändert den Inbox-Status nicht; Abhaken schließt keine Tabs."
+  },
+  "ui_loading_collection_fd4ce2": {
+    "message": "Sammlung wird geladen …"
+  },
+  "ui_done_channel_topic_and_date_added_are_preserved_0a3ccb": {
+    "message": "✓ = erledigt · Kanal, Thema und Hinzufügedatum bleiben gespeichert."
+  },
+  "ui_saved_videos_83c48e": {
+    "message": "Gespeicherte Videos"
+  },
+  "ui_show_more_6be5a5": {
+    "message": "Weitere anzeigen"
+  },
+  "ui_your_collection_stays_local_to_this_extension_e3f84c": {
+    "message": "Deine Sammlung bleibt lokal in dieser Erweiterung."
+  },
+  "ui_links_and_titles_are_saved_not_video_files_topics_ar_318e6e": {
+    "message": "Links und Titel werden gespeichert, keine Videodateien. Themen sind automatisch abgeleitet und können ungenau sein."
+  },
+  "ui_create_a_json_backup_before_removing_the_extension_d_2135be": {
+    "message": "Vor dem Entfernen der Erweiterung eine JSON-Sicherung erstellen. Verschiedene Installationen haben getrennte Sammlungen."
+  },
+  "ui_back_up_json_3eada2": {
+    "message": "JSON sichern"
+  },
+  "ui_unknown_276ffa": {
+    "message": "Unbekannt"
+  },
+  "ui_other_9f3d5f": {
+    "message": "Sonstiges"
+  },
+  "ui_other_tabs_b3d909": {
+    "message": "Andere Tabs"
+  },
+  "ui_requested_6cb37a": {
+    "message": "angefordert"
+  },
+  "ui_skipped_9e74d8": {
+    "message": "übersprungen"
+  },
+  "ui_failed_e650a8": {
+    "message": "fehlgeschlagen"
+  },
+  "extensionName": {
+    "message": "Tab Atelier — YouTube & Domains"
+  },
+  "extensionTitle": {
+    "message": "Tab Atelier"
+  },
+  "extensionDescription": {
+    "message": "Tabs nach Domain bündeln, Duplikate verwalten und YouTube-Videos mit Titeln, Kanälen und Themen in einer lokalen Inbox speichern."
+  },
+  "actionWindow": {
+    "message": "Fenster"
+  },
+  "actionClose": {
+    "message": "Schließen"
+  },
+  "actionInbox": {
+    "message": "Inbox"
+  },
+  "donatePageTitle": {
+    "message": "Tab Atelier unterstützen"
+  },
+  "donateBrand": {
+    "message": "ENTWICKLUNG UNTERSTÜTZEN"
+  },
+  "donateNav": {
+    "message": "Spenden"
+  },
+  "donateEyebrow": {
+    "message": "KLEINE UNTERSTÜTZUNG, GROSSE HILFE"
+  },
+  "donateHeading": {
+    "message": "Tab Atelier hilft dir?"
+  },
+  "donateIntro": {
+    "message": "Mit einer freiwilligen Spende unterstützt du Entwicklung und Pflege. Alle Funktionen bleiben auch ohne Spende verfügbar."
+  },
+  "donateNetwork": {
+    "message": "Netzwerk: Bitcoin-Hauptnetz"
+  },
+  "donateOptional": {
+    "message": "Freiwillig"
+  },
+  "donateAddressLabel": {
+    "message": "Öffentliche Bitcoin-Empfangsadresse"
+  },
+  "donateCopy": {
+    "message": "Adresse kopieren"
+  },
+  "donateWallet": {
+    "message": "In Wallet öffnen ↗"
+  },
+  "donateNetworkNote": {
+    "message": "Nur BTC über das Bitcoin-Netzwerk senden. Den Betrag bestimmst du selbst; eine Zahlung bestätigst du in deiner eigenen Wallet."
+  },
+  "donatePrivacy": {
+    "message": "Tab Atelier verbindet sich nicht mit deiner Wallet und prüft weder Guthaben noch Transaktionen. Diese Seite zeigt nur öffentliche Empfangsadressen; die QR-Codes werden lokal mitgeliefert."
+  },
+  "donateThanks": {
+    "message": "Danke, dass du Tab Atelier unterstützt."
+  },
+  "donateCopied": {
+    "message": "Bitcoin-Adresse kopiert."
+  },
+  "donateCopyFallback": {
+    "message": "Automatisches Kopieren ist gerade nicht möglich. Die Adresse ist markiert – bitte manuell kopieren."
+  },
+  "donatePopup": {
+    "message": "♡ Entwicklung unterstützen"
+  },
+  "donateMoneroNetwork": {
+    "message": "Netzwerk: Monero-Hauptnetz"
+  },
+  "donateMoneroAddressLabel": {
+    "message": "Öffentliche Monero-Empfangsadresse"
+  },
+  "donateMoneroCopied": {
+    "message": "Monero-Adresse kopiert."
+  },
+  "donateScan": {
+    "message": "Mit deiner Wallet-App scannen"
+  },
+  "donateBitcoinQrAlt": {
+    "message": "QR-Code für eine Bitcoin-Spende"
+  },
+  "donateMoneroQrAlt": {
+    "message": "QR-Code für eine Monero-Spende"
+  },
+  "donateMoneroNetworkNote": {
+    "message": "Nur XMR über das Monero-Netzwerk senden. Diese Spenden-Unteradresse bleibt nutzbar, auch wenn Cake Wallet später eine andere Empfangsadresse anzeigt."
+  },
+  "donateWalletHint": {
+    "message": "QR-Codes und Wallet-Links geben keinen Betrag vor. Wähle einen Betrag und bestätige ihn in einer kompatiblen Wallet."
+  },
+  "ui_parked_tab_parker_videos_are_included_without_loading": {
+    "message": "Geparkte Tab-Parker-Videos werden direkt übernommen, ohne sie zu laden. Kanalinfos werden verwendet, wenn sie bereits gespeichert sind."
+  },
+  "ui_topic_artificial_intelligence": {
+    "message": "Künstliche Intelligenz"
+  },
+  "ui_topic_programming": {
+    "message": "Programmierung"
+  },
+  "ui_capture_title_search": {
+    "message": "Offene Videos nach Titel filtern"
+  },
+  "ui_capture_title_placeholder": {
+    "message": "z. B. Michael Every"
+  },
+  "ui_capture_parked_only": {
+    "message": "Nur geparkte Tab-Parker-Videos"
+  },
+  "ui_capture_filter_hint": {
+    "message": "Es werden nur passende Videotitel übernommen. Leer lassen, um alle Videos der ausgewählten Fenster zu übernehmen."
+  },
+  "ui_capture_sample_titles": {
+    "message": "Vorschau passender Videotitel (bis zu 5)"
+  },
+  "ui_capture_search_matches": {
+    "message": "Videos mit passendem Titel in die Inbox übernehmen ↗"
+  },
+  "ui_capture_search_preview_hint": {
+    "message": "Auf der nächsten Seite geparkte Videos auswählen und die Treffer prüfen."
+  },
+  "ui_capture_invalid_filter": {
+    "message": "Ungültiger Titelfilter: maximal 200 Zeichen. Bitte die Auswahl erneut prüfen."
+  },
+  "ui_parked_info_heading": {
+    "message": "Titel oder Kanal fehlen?"
+  },
+  "ui_parked_info_hint": {
+    "message": "Fehlende Infos für passende geparkte Videos bei YouTube abfragen. Dabei werden nur Videolinks übermittelt, ohne Cookies. Private Tabs sind ausgenommen. Die Videos bleiben geparkt."
+  },
+  "ui_parked_info_action": {
+    "message": "Fehlende Infos ergänzen"
+  },
+  "ui_parked_info_progress": {
+    "message": "Titel und Kanäle werden ergänzt – die Videos bleiben geparkt."
+  },
+  "ui_parked_info_done": {
+    "message": "Kanalinfos für $1 von $2 Videos vorhanden. Nicht verfügbare oder private Videos können unvollständig bleiben."
+  },
+  "ui_parked_info_no_private": {
+    "message": "Für private Tabs werden keine Online-Metadaten abgefragt."
+  },
+  "ui_update_heading": {
+    "message": "Tab Parker sicher aktualisieren"
+  },
+  "ui_update_instructions": {
+    "message": "Geparkte Tabs zuerst hier überbrücken. Danach Tab Parker in Chromes Erweiterungen neu laden und anschließend hier wiederherstellen. Tab Atelier währenddessen aktiviert lassen."
+  },
+  "ui_update_prepare": {
+    "message": "Parkseiten überbrücken"
+  },
+  "ui_update_restore": {
+    "message": "Parkseiten wiederherstellen"
+  },
+  "ui_update_pending": {
+    "message": "$1 von $2 Parkseiten überbrückt. Nach dem Neuladen von Tab Parker hier wiederherstellen."
+  },
+  "ui_update_held": {
+    "message": "$1 von $2 Tabs überbrückt. Nur bei vollständiger Überbrückung Tab Parker neu laden."
+  },
+  "ui_update_restored": {
+    "message": "$1 Parkseiten wiederhergestellt. $2 geschlossene oder inzwischen geänderte Tabs übersprungen."
+  },
+  "ui_update_wait": {
+    "message": "Ein geparkter Tab lädt gerade. Bitte kurz warten und erneut versuchen."
+  },
+  "ui_update_hold_title": {
+    "message": "Geparktes Video · Aktualisierung"
+  },
+  "ui_update_hold_eyebrow": {
+    "message": "DEIN LINK BLEIBT LOKAL ERHALTEN"
+  },
+  "ui_update_hold_copy": {
+    "message": "Dieser Tab wird während des Tab-Parker-Updates überbrückt. Videolink, Fenster und Gruppe bleiben erhalten. Schließe das Update in der Video-Inbox ab und stelle danach die Parkseiten wieder her."
+  },
+  "ui_update_open_inbox": {
+    "message": "Video-Inbox öffnen"
+  },
+  "ui_update_private": {
+    "message": "Private Parkseiten sind offen. Diese Überbrückung speichert keine privaten Links. Tab Parker erst aktualisieren, wenn diese separat gesichert oder geschlossen sind."
+  },
+  "ui_auto_youtube_grouping": {
+    "message": "YouTube-Tabs automatisch gruppieren"
+  },
+  "ui_auto_group_channel": {
+    "message": "Nach Kanal"
+  },
+  "ui_auto_group_topic": {
+    "message": "Nach Thema"
+  },
+  "actionGroup": {
+    "message": "Gruppe"
+  },
+  "domainGroupName": {
+    "message": "Gruppenname"
+  },
+  "domainGroupScope": {
+    "message": "Tabs werden pro Fenster gruppiert. Angeheftete Tabs bleiben separat."
+  },
+  "domainGroupCancel": {
+    "message": "Abbrechen"
+  },
+  "domainGroupResult": {
+    "message": "$COUNT$ Tabs in „$TITLE$“ gruppiert · $SKIPPED$ übersprungen.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "title": {
+        "content": "$2"
+      },
+      "skipped": {
+        "content": "$3"
+      }
+    }
+  },
+  "domainGroupInvalid": {
+    "message": "Bitte gib einen Gruppennamen mit höchstens 80 Zeichen ein."
+  },
+  "ui_update_individual": {
+    "message": "Einzelne Tabs"
+  },
+  "ui_update_parker_unavailable": {
+    "message": "Tab Parker ist noch nicht erreichbar. Die betroffenen Links bleiben gesichert."
+  },
+  "domainGroupPartial": {
+    "message": "$COUNT$ Tabs gruppiert · $SKIPPED$ übersprungen.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "skipped": {
+        "content": "$2"
+      }
+    }
+  },
+  "protectionEnable": {
+    "message": "Tab-Schutz aktivieren (60 Tabs / 20 Videos)"
+  },
+  "overflowEnable": {
+    "message": "Überzählige YouTube-Videos in der Inbox ablegen"
+  },
+  "overflowLimit": {
+    "message": "Maximal offene YouTube-Videos"
+  },
+  "overflowHint": {
+    "message": "Pausiere eine YouTube-Schließregel in der separaten Tablimit-Erweiterung, damit Atelier die Videos zuerst sichern kann."
+  },
+  "overflowStorageError": {
+    "message": "Der exakte Videolink konnte in der Inbox nicht bestätigt werden. Der Tab bleibt offen."
+  },
+  "overflowNoCandidate": {
+    "message": "YouTube-Limit noch überschritten. Angeheftete, aktive oder hörbare Tabs bleiben offen."
+  },
+  "overflowVideoFull": {
+    "message": "YouTube-Limit von $1 erreicht. Schließe einen Video-Tab, um weiter zu öffnen."
+  },
+  "inboxMissingTitle": {
+    "message": "Titel fehlt"
+  },
+  "inboxMissingChannel": {
+    "message": "Kanal fehlt"
+  },
+  "inboxMissingTopic": {
+    "message": "Kein Thema erkannt"
+  },
+  "inboxMetadataFilter": {
+    "message": "Fehlende Angaben"
+  },
+  "inboxReviewNext": {
+    "message": "Nächste $1 in Gruppe öffnen"
+  },
+  "inboxReviewHint": {
+    "message": "Öffnet bis zu zehn Videos auf einmal und verwendet bereits offene Videos wieder. Als erledigt markieren gilt für alle Treffer."
+  },
+  "inboxPageRange": {
+    "message": "$1–$2 von $3"
+  },
+  "inboxPagePrevious": {
+    "message": "Zurück"
+  },
+  "inboxPageNext": {
+    "message": "Weiter"
+  },
+  "inboxTopicEdit": {
+    "message": "Thema bearbeiten"
+  },
+  "inboxTopicInvalid": {
+    "message": "Das Thema darf höchstens 120 Zeichen haben."
+  },
+  "inboxTopicReset": {
+    "message": "Leer lassen, um wieder das automatisch erkannte Thema zu verwenden."
+  },
+  "inboxAutoMetadata": {
+    "message": "Fehlende Videodaten automatisch ergänzen"
+  },
+  "inboxAutoHint": {
+    "message": "Fragt Angaben für gespeicherte und geparkte Videos ohne Cookies bei YouTube ab. Geparkte Tabs bleiben geparkt. Private Tabs werden ausgelassen."
+  },
+  "inboxAutoWaiting": {
+    "message": "YouTube hat die Abfragen vorübergehend begrenzt. Atelier setzt später fort."
+  },
+  "inboxAutoProgress": {
+    "message": "$1 ergänzt · $2 noch offen"
+  },
+  "inboxReviewLimited": {
+    "message": "$1 weitere Videos bleiben in der Inbox, weil das Tab-Limit erreicht ist."
+  },
+  "reviewChoose": {
+    "message": "In Gruppe öffnen …"
+  },
+  "reviewTarget": {
+    "message": "Ziel"
+  },
+  "reviewNewWindow": {
+    "message": "Neues Fenster"
+  },
+  "reviewCurrentWindow": {
+    "message": "Dieses Fenster"
+  },
+  "reviewAmount": {
+    "message": "Anzahl der Videos"
+  },
+  "reviewAll": {
+    "message": "Alle $1"
+  },
+  "reviewSummary": {
+    "message": "$1 Videos ausgewählt · $2 davon noch nicht offen"
+  },
+  "reviewOpenCount": {
+    "message": "$1 Videos öffnen"
+  },
+  "reviewOpenException": {
+    "message": "$1 Videos mit Ausnahme öffnen"
+  },
+  "reviewChecking": {
+    "message": "Auswahl wird geprüft …"
+  },
+  "reviewHint": {
+    "message": "Wähle, wie viele Videos du öffnen möchtest. Als erledigt markieren gilt für alle Treffer."
+  },
+  "reviewExceptionHint": {
+    "message": "Diese Gruppe darf die Tab-Limits überschreiten. Die Videos zählen weiter zum Gesamtlimit und bleiben vor der automatischen Archivierung geschützt."
+  },
+  "reviewCapacityChanged": {
+    "message": "Die verfügbaren Plätze haben sich geändert. Öffne das Auswahlmenü erneut, um die Ausnahme zu bestätigen."
+  },
+  "reviewSelectionChanged": {
+    "message": "Die Auswahl hat sich geändert. Öffne das Auswahlmenü erneut."
+  },
+  "reviewWindowChanged": {
+    "message": "Das Gruppenfenster wurde geschlossen oder verändert. Bereits geöffnete Tabs bleiben erhalten."
+  },
+  "reviewOpening": {
+    "message": "Videos werden in der Gruppe geöffnet …"
+  },
+  "reviewResult": {
+    "message": "$1 gruppiert · $2 neu geöffnet · $3 wiederverwendet · $4 übersprungen"
+  },
+  "reviewProtectionTitle": {
+    "message": "Atelier · Gruppenschutz"
+  },
+  "reviewProtectionActive": {
+    "message": "Die bestätigten Videos dieser Gruppe sind vor der automatischen Archivierung geschützt. Der Schutz bleibt aktiv, wenn Chrome diese Gruppe samt diesem Tab wiederherstellt."
+  },
+  "reviewProtectionPending": {
+    "message": "Dieser Tab gehört zu einem laufenden oder pausierten Inbox-Auftrag."
+  },
+  "reviewProtectionInactive": {
+    "message": "Die Tab-Limits gelten wieder für diese Videos. Du kannst diesen Tab schließen."
+  },
+  "reviewProtectionStop": {
+    "message": "Gruppenschutz beenden"
+  }
+}

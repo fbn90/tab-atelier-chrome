@@ -1,0 +1,51 @@
+.donate-main{max-width:780px;padding-top:48px;padding-bottom:36px}
+.donate-intro{text-align:center;margin-bottom:30px}
+.support-mark{display:grid;place-items:center;margin:0 auto 22px;width:64px;height:64px;border-radius:20px;background:#e1f1ff;color:var(--accent);font-size:38px}
+.donate-intro .intro-copy{max-width:580px;margin:16px auto 0}
+.donation-card{padding:28px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 28px #17324d08}
+.donation-card-heading{display:flex;align-items:center;gap:13px;margin-bottom:25px}
+.coin-mark{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;border-radius:14px;background:#fff3df;color:#a9650a;font-size:28px}
+.coin-code{margin-left:5px;color:var(--muted);font-size:12px;font-weight:500;letter-spacing:0}
+.donation-card-heading p{margin:5px 0 0;font-size:12px;color:var(--muted)}
+.optional-tag{margin-left:auto;border-radius:20px;background:#eaf3ff;color:var(--accent);font-size:11px;padding:6px 10px}
+.donation-card label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:8px}
+.wallet-address{height:48px;font-family:ui-monospace,"SF Mono",monospace;font-size:13px;letter-spacing:0;width:100%;min-width:0;background:#f6faff}
+.donation-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px}
+.donation-actions button,.wallet-link{font-size:13px;padding:11px 15px;border-radius:9px;border:1px solid var(--line);font-weight:600}
+.donation-actions .primary-action{background:var(--accent);color:#fff;border-color:var(--accent)}
+.donation-actions .primary-action:hover{background:#105892}
+.wallet-link{display:inline-block;color:var(--accent);text-decoration:none}
+.wallet-link:hover{background:#eaf3ff;border-color:#aacdeb}
+.copy-status{min-height:18px;color:var(--accent);font-size:12px;line-height:1.5;margin:12px 0 0}
+.copy-status.error{background:transparent!important}
+.donation-note{font-size:12px;line-height:1.65;color:var(--muted);margin:14px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+.donation-footer{text-align:center;padding:0 18px;font-size:12px;line-height:1.7}
+.donation-footer p:last-child{color:var(--accent);font-weight:600}
+@media(max-width:520px){.donate-main{padding-top:30px}.donation-card{padding:20px}.donation-actions>*{flex:1;text-align:center}.wallet-address{font-size:11px}.optional-tag{display:none}}
+
+/* Keep the whole address readable, including long Monero subaddresses. */
+.donate-main{max-width:900px}
+.donation-card+.donation-card{margin-top:20px}
+.donation-content{display:grid;grid-template-columns:220px minmax(0,1fr);gap:26px;align-items:center}
+.payment-qr{margin:0;text-align:center}
+.payment-qr img{display:block;width:220px;max-width:100%;height:auto;margin:auto;background:#fff;image-rendering:pixelated}
+.payment-qr figcaption{font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px}
+.payment-details{min-width:0}
+textarea.wallet-address{height:auto;resize:none;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-all;border:1px solid var(--line);border-radius:8px;padding:10px 11px;line-height:1.6;color:inherit;display:block}
+.monero-mark{background:#fff0e5;color:#a65316;font-weight:750;font-size:24px}
+textarea:focus-visible{outline:3px solid #147dcc;outline-offset:3px}
+@media(max-width:720px){.donation-content{grid-template-columns:minmax(0,1fr);gap:22px}.payment-qr img{width:220px}.payment-details{width:100%}}
+
+/* Use the same quiet surfaces and button treatment as the dashboard. */
+.donation-card { border-radius: 18px; border-color: #e0e7ef; box-shadow: 0 4px 16px #17324d05; }
+.support-mark { width: 60px; height: 60px; border-radius: 18px; background: #eaf3fb; }
+.optional-tag { background: #f0f4f8; color: #52677e; }
+.donation-actions button, .wallet-link { min-height: 40px; padding: 10px 15px; border-radius: 10px; }
+.donation-actions .primary-action { box-shadow: 0 2px 4px #176bb014; }
+.donation-actions .primary-action:hover:not(:disabled) { background: #125c99; border-color: #125c99; color: #fff; }
+.wallet-link { background: #fff; border-color: #dce5ef; color: #365670; }
+.wallet-link:hover { background: #f3f7fb; border-color: #b9ccdf; }
+textarea.wallet-address { background: #f8fafc; border-color: #dce5ef; border-radius: 10px; padding: 12px; }
+.donation-note { border-top-color: #edf1f6; line-height: 1.7; }
+.payment-qr { padding: 12px; border: 1px solid #edf1f6; border-radius: 14px; }
+@media (max-width: 520px) { .donation-actions button, .wallet-link { min-height: 44px; } }

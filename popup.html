@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="ui_tab_atelier_01e1cc">Tab Atelier</title>
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="icon" href="icons/logo.svg?v=20261110">
+</head>
+  <body>
+    <main class="popup">
+      <header class="app-header">
+        <div class="brand">
+          <img class="brand-mark" src="icons/logo.svg" width="28" height="28" alt="">
+          <div class="brand-copy">
+            <strong class="brand-title" data-i18n="ui_tab_atelier_01e1cc">Tab Atelier</strong>
+          </div>
+        </div>
+        <button
+          id="refreshChannelsButton"
+          class="icon-button"
+          type="button"
+          aria-label="Refresh channel list"
+          title="Refresh channel list"
+         data-i18n-aria-label="ui_refresh_channel_list_3b2a48" data-i18n-title="ui_refresh_channel_list_3b2a48">
+          ↻
+        </button>
+      </header>
+
+      <section class="section launch-section"><button id="openDashboard" class="primary-button" type="button" data-i18n="ui_open_dashboard_ef1f6f">Open dashboard ↗</button><button id="openInbox" class="text-button" type="button" data-i18n="ui_open_video_inbox_27ca3d">Open Video Inbox ↗</button><button id="openDonate" class="donate-button" type="button" data-i18n="donatePopup">♡ Support development</button><p id="dashboardOpenStatus" class="subtle-status" role="status"></p></section>
+
+      <section id="taskPanel" class="section" hidden aria-label="Running tasks" data-i18n-aria-label="ui_running_tasks_72aebd">
+        <h2 class="section-title" data-i18n="ui_tasks_1351ad">Tasks</h2>
+        <p class="section-copy" data-i18n="ui_tasks_continue_when_the_popup_is_closed_cancel_stops_1f901c">Tasks continue when the popup is closed. Cancel stops further steps; completed steps are preserved.</p>
+        <ul id="taskList" class="alias-list" aria-live="polite"></ul>
+      </section>
+      <section class="section domain-section" aria-labelledby="domainsTitle">
+        <div class="section-head section-head-tight">
+          <div><p id="domainScopeLabel" class="section-label" data-i18n="ui_all_windows_7d53f7">All windows</p><h1 id="domainsTitle" class="section-title" data-i18n="ui_your_tabs_d26e6d">Your tabs</h1></div>
+          <span id="totalTabs" class="total-tabs">…</span>
+        </div>
+        <label class="search-label" for="domainSearch" data-i18n="ui_search_domains_50c4f9">Search domains</label>
+        <input id="domainSearch" class="threshold-input" type="search" placeholder="youtube.com, jamesedition.com …" autocomplete="off"  data-i18n-placeholder="ui_youtube_com_jamesedition_com_dd9957"/>
+        <label class="sort-option"><input id="domainCurrentWindow" type="checkbox" /> <span data-i18n="ui_only_this_window_2488d8">Only this window</span></label>
+        <label class="sort-option"><input id="domainSubdomains" type="checkbox" /> <span data-i18n="ui_include_subdomains_under_the_parent_domain_3f9785">Include subdomains under the parent domain</span></label>
+        <p id="domainStatus" class="subtle-status" aria-live="polite" data-i18n="ui_loading_domains_1d34f4">Loading domains …</p>
+        <ul id="domainList" class="channel-list domain-list" aria-label="Domains" data-i18n-aria-label="ui_domains_ced677"></ul>
+        <p class="section-copy" data-i18n="ui_window_collects_all_tabs_from_a_domain_in_a_new_wind_065488">“Window” collects all tabs from a domain in a new window, with no per-window tab limit. Regular and private tabs stay separate.</p>
+        <button id="deduplicateButton" class="text-button" type="button" data-i18n="ui_clean_up_duplicates_now_09c595">Clean up duplicates now</button>
+        <label class="sort-option"><input id="automaticDuplicates" type="checkbox" disabled /> <span data-i18n="ui_automatically_close_new_duplicates_8d43cd">Automatically close new duplicates</span></label>
+        <p class="section-copy" data-i18n="ui_only_newly_opened_fully_loaded_tabs_youtube_duplicat_b028fe">Only newly opened, fully loaded tabs. YouTube duplicates are matched by video without timestamps; playlist contexts stay separate. Other sites use the complete URL. Pinned tabs take priority; otherwise the newer tab stays. No automatic full cleanup on startup.</p>
+        <details class="topic-editor">
+          <summary data-i18n="ui_duplicate_cleanup_log_da631e">Duplicate cleanup log</summary>
+          <p class="section-copy" data-i18n="ui_the_last_20_actions_in_this_session_earlier_closures_8e6afc">The last 20 actions in this session. Earlier closures were not recorded.</p>
+          <ul id="duplicateCloseLog" class="alias-list" aria-label="Duplicate cleanup log" data-i18n-aria-label="ui_duplicate_cleanup_log_da631e"></ul>
+        </details>
+      </section>
+
+      <section class="section automation-section" aria-labelledby="automationTitle">
+        <div class="section-head"><div><p class="section-label" data-i18n="ui_your_rules_157b08">Your rules</p><h2 id="automationTitle" class="section-title" data-i18n="ui_automation_tab_limit_9d3f57">Automation &amp; tab limit</h2></div><span class="inline-value" data-i18n="ui_on_off_f0d2ca">On / Off</span></div>
+        <label class="search-label" for="youtubeGrouping" data-i18n="ui_auto_youtube_grouping">Group YouTube tabs automatically</label>
+        <select id="youtubeGrouping" class="threshold-input" disabled>
+          <option value="off" data-i18n="ui_off_2337c3">Off</option>
+          <option value="channel" data-i18n="ui_auto_group_channel">By channel</option>
+          <option value="topic" data-i18n="ui_auto_group_topic">By topic</option>
+        </select>
+        <label class="sort-option"><input id="automaticDomainRouting" type="checkbox" disabled /> <span data-i18n="ui_automatically_collect_new_tabs_by_domain_10e7bf">Automatically collect new tabs by domain</span></label>
+        <p class="section-copy" data-i18n="ui_one_destination_window_per_domain_with_no_per_window_e5dd87">One destination window per domain, with no per-window tab limit. Groups and pinned tabs stay where they are. Internal pages are not moved.</p>
+        <button id="sortDomainsNow" class="text-button" type="button" disabled data-i18n="ui_collect_existing_ungrouped_tabs_by_domain_a2d2bc">Collect existing ungrouped tabs by domain</button>
+        <label class="sort-option"><input id="totalTabLimitEnabled" type="checkbox" disabled /> <span data-i18n="ui_limit_the_total_number_of_open_tabs_b460c8">Limit the total number of open tabs</span></label>
+        <label class="search-label" for="totalTabLimit" data-i18n="ui_maximum_open_tabs_all_windows_724283">Maximum open tabs (all windows)</label>
+        <div class="input-row"><input id="totalTabLimit" class="threshold-input" type="number" min="1" max="10000" step="1" value="40" required disabled /><button id="saveTotalTabLimit" class="text-button" type="button" disabled data-i18n="ui_save_f6b2ff">Save</button></div>
+        <p class="section-copy" data-i18n="ui_new_tabs_are_rejected_when_the_limit_is_reached_one_20b3f6">New tabs are rejected when the limit is reached. One reusable notice page is allowed in addition. Existing tabs stay open; opening from the Inbox also respects the limit.</p>
+        <button id="retryTabSettings" class="text-button" type="button" hidden data-i18n="ui_reconnect_c278e2">Reconnect</button>
+        <button id="enableTabProtection" class="text-button" type="button" disabled data-i18n="protectionEnable">Enable protection (60 tabs / 20 videos)</button>
+        <label class="sort-option"><input id="youtubeLimitEnabled" type="checkbox" disabled> <span data-i18n="overflowEnable">Save excess YouTube videos to the Inbox</span></label>
+        <div class="input-row"><label for="youtubeLimit" data-i18n="overflowLimit">Maximum open YouTube videos</label><input id="youtubeLimit" class="threshold-input" type="number" min="1" max="10000" step="1" value="20" required disabled><button id="saveYoutubeLimit" class="text-button" type="button" disabled data-i18n="ui_save_f6b2ff">Save</button></div>
+        <p class="section-copy" data-i18n="overflowHint">Pause any YouTube closing rule in the separate Tablimit extension to let Atelier save videos first.</p>
+        <p id="tabAutomationStatus" class="subtle-status" role="status"></p>
+      </section>
+
+      <section class="section" aria-labelledby="sortWindowTitle">
+        <h2 id="sortWindowTitle" class="section-title" data-i18n="ui_sort_this_window_6c2d7c">Sort this window</h2>
+        <button id="sortWindowButton" class="primary-button" type="button" data-i18n="ui_sort_tabs_oldest_newest_8925d5">Sort tabs: oldest → newest</button>
+        <label class="sort-option"><input id="dissolveGroups" type="checkbox" /> <span data-i18n="ui_ungroup_tabs_for_one_continuous_sort_order_fedb8e">Ungroup tabs for one continuous sort order</span></label>
+        <p class="section-copy" data-i18n="ui_pinned_tabs_stay_at_the_front_groups_stay_together_o_c48495">Pinned tabs stay at the front. Groups stay together, ordered by their oldest tab; tabs within each group are sorted oldest to newest. For pre-existing tabs, only their recorded order is known.</p>
+        <p id="sortWindowStatus" class="subtle-status" aria-live="polite"></p>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="section-label" data-i18n="ui_youtube_minimum_eab892">YouTube minimum</p>
+            <p class="section-copy" data-i18n="ui_only_groups_above_this_number_1bca2a">Only groups above this number.</p>
+          </div>
+          <span id="thresholdPreview" class="inline-value">&gt; 2</span>
+        </div>
+        <div class="input-row">
+          <input
+            id="thresholdInput"
+            class="threshold-input"
+            type="number"
+            min="0"
+            step="1"
+            inputmode="numeric"
+            value="2"
+            aria-label="More than X video tabs"
+           data-i18n-aria-label="ui_more_than_x_video_tabs_eb7428"/>
+          <button id="saveThresholdButton" class="text-button" type="button" data-i18n="ui_save_f6b2ff">Save</button>
+        </div>
+      </section>
+
+      <section class="section export-section">
+        <div class="section-head">
+          <div>
+            <p class="section-label" data-i18n="ui_export_366489">Export</p>
+            <h1 class="section-title" data-i18n="ui_export_json_259d05">Export JSON</h1>
+          </div>
+        </div>
+        <p class="section-copy" data-i18n="ui_open_youtube_videos_shorts_live_streams_and_short_li_250607">Open YouTube videos, Shorts, live streams and short links.</p>
+        <button id="runButton" class="primary-button" type="button" data-i18n="ui_export_json_259d05">Export JSON</button>
+        <p id="status" class="status" aria-live="polite" data-i18n="ui_ready_3fd371">Ready.</p>
+        <pre id="details" class="details" hidden></pre>
+      </section>
+
+      <section class="section channel-section">
+        <div class="section-head section-head-tight">
+          <div class="channel-heading">
+            <span class="youtube-dot" aria-hidden="true"></span>
+            <div>
+              <p id="groupModeLabel" class="section-label" data-i18n="ui_youtube_by_channel_bb31ab">YouTube by channel</p>
+              <h2 id="groupModeTitle" class="section-title section-title-small" data-i18n="ui_channels_d459d5">Channels</h2>
+            </div>
+          </div>
+          <div class="mode-switch" role="group" aria-label="Grouping mode" data-i18n-aria-label="ui_grouping_mode_109f16">
+            <button
+              id="modeChannelButton"
+              class="mode-button is-active"
+              type="button"
+              data-group-by="channel"
+              aria-pressed="true"
+             data-i18n="ui_channel_fe59ab">
+              Channel
+            </button>
+            <button
+              id="modeTopicButton"
+              class="mode-button"
+              type="button"
+              data-group-by="topic"
+              aria-pressed="false"
+             data-i18n="ui_topic_91e1f3">
+              Topic
+            </button>
+          </div>
+        </div>
+        <p id="channelFilterText" class="section-copy" data-i18n="ui_only_channels_with_more_than_2_video_tabs_1fd38f">
+          Only channels with more than 2 video tabs.
+        </p>
+        <p id="channelStatus" class="subtle-status" aria-live="polite" data-i18n="ui_loading_groups_b64cb8">Loading groups...</p>
+        <details id="topicEditor" class="topic-editor" hidden>
+          <summary data-i18n="ui_merge_topics_4a741f">Merge topics</summary>
+          <p class="section-copy" data-i18n="ui_use_one_name_for_different_spellings_applies_immedia_8373d7">Use one name for different spellings. Applies immediately and to future titles. Everything stays local.</p>
+          <form id="topicAliasForm">
+            <label for="topicTarget" data-i18n="ui_shared_topic_name_7ef9f0">Shared topic name</label>
+            <input id="topicTarget" class="threshold-input" list="topicChoices" maxlength="72" placeholder="e.g. Alex Karp" required  data-i18n-placeholder="ui_e_g_alex_karp_21fa26"/>
+            <datalist id="topicChoices"></datalist>
+            <label for="topicChoice" data-i18n="ui_add_an_existing_topic_71bac9">Add an existing topic</label>
+            <div class="input-row">
+              <select id="topicChoice" aria-label="Select an existing topic" data-i18n-aria-label="ui_select_an_existing_topic_af3708"></select>
+              <button id="addTopicChoice" class="text-button" type="button" data-i18n="ui_add_cbb95c">Add</button>
+            </div>
+            <label for="topicVariants" data-i18n="ui_variants_one_per_line_1b5b06">Variants – one per line</label>
+            <textarea id="topicVariants" rows="3" placeholder="Alexander Karp
+Alexander C. Karp
+Palantir CEO" maxlength="8000" required data-i18n-placeholder="ui_alexander_karp_alexander_c_karp_palantir_ceo_e107a1"></textarea>
+            <button id="saveTopicAliases" class="primary-button" type="submit" data-i18n="ui_merge_remember_7cfc3a">Merge &amp; remember</button>
+          </form>
+          <p id="topicAliasStatus" class="subtle-status" aria-live="polite"></p>
+          <ul id="topicAliasList" class="alias-list" aria-label="Saved topic rules" data-i18n-aria-label="ui_saved_topic_rules_47aa5b"></ul>
+          <p class="section-copy" data-i18n="ui_alex_karp_and_joachim_steinh_fel_are_already_recogni_b70886">Alex Karp and Joachim Steinhöfel are already recognized automatically. Your rules take priority. Removing a rule restores the original detection.</p>
+        </details>
+        <ul id="channelList" class="channel-list" aria-live="polite"></ul>
+        <p id="channelEmpty" class="section-copy" hidden data-i18n="ui_currently_no_channels_with_more_than_2_tabs_5a4705">Currently no channels with more than 2 tabs.</p>
+      </section>
+      <section class="section">
+        <details id="cacheDetails" class="topic-editor">
+          <summary data-i18n="ui_youtube_cache_12046d">YouTube cache</summary>
+          <p id="cacheStatus" class="section-copy" aria-live="polite"></p>
+          <button id="clearMetadataCache" class="text-button" type="button" data-i18n="ui_clear_metadata_cache_9616ef">Clear metadata cache</button>
+          <p class="section-copy" data-i18n="ui_clear_cached_titles_and_channels_your_topic_rules_ar_8ff29d">Clear cached titles and channels. Your topic rules are preserved.</p>
+        </details>
+      </section>
+    </main>
+    <script src="i18n-core.js"></script>
+<dialog id="domainGroupDialog" class="domain-group-dialog" aria-labelledby="domainGroupLabel">
+  <form method="dialog">
+    <label id="domainGroupLabel" for="domainGroupName" data-i18n="domainGroupName">Group name</label>
+    <input id="domainGroupName" name="name" required maxlength="80" autofocus>
+    <p data-i18n="domainGroupScope">Tabs are grouped within each window. Pinned tabs stay separate.</p>
+    <div class="domain-group-buttons">
+      <button type="button" value="cancel" data-i18n="domainGroupCancel">Cancel</button>
+      <button value="group" data-i18n="actionGroup">Group</button>
+    </div>
+  </form>
+</dialog>
+<script src="domain-group-dialog.js"></script>
+<script src="i18n-page.js"></script>
+<script src="dashboard-launcher.js"></script>
+    <script src="tasks-popup.js"></script>
+    <script src="popup.js"></script>
+    <script src="domains-popup.js"></script>
+    <script type="module" src="tab-automation-page.js"></script>
+  </body>
+</html>

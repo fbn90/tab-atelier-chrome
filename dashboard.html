@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="ui_tab_atelier_dashboard_0b15b3">Tab Atelier · Dashboard</title>
+  <link rel="icon" href="icons/logo.svg?v=20261110">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="dashboard.html"><img src="icons/logo.svg" width="36" height="36" alt=""><span><span data-i18n="ui_tab_atelier_01e1cc">Tab Atelier</span><small data-i18n="ui_your_tab_dashboard_f18596">YOUR TAB DASHBOARD</small></span></a>
+    <nav class="view-nav" aria-label="View" data-i18n-aria-label="ui_view_a6d610"><a href="dashboard.html" aria-current="page" data-i18n="ui_open_tabs_59c324">Open tabs</a><a href="inbox.html" data-i18n="ui_video_inbox_353952">Video Inbox</a><a href="donate.html" data-i18n="donateNav">Donate</a></nav>
+    <button id="refresh" type="button" data-i18n="ui_refresh_8f8431">↻ Refresh</button>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="pageTitle">
+      <div><p class="eyebrow" data-i18n="ui_more_clarity_less_searching_81ffad">MORE CLARITY, LESS SEARCHING</p><h1 id="pageTitle" data-i18n="ui_everything_in_its_place_19bc5b">Everything in its place.</h1><p class="intro-copy" data-i18n="ui_your_tabs_by_website_channel_and_topic_expand_collec_c859ac">Your tabs by website, channel and topic. Expand, collect or close groups.</p></div>
+      <div class="totals"><strong id="tabTotal">—</strong><span><span data-i18n="ui_total_tabs_d57ecb">Total tabs</span><br><span id="windowTotal" data-i18n="ui_windows_3183fc">— windows</span></span></div>
+    </section>
+    <section class="filters" aria-label="Filter view" data-i18n-aria-label="ui_filter_view_4d22cc">
+      <label class="search"><span data-i18n="ui_search_dd097e">Search</span><input id="search" type="search" placeholder="Domain, channel, topic or video title …" autocomplete="off" data-i18n-placeholder="ui_domain_channel_topic_or_video_title_9856ee"></label>
+      <label><span data-i18n="ui_window_22c978">Window</span><select id="windowFilter"><option value="" data-i18n="ui_all_windows_7d53f7">All windows</option></select></label>
+      <label><span data-i18n="ui_youtube_group_minimum_30382a">YouTube group minimum</span><select id="minimum"><option value="1" data-i18n="ui_1_tab_7d0e09">1 tab</option><option value="2" data-i18n="ui_2_tabs_7226d1">2 tabs</option><option value="3" data-i18n="ui_3_tabs_4faf6f">3 tabs</option><option value="5" data-i18n="ui_5_tabs_50626a">5 tabs</option><option value="10" data-i18n="ui_10_tabs_23963e">10 tabs</option></select></label>
+      <label><span data-i18n="ui_sort_order_59ff9e">Sort order</span><select id="sort"><option value="count" data-i18n="ui_most_tabs_first_b68cbe">Most tabs first</option><option value="name" data-i18n="ui_name_a_z_7ed966">Name A–Z</option></select></label>
+    </section>
+    <p id="captureSearchAction" class="capture-search-action" hidden><a id="captureMatches" href="inbox.html" data-i18n="ui_capture_search_matches">Save videos matching this title to Inbox ↗</a><span data-i18n="ui_capture_search_preview_hint">Choose parked videos and check the matches on the next page.</span></p>
+    <div class="overview"><span id="scopeLabel" data-i18n="ui_all_windows_7d53f7">All windows</span><span id="scanStatus" role="status" data-i18n="ui_preparing_youtube_1b1ed5">Preparing YouTube …</span></div>
+    <progress id="scanProgress" aria-label="YouTube analysis" max="1" value="0" data-i18n-aria-label="ui_youtube_analysis_c3e653"></progress>
+    <p id="actionStatus" role="status" class="action-status" hidden></p>
+    <section id="taskPanel" class="tasks" hidden aria-label="Tasks" data-i18n-aria-label="ui_tasks_1351ad">
+      <details open><summary data-i18n="ui_tasks_progress_5b9508">Tasks &amp; progress</summary><p data-i18n="ui_tasks_continue_when_the_dashboard_is_closed_cancel_s_52bbda">Tasks continue when the dashboard is closed. Cancel stops the next steps.</p><ul id="taskList" aria-live="polite"></ul></details>
+    </section>
+    <div class="columns">
+      <section class="column" aria-labelledby="domainsTitle"><header class="column-header"><span class="column-icon">↗</span><div><h2 id="domainsTitle" data-i18n="ui_domains_ced677">Domains</h2><p data-i18n="ui_your_websites_c595ea">Your websites</p></div><span id="domainsCount" class="column-count">0</span></header><div id="domains" class="group-list"></div></section>
+      <section class="column" aria-labelledby="channelsTitle"><header class="column-header"><span class="column-icon youtube">▶</span><div><h2 id="channelsTitle" data-i18n="ui_youtube_channels_d0bae3">YouTube channels</h2><p data-i18n="ui_grouped_by_creator_07b71c">Grouped by creator</p></div><span id="channelsCount" class="column-count">0</span></header><div id="channels" class="group-list"></div></section>
+      <section class="column" aria-labelledby="topicsTitle"><header class="column-header"><span class="column-icon topics">#</span><div><h2 id="topicsTitle" data-i18n="ui_topics_keywords_e29c63">Topics &amp; keywords</h2><p data-i18n="ui_people_terms_and_connections_954ed9">People, terms and connections</p></div><span id="topicsCount" class="column-count">0</span></header><div id="topics" class="group-list"></div></section>
+    </div>
+    <footer><span data-i18n="ui_domains_window_collects_all_tabs_from_a_domain_in_a_f8d8cc">Domains: “Window” collects all tabs from a domain in a new window with no per-window tab limit · “Close” closes the entire group, including pinned tabs.</span><br><span data-i18n="ui_search_filters_groups_actions_affect_every_tab_in_th_d3f75c">Search filters groups; actions affect every tab in the group in the selected window. Topics are identified locally from titles and your rules.</span></footer>
+  </main>
+  <script src="i18n-core.js"></script>
+<dialog id="domainGroupDialog" class="domain-group-dialog" aria-labelledby="domainGroupLabel">
+  <form method="dialog">
+    <label id="domainGroupLabel" for="domainGroupName" data-i18n="domainGroupName">Group name</label>
+    <input id="domainGroupName" name="name" required maxlength="80" autofocus>
+    <p data-i18n="domainGroupScope">Tabs are grouped within each window. Pinned tabs stay separate.</p>
+    <div class="domain-group-buttons">
+      <button type="button" value="cancel" data-i18n="domainGroupCancel">Cancel</button>
+      <button value="group" data-i18n="actionGroup">Group</button>
+    </div>
+  </form>
+</dialog>
+<script src="domain-group-dialog.js"></script>
+<script src="i18n-page.js"></script>
+<script src="tasks-popup.js"></script>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

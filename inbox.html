@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title data-i18n="ui_tab_atelier_video_inbox_14df7e">Tab Atelier · Video Inbox</title><link rel="icon" href="icons/logo.svg?v=20261110"><link rel="stylesheet" href="dashboard.css"><link rel="stylesheet" href="inbox.css"></head>
+<body>
+<header class="topbar"><a class="brand" href="dashboard.html"><img src="icons/logo.svg" width="36" height="36" alt=""><span><span data-i18n="ui_tab_atelier_01e1cc">Tab Atelier</span><small data-i18n="ui_your_video_collection_0b9861">YOUR VIDEO COLLECTION</small></span></a><nav class="view-nav" aria-label="View" data-i18n-aria-label="ui_view_a6d610"><a href="dashboard.html" data-i18n="ui_open_tabs_59c324">Open tabs</a><a href="inbox.html" aria-current="page" data-i18n="ui_video_inbox_353952">Video Inbox</a><a href="donate.html" data-i18n="donateNav">Donate</a></nav><button id="refresh" type="button" data-i18n="ui_refresh_8f8431">↻ Refresh</button></header>
+<main>
+  <section class="intro"><div><p class="eyebrow" data-i18n="ui_save_for_later_without_keeping_tabs_open_903630">SAVE FOR LATER, WITHOUT KEEPING TABS OPEN</p><h1 data-i18n="ui_your_video_inbox_836e07">Your Video Inbox.</h1><p class="intro-copy" data-i18n="ui_titles_channels_and_topics_saved_even_after_the_tabs_8a8fc8">Titles, channels and topics – saved even after the tabs are closed.</p></div><div class="totals"><strong id="inboxTotal">—</strong><span><span data-i18n="ui_videos_saved_2733f2">Videos saved</span><br><span id="openTotal" data-i18n="ui_still_open_fe4844">— still open</span></span></div></section>
+  <details id="capturePanel" class="capture-panel" open><summary data-i18n="ui_save_youtube_tabs_to_the_inbox_a17548">Save YouTube tabs to the Inbox</summary><div class="capture-content">
+    <div class="capture-filters"><label for="captureSearch"><span data-i18n="ui_capture_title_search">Filter open videos by title</span><input id="captureSearch" type="search" maxlength="200" autocomplete="off" placeholder="e.g. Michael Every" data-i18n-placeholder="ui_capture_title_placeholder" aria-describedby="captureFilterHint"></label><label class="check"><input id="parkedOnly" type="checkbox"><span data-i18n="ui_capture_parked_only">Only parked Tab Parker videos</span></label></div>
+    <p id="captureFilterHint" class="hint" data-i18n="ui_capture_filter_hint">Only matching video titles are saved. Leave empty to include all videos in the selected windows.</p>
+    <div class="capture-options"><label><span data-i18n="ui_from_these_windows_8e3964">From these windows</span><select id="captureWindow"><option value="" data-i18n="ui_all_windows_7d53f7">All windows</option></select></label><div><label class="check"><input id="includePrivate" type="checkbox"> <span data-i18n="ui_also_save_private_tabs_permanently_8dbfea">Also save private tabs permanently</span></label><label class="check"><input id="closeSaved" type="checkbox" checked> <span data-i18n="ui_close_after_storage_is_verified_including_pinned_tab_f57efe">Close after storage is verified – including pinned tabs</span></label></div></div>
+    <div class="capture-footer"><span id="capturePreview" role="status" data-i18n="ui_counting_open_youtube_videos_eaf1c8">Counting open YouTube videos …</span><button id="capture" class="primary-action" type="button" disabled data-i18n="ui_save_close_tabs_9a28ef">Save &amp; close tabs</button></div>
+    <ul id="captureSamples" class="capture-samples" aria-label="Preview of matching video titles" data-i18n-aria-label="ui_capture_sample_titles" hidden></ul>
+    <p class="hint" data-i18n="ui_each_video_is_saved_once_done_and_keep_statuses_are_82f3a9">Each video is saved once. Done and Keep statuses are preserved when saved again. Titles and links are saved first, channels are added next, and tabs are only closed afterward if you choose.</p>
+    <div class="metadata-help"><div><strong data-i18n="ui_parked_info_heading">Missing a title or channel?</strong><p class="hint" data-i18n="ui_parked_info_hint">For matching parked videos, request missing information from YouTube. Only video links are sent, without cookies. Private tabs are excluded. Videos stay parked.</p></div><button id="enrichParked" type="button" disabled data-i18n="ui_parked_info_action">Fill missing info</button></div>
+    <p class="hint" data-i18n="ui_parked_tab_parker_videos_are_included_without_loading">Parked Tab Parker videos are included without loading them. Channel information is used when already saved.</p>
+  </div></details>
+  <div class="metadata-help"><div><label class="check"><input id="autoMetadata" type="checkbox" disabled><span data-i18n="inboxAutoMetadata">Automatically fill missing video information</span></label>
+    <p class="hint" data-i18n="inboxAutoHint">Looks up saved videos and parked videos on YouTube without cookies. It keeps them parked and skips private tabs.</p></div><span id="metadataProgress" role="status"></span></div>
+  <p id="notice" role="status" class="action-status" hidden></p>
+  <section id="taskPanel" class="tasks" hidden aria-label="Tasks" data-i18n-aria-label="ui_tasks_1351ad"><details open><summary data-i18n="ui_tasks_progress_5b9508">Tasks &amp; progress</summary><p data-i18n="ui_you_can_close_this_page_videos_already_saved_are_kep_b0fca1">You can close this page. Videos already saved are kept. Cancel stops further steps.</p><ul id="taskList" aria-live="polite"></ul></details></section>
+  <section class="filters" aria-label="Filter collection" data-i18n-aria-label="ui_filter_collection_91d4a2">
+    <label class="search"><span data-i18n="ui_search_dd097e">Search</span><input id="search" type="search" placeholder="Video title, channel, topic or link …" autocomplete="off" data-i18n-placeholder="ui_video_title_channel_topic_or_link_9025f3"></label>
+    <label><span data-i18n="ui_status_920e41">Status</span><select id="statusFilter"><option value="open" data-i18n="ui_open_64509e">Open</option><option value="keep" data-i18n="ui_keep_27d1d9">Keep</option><option value="done" data-i18n="ui_done_467e01">Done</option><option value="all" data-i18n="ui_all_videos_0aed7a">All videos</option></select></label>
+    <label><span data-i18n="ui_group_by_ebd093">Group by</span><select id="groupBy"><option value="channel" data-i18n="ui_youtube_channel_34040a">YouTube channel</option><option value="topic" data-i18n="ui_topic_keyword_4f284f">Topic / keyword</option><option value="none" data-i18n="ui_all_in_one_list_2b7cc7">All in one list</option></select></label>
+    <label><span data-i18n="inboxMetadataFilter">Missing information</span><select id="metadataFilter"><option value="all" data-i18n="ui_all_videos_0aed7a">All videos</option><option value="title" data-i18n="inboxMissingTitle">Title missing</option><option value="channel" data-i18n="inboxMissingChannel">Channel missing</option><option value="topic" data-i18n="inboxMissingTopic">No topic detected</option></select></label>
+    <label><span data-i18n="ui_sort_videos_6cd5a6">Sort videos</span><select id="sortBy"><option value="newest" data-i18n="ui_recently_saved_52c1da">Recently saved</option><option value="title" data-i18n="ui_title_a_z_c380f6">Title A–Z</option><option value="oldest" data-i18n="ui_oldest_saved_45a62c">Oldest saved</option></select></label>
+  </section>
+  <section class="batch-panel" aria-label="Actions for all matching videos" data-i18n-aria-label="ui_actions_for_all_matching_videos_408b8c">
+    <div class="batch-actions"><strong id="batchCount" data-i18n="ui_all_matches_ea0cb8">All matches</strong><button id="openBatch" class="primary-action" type="button" disabled>Open next videos in group ↗</button><button id="doneBatch" type="button" disabled data-i18n="ui_mark_all_as_done_597682">Mark all as done ✓</button></div>
+    <p data-i18n="reviewHint">Choose how many videos to open. Marking as done applies to all matches.</p>
+  </section>
+  <div class="overview"><span id="resultCount" data-i18n="ui_loading_collection_fd4ce2">Loading collection …</span><span data-i18n="ui_done_channel_topic_and_date_added_are_preserved_0a3ccb">✓ = done · Channel, topic and date added are preserved.</span></div>
+  <section id="collection" aria-label="Saved videos" data-i18n-aria-label="ui_saved_videos_83c48e"></section>
+  <button id="previousGroups" type="button" hidden data-i18n="inboxPagePrevious">Previous</button>
+  <button id="more" type="button" hidden data-i18n="inboxPageNext">Next</button>
+  <details class="capture-panel" id="parkerUpdate"><summary data-i18n="ui_update_heading">Update Tab Parker safely</summary><div class="capture-content"><p class="hint" data-i18n="ui_update_instructions">First hold your parked tabs here. Then reload Tab Parker in Chrome Extensions, and restore the tabs here. Keep Tab Atelier enabled during these steps.</p><div class="backup-actions"><button id="prepareParker" type="button" data-i18n="ui_update_prepare">Hold parked tabs</button><button id="restoreParker" type="button" disabled data-i18n="ui_update_restore">Restore parked tabs</button></div><p id="updateStatus" class="hint" role="status"></p><details id="updateEntriesPanel" hidden><summary data-i18n="ui_update_individual">Individual tabs</summary><ul id="updateEntries"></ul></details></div></details>
+  <footer class="inbox-footer"><div><strong data-i18n="ui_your_collection_stays_local_to_this_extension_e3f84c">Your collection stays local to this extension.</strong><br><span data-i18n="ui_links_and_titles_are_saved_not_video_files_topics_ar_318e6e">Links and titles are saved, not video files. Topics are inferred automatically and may be inaccurate.</span><br><span data-i18n="ui_create_a_json_backup_before_removing_the_extension_d_2135be">Create a JSON backup before removing the extension. Different installations have separate collections.</span></div><div class="backup-actions"><button id="backup" type="button" data-i18n="ui_back_up_json_3eada2">Back up JSON</button><button id="restore" type="button" data-i18n="ui_import_backup_1da417">Import backup</button><input id="restoreFile" type="file" accept="application/json,.json" hidden></div></footer>
+  <dialog id="reviewDialog" aria-labelledby="reviewTitle">
+    <form id="reviewForm">
+      <h2 id="reviewTitle"></h2>
+      <label for="reviewAmount" data-i18n="reviewAmount">Videos to open</label>
+      <select id="reviewAmount"></select>
+      <label for="openTarget" data-i18n="reviewTarget">Destination</label><select id="openTarget"><option value="new" data-i18n="reviewNewWindow">New window</option><option value="current" data-i18n="reviewCurrentWindow">This window</option></select>
+      <p id="reviewSummary" role="status"></p>
+      <p id="reviewException" class="hint" hidden data-i18n="reviewExceptionHint">This group can exceed the tab limits. Its videos count toward the total limit and stay protected from automatic archiving.</p>
+      <div class="backup-actions">
+        <button id="reviewCancel" type="button" data-i18n="domainGroupCancel">Cancel</button>
+        <button id="reviewSubmit" type="submit" class="primary-action" disabled>Open group</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="topicEditor"><form method="dialog">
+    <h2 id="topicEditorVideo"></h2>
+    <label for="topicEditorValue" data-i18n="inboxTopicEdit">Edit topic</label>
+    <input id="topicEditorValue" maxlength="120">
+    <p class="hint" data-i18n="inboxTopicReset">Leave empty to use the automatic topic.</p>
+    <button value="cancel" data-i18n="domainGroupCancel">Cancel</button>
+    <button value="save" data-i18n="ui_save_f6b2ff">Save</button>
+  </form></dialog>
+</main><script src="i18n-core.js"></script>
+<script src="i18n-page.js"></script>
+<script src="tasks-popup.js"></script><script type="module" src="inbox-page.js"></script>
+</body></html>
