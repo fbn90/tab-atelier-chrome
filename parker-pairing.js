@@ -1,7 +1,7 @@
 import './i18n.js';
 import {isTrustedPage} from './extension-pages.js';
 import {PARKER_APPROVALS_KEY,approvedParkerIds,identifyTabParker,isPinnedParkerId,isTrustedParkerId,
-  loadApprovedParkerIds,setApprovedParkerIds,TAB_PARKER_STORE_ID,TAB_PARKER_UNPACKED_ID,unpairedParkerIds} from './youtube-url.js';
+  loadApprovedParkerIds,setApprovedParkerIds,TAB_PARKER_STORE_ID,unpairedParkerIds} from './youtube-url.js';
 
 // Pairing: an unpacked Tab Parker without a manifest key has a path-derived ID.
 // Answering the identity probe proves nothing (any extension can), so such an
@@ -22,7 +22,7 @@ export function installParkerPairing(api){
     }catch{}
     const probe=async id=>({id,active:await identifyTabParker(api,id)});
     const [pinned,approved,found]=await Promise.all([
-      Promise.all([TAB_PARKER_STORE_ID,TAB_PARKER_UNPACKED_ID].map(probe)),
+      Promise.all([TAB_PARKER_STORE_ID].map(probe)),
       Promise.all(approvedParkerIds().map(probe)),
       Promise.all([...candidates].map(probe))
     ]);

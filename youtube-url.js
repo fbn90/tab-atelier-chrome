@@ -17,11 +17,10 @@ export function parseYouTubeVideo(raw) {
 
 // Only known Tab Parker installs may participate. A similarly shaped page from
 // another extension must never establish a reason to close a tab.
+// Parker's manifest carries the Web Store public key, so store and unpacked
+// installs share this ID. Older keyless installs must be paired by the user.
 export const TAB_PARKER_STORE_ID = 'bhnabphdcdknjeebnmeikbdcncnfhdpf';
-export const TAB_PARKER_UNPACKED_ID = 'pfijnbeaagokdgmnahpegnhgbneoodln';
-// The unpacked ID is derived from this workspace's Parker extension folder.
-// Add other explicitly trusted unpacked installation IDs here when needed.
-const TRUSTED_PARKER_IDS = new Set([TAB_PARKER_STORE_ID, TAB_PARKER_UNPACKED_ID]);
+const TRUSTED_PARKER_IDS = new Set([TAB_PARKER_STORE_ID]);
 const TAB_PARKER_IDS = new Set(TRUSTED_PARKER_IDS);
 // Unpacked installs without a manifest key get a path-derived ID. Such an
 // install is trusted only after the user explicitly paired it in the Inbox.
