@@ -42,7 +42,7 @@ function fixture({tabs=[video(1)],api,fetcher}={}) {
   const app=vm.runInNewContext(source+`\n({handleDashboardGroups,handleGetGroupActions,resetGroupScanState,getMetadataPromise,readMetadataFromDom,resolveAutomaticGroupLabels,metadataCache,finishExport,createGroupScanState,
     ageScan(){channelScanState.createdAt=Date.now()-120000;},
     seed(records){channelScanState={generation:scanGeneration,matchedTabs:records.length,records,pendingEntries:[],nextIndex:0,groupsCache:new Map()};}
-  })`,{atelierI18n:globalThis.atelierI18n,chrome:api,installYouTubeAutoGroups,parkedVideoTitle,canCloseYouTubeSource,channelIdentity,channelIdentityKeys,hasCardDuration,preferredVideoTitle,installAutomaticMetadata:()=>({}),installParkerUpdate,installInbox,transferStep,isTrustedPage,validateWindowId,parseWatchVideo,parseYouTubeTab,discoverTabParkers,meaningfulYouTubeTitle,meaningfulChannel,createMetadataCache,createAliasStore,ALIAS_STORAGE_KEY,recognizeTopic,resolveTopicOverride,
+  })`,{atelierI18n:globalThis.atelierI18n,chrome:api,installYouTubeAutoGroups,parkedVideoTitle,canCloseYouTubeSource,channelIdentity,channelIdentityKeys,hasCardDuration,preferredVideoTitle,installAutomaticMetadata:()=>({}),installParkerUpdate,installParkerPairing:()=>{},installInbox,transferStep,isTrustedPage,validateWindowId,parseWatchVideo,parseYouTubeTab,discoverTabParkers,meaningfulYouTubeTitle,meaningfulChannel,createMetadataCache,createAliasStore,ALIAS_STORAGE_KEY,recognizeTopic,resolveTopicOverride,
     taskService:()=>service,runExclusive:fn=>runExclusive(fn,api),URL,AbortSignal,setTimeout,clearTimeout,console,
     fetch:async url=>{const id=parseWatchVideo(new URL(url).searchParams.get('url')).videoId;api.fetches.push(id);if(fetcher)return fetcher(id);return {ok:true,json:async()=>({title:`API ${id}`,author_name:'API channel'})}}
   });
@@ -189,7 +189,7 @@ test('a long-running dashboard analysis does not restart after sixty seconds',as
 });
 
 test('parked titles supply local topics even when cached metadata contains no title',async()=>{
-  const raw='chrome-extension://pfijnbeaagokdgmnahpegnhgbneoodln/parked.html?title=Omarchy%20Linux%20installation#https://www.youtube.com/watch?v=ZdeoJrfxvQ8&pp=ugUEEgJlbg%3D%3D';
+  const raw='chrome-extension://bhnabphdcdknjeebnmeikbdcncnfhdpf/parked.html?title=Omarchy%20Linux%20installation#https://www.youtube.com/watch?v=ZdeoJrfxvQ8&pp=ugUEEgJlbg%3D%3D';
   const f=fixture({tabs:[video(1,{url:raw,title:'Omarchy Linux installation'})]});
   await f.app.metadataCache.set('ZdeoJrfxvQ8',{title:null,channel:'Unbekannt'});await f.app.metadataCache.flush();
   const groups=await f.app.handleDashboardGroups();
@@ -200,7 +200,7 @@ test('parked titles supply local topics even when cached metadata contains no ti
 
 test('all parked titles are available in the first scan without network or four-tab chunking',async()=>{
   const tabs=Array.from({length:80},(_,i)=>video(i+1,{
-    url:`chrome-extension://pfijnbeaagokdgmnahpegnhgbneoodln/parked.html?title=${encodeURIComponent(`michael every interview ${i}`)}#https://youtu.be/parked${i}`,
+    url:`chrome-extension://bhnabphdcdknjeebnmeikbdcncnfhdpf/parked.html?title=${encodeURIComponent(`michael every interview ${i}`)}#https://youtu.be/parked${i}`,
     title:'YouTube-Video geparkt',discarded:true
   }));
   const f=fixture({tabs});
@@ -211,7 +211,7 @@ test('all parked titles are available in the first scan without network or four-
 });
 
 test('parked records resolve before earlier network-backed tabs in a mixed inventory',async()=>{
-  const raw='chrome-extension://pfijnbeaagokdgmnahpegnhgbneoodln/parked.html?title=Michael%20Every%20interview#https://youtu.be/parkedLast';
+  const raw='chrome-extension://bhnabphdcdknjeebnmeikbdcncnfhdpf/parked.html?title=Michael%20Every%20interview#https://youtu.be/parkedLast';
   const f=fixture({tabs:[...Array.from({length:20},(_,i)=>video(i+1,{discarded:true})),video(30,{url:raw,title:'YouTube-Video geparkt',discarded:true})]});
   const scan=await f.app.createGroupScanState();
   assert.equal(scan.records.length,1);assert.equal(scan.records[0].title,'Michael Every interview');
@@ -225,7 +225,7 @@ test('a meaningful parked title outranks stale cache while generic parked text p
     ['Michael Every on trade','Older interview','Michael Every on trade'],
     ['YouTube-Video geparkt','Michael Every on trade','Michael Every on trade']
   ]) {
-    const raw=`chrome-extension://pfijnbeaagokdgmnahpegnhgbneoodln/parked.html?title=${encodeURIComponent(local)}#https://youtu.be/localTitle`;
+    const raw=`chrome-extension://bhnabphdcdknjeebnmeikbdcncnfhdpf/parked.html?title=${encodeURIComponent(local)}#https://youtu.be/localTitle`;
     const f=fixture({tabs:[video(1,{url:raw,title:local,discarded:true})]});
     await f.app.metadataCache.set('localTitle',{title:cached,channel:'Interviews'});await f.app.metadataCache.flush();
     const metadata=await f.app.getMetadataPromise({parked:true,videoId:'localTitle',tabTitle:local});
@@ -239,7 +239,7 @@ test('a meaningful parked title outranks stale cache while generic parked text p
 test('mixed scans return parked topics before any network request and advance on later polls',async()=>{
   for(const request of ['dashboard','actions']) {
     const parked=[30,31,32].map(id=>video(id,{
-      url:`chrome-extension://pfijnbeaagokdgmnahpegnhgbneoodln/parked.html?title=Michael%20Every%20interview#https://youtu.be/parked${id}`,
+      url:`chrome-extension://bhnabphdcdknjeebnmeikbdcncnfhdpf/parked.html?title=Michael%20Every%20interview#https://youtu.be/parked${id}`,
       title:'YouTube-Video geparkt',discarded:true
     }));
     const f=fixture({tabs:[...Array.from({length:12},(_,i)=>video(i+1,{discarded:true})),...parked]});

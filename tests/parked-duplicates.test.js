@@ -2,15 +2,19 @@ import './i18n-helper.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { duplicateKey, duplicatePairs } from '../tab-rules.js';
-import { navigationKey, tabParkerTarget, TAB_PARKER_STORE_ID, TAB_PARKER_UNPACKED_ID } from '../youtube-url.js';
+import { navigationKey, tabParkerTarget, TAB_PARKER_STORE_ID, setApprovedParkerIds } from '../youtube-url.js';
+
+// A keyless unpacked Parker participates only after the user paired it.
+const PAIRED_PARKER_ID = 'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk';
+setApprovedParkerIds([PAIRED_PARKER_ID]);
 
 const video = 'https://www.youtube.com/watch?v=x5IBwQhYUR0';
 const parked = (target = video, title = 'Ein Titel', id = TAB_PARKER_STORE_ID) =>
   `chrome-extension://${id}/parked.html?title=${encodeURIComponent(title)}#${target}`;
 const tab = (id, url, extra = {}) => ({ id, url, status: 'complete', discarded: false, pinned: false, incognito: false, ...extra });
 
-test('store and unpacked parked pages resolve to the original URL without fetching it', () => {
-  for (const id of [TAB_PARKER_STORE_ID, TAB_PARKER_UNPACKED_ID]) {
+test('store and paired unpacked parked pages resolve to the original URL without fetching it', () => {
+  for (const id of [TAB_PARKER_STORE_ID, PAIRED_PARKER_ID]) {
     const target = `${video}&next=https%3A%2F%2Fexample.com%2Fa%3Fx%3D1%26y%3D2#chapter%23one`;
     assert.equal(tabParkerTarget(parked(target, 'Deutsch / English', id)), target);
   }

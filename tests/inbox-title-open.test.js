@@ -44,17 +44,17 @@ test('wrong application, protocol or sender identity cannot select a Parker dest
   }
 });
 
-test('custom unpacked Parker pages are accepted only after their identity responds', async () => {
+test('an extension answering the identity probe never becomes an Inbox destination unless pinned or paired', async () => {
+  // Any installed extension can answer the probe; only pinned or user-paired IDs may receive titles, channels and URLs.
   const id = 'dddddddddddddddddddddddddddddddd';
   const customBase = `chrome-extension://${id}/`;
-  assert.equal(inboxParkedUrl(customBase, target, 'Saved title'), target);
-  const found = await findTabParkerBase(api(async candidate => candidate === id ? answer(id) : undefined), [
-    { url: `${customBase}popup.html` }
+  const probed = [];
+  const found = await findTabParkerBase(api(async candidate => { probed.push(candidate); return candidate === id ? answer(id) : undefined; }), [
+    { url: `${customBase}popup.html` }, { url: `${customBase}parked.html#${target}` }
   ]);
-  assert.equal(found, customBase);
-  const parked = inboxParkedUrl(found, target, 'Saved title');
-  assert.equal(new URL(parked).searchParams.get('title'), 'Saved title');
-  assert.equal(parseYouTubeTab(parked).sourceUrl, target);
+  assert.equal(found, null);
+  assert.ok(!probed.includes(id));
+  assert.equal(inboxParkedUrl(customBase, target, 'Saved title'), target);
 });
 
 test('Unicode and reserved title characters stay local while the original fragment round-trips exactly', () => {
@@ -157,7 +157,7 @@ test('another active Parker owner cannot authorize repairing a disabled owner ta
     calls.push({id,message});
     return id===other?answer(other):undefined;
   });
-  assert.equal(await findTabParkerBase(browser,[{url:`${otherBase}popup.html`}]),otherBase);
+  assert.equal(await findTabParkerBase(browser,[{url:`${otherBase}popup.html`}]),null);
   calls.length=0;
   const tab={url:`${base}parked.html#${target}`,status:'complete'};
   assert.equal(await verifiedInboxParkedRepair(browser,tab,'Recovered title'),null);

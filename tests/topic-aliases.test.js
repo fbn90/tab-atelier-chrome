@@ -103,7 +103,7 @@ function backgroundFixture(liveTabs = new Map(), removed = []) {
       return job.result;
     },
     seed(records) { channelScanState = {generation:scanGeneration,records, pendingEntries:[], nextIndex:0, groupsCache:new Map()}; return channelScanState; }
-  })`,{atelierI18n:globalThis.atelierI18n,chrome,installYouTubeAutoGroups,parkedVideoTitle,canCloseYouTubeSource,channelIdentity,channelIdentityKeys,hasCardDuration,preferredVideoTitle,installAutomaticMetadata:()=>({}),installParkerUpdate,installInbox,isTrustedPage,validateWindowId,recognizeTopic,resolveTopicOverride,createAliasStore,ALIAS_STORAGE_KEY,parseWatchVideo,parseYouTubeTab,discoverTabParkers,meaningfulYouTubeTitle,meaningfulChannel,createMetadataCache,runExclusive:fn=>fn(),taskService:()=>({register(){},async resume(){}}),URL,AbortSignal,setTimeout:()=>0,clearTimeout(){}});
+  })`,{atelierI18n:globalThis.atelierI18n,chrome,installYouTubeAutoGroups,parkedVideoTitle,canCloseYouTubeSource,channelIdentity,channelIdentityKeys,hasCardDuration,preferredVideoTitle,installAutomaticMetadata:()=>({}),installParkerUpdate,installParkerPairing:()=>{},installInbox,isTrustedPage,validateWindowId,recognizeTopic,resolveTopicOverride,createAliasStore,ALIAS_STORAGE_KEY,parseWatchVideo,parseYouTubeTab,discoverTabParkers,meaningfulYouTubeTitle,meaningfulChannel,createMetadataCache,runExclusive:fn=>fn(),taskService:()=>({register(){},async resume(){}}),URL,AbortSignal,setTimeout:()=>0,clearTimeout(){}});
 }
 
 test('real grouping pipeline gives people priority over repeated title fragments',async()=>{

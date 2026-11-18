@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createTaskService} from '../task-runner.js';
 import {transferStep} from '../tab-transfer.js';
+import {discoverTabParkers} from '../youtube-url.js';
 import {memoryStorage,event} from './storage-helper.js';
 
 function fixture({count=25,snapshot,group=true,reuse=false,sourceWindowId,title='Asmongold'}={}) {
@@ -234,4 +235,15 @@ test('an ambiguous create interruption never adopts an unrelated multi-tab windo
   const resumed=fixture({snapshot});const done=await finish(resumed);
   assert.equal(done.status,'done');assert.equal(resumed.tabs.get(1).windowId,99);assert.equal(resumed.tabs.get(999).windowId,99);
   assert.equal(done.result.movedTabs,2);assert.equal(done.result.skipped,1);
+});
+
+test('an unverified Parker page in the target group cannot get a real video closed as its duplicate',async()=>{
+  // Discovery (display only) registers the impostor; it must still not act as a duplicate keeper.
+  const fake='dddddddddddddddddddddddddddddddd';
+  const parked=`chrome-extension://${fake}/parked.html#https://www.youtube.com/watch?v=video2`;
+  assert.ok(await discoverTabParkers({runtime:{sendMessage:async id=>({app:'youtube-tab-parker',protocol:1,id,version:'1.0.0'})}},[{url:parked}]));
+  const f=namedFixture({tabs:[{id:2,windowId:2,groupId:10,url:parked},{id:4,windowId:3,groupId:11,url:'https://youtu.be/video2?t=100'}],
+    groups:[{id:10,windowId:2,title:'Asmongold TV'},{id:11,windowId:3,title:'asmongoldTV'}]});
+  await f.service.start('move-group-to-window');const task=await finish(f);
+  assert.equal(task.status,'done');assert.deepEqual(f.calls.close,[]);assert.equal(task.result.duplicatesClosed,0);assert.ok(f.tabs.has(4));
 });

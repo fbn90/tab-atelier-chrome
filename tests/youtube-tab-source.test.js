@@ -1,10 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {canCloseYouTubeSource,parseYouTubeTab,meaningfulYouTubeTitle,TAB_PARKER_STORE_ID,TAB_PARKER_UNPACKED_ID} from '../youtube-url.js';
+import {canCloseYouTubeSource,parseYouTubeTab,meaningfulYouTubeTitle,TAB_PARKER_STORE_ID,setApprovedParkerIds} from '../youtube-url.js';
+// A keyless unpacked Parker participates only after the user paired it.
+const PAIRED_PARKER_ID='kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk';
+setApprovedParkerIds([PAIRED_PARKER_ID]);
 const base=id=>`chrome-extension://${id}/parked.html`;
 
 test('known parked video sources unwrap once and preserve original URL escapes and position',()=>{
-  for(const id of [TAB_PARKER_STORE_ID,TAB_PARKER_UNPACKED_ID])for(const target of [
+  for(const id of [TAB_PARKER_STORE_ID,PAIRED_PARKER_ID])for(const target of [
     'https://www.youtube.com/watch?v=abc&t=90&x=a%26b%23c#t=120','https://youtu.be/abc?t=30',
     'https://www.youtube.com/shorts/abc','https://youtube.com/live/abc','https://youtube.com/embed/abc','https://youtube.com/v/abc'
   ]) {

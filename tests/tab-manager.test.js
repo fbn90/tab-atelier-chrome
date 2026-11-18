@@ -43,7 +43,8 @@ function mockChrome(initial) {
   const tabs = new Map(initial.map(t => [t.id,{...t}]));
   // Most fixtures represent an already running browser outside its startup grace.
   const session = {tabManagerSessionV1:{next:1,order:{},openedAt:{},autoGraceUntil:0}};
-  const local = {};
+  // Automatic cleanup is opt-in; these fixtures exercise an enabled install.
+  const local = {automaticDuplicatesEnabledV1:true};
   const moves = [];
   const api = {
     tabs: {
@@ -347,6 +348,16 @@ test('a pending new tab remains eligible after worker restart but only after loa
   Object.assign(mock.tabs.get(2),{url:tab(1).url,status:'complete'});delete mock.tabs.get(2).pendingUrl;
   mock.api.tabs.onUpdated.fire(2,{url:tab(1).url,status:'complete'});
   await mock.request('get-domains');assert.deepEqual([...mock.tabs.keys()],[2]);
+});
+
+test('automatic cleanup is opt-in: a fresh install keeps both duplicates',async()=>{
+  const mock=mockChrome([tab(1)]);globalThis.chrome=mock.api;
+  mock.api.storage.local.get=async()=>({});
+  await import('../tab-manager.js?fresh-install-default-off');
+  mock.tabs.set(2,tab(2));mock.api.tabs.onCreated.fire(mock.tabs.get(2));
+  mock.api.tabs.onUpdated.fire(2,{status:'complete'});
+  const result=await mock.request('get-domains');
+  assert.equal(result.automaticEnabled,false);assert.deepEqual([...mock.tabs.keys()],[1,2]);
 });
 
 test('pause persists across worker restart; re-enabling never cleans existing copies',async()=>{
