@@ -26,13 +26,15 @@ const updates = new Set(), removals = new Set();
 let state;
 const pendingCreations = new Map();
 let creationSequence = 0;
-let automaticEnabled = true;
+let automaticEnabled = false;
 let settingsLoaded = false;
 
 async function loadAutoSetting() {
   if (!settingsLoaded) {
     const stored = await chrome.storage.local.get(AUTO_KEY);
-    automaticEnabled = stored[AUTO_KEY] !== false;
+    // Opt-in: closing a tab discards its state (e.g. playback position), so it
+    // only happens after the user enabled it in the popup.
+    automaticEnabled = stored[AUTO_KEY] === true;
     settingsLoaded = true;
   }
 }

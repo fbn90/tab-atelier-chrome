@@ -119,15 +119,12 @@ export async function discoverTabParkers(api,tabs) {
   return (await Promise.all([...ids].map(id=>identifyTabParker(api,id)))).some(Boolean);
 }
 
-export async function findTabParkerBase(api,tabs) {
-  const ids=new Set();
-  // Include local extension pages such as Parker's popup, not only parked tabs.
-  // Page shape is not a proof: every candidate must answer the identity probe.
-  for(const tab of tabs)try {
-    const url=new URL(tab.pendingUrl||tab.url);
-    if(url.protocol==='chrome-extension:'&&/^[a-p]{32}$/.test(url.hostname)&&url.hostname!==api.runtime.id)ids.add(url.hostname);
-  }catch{}
-  for(const id of TAB_PARKER_IDS)ids.add(id);
+export async function findTabParkerBase(api,_tabs) {
+  // Opening an Inbox video hands its title, channel and URL to the target page.
+  // Any extension can answer the identity probe, so only pinned IDs qualify;
+  // discovered installs stay readable but never receive new navigations.
+  const ids=new Set(TRUSTED_PARKER_IDS);
+  ids.delete(api.runtime.id);
   try {
     return await Promise.any([...ids].map(async id=>{
       if(await identifyTabParker(api,id))return `chrome-extension://${id}/`;
@@ -154,7 +151,7 @@ export function inboxParkedUrl(base,target,title,channel) {
   if(!video||!label||!base)return target;
   try {
     const owner=new URL(base),source=new URL(target);
-    if(owner.href!==`chrome-extension://${owner.hostname}/`||!TAB_PARKER_IDS.has(owner.hostname)||
+    if(owner.href!==`chrome-extension://${owner.hostname}/`||!TRUSTED_PARKER_IDS.has(owner.hostname)||
        source.username||source.password||source.port||!['youtube.com','www.youtube.com','m.youtube.com', 'music.youtube.com','youtu.be'].includes(source.hostname))return target;
     // Titles belong to the local placeholder, never to a YouTube request.
     return `${owner.href}parked.html?title=${encodeURIComponent(label)}${meaningfulChannel(channel)?'&channel='+encodeURIComponent(meaningfulChannel(channel)):''}#${target}`;

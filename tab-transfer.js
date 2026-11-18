@@ -1,6 +1,6 @@
 import './i18n.js';
 import {groupNameKey,reusableGroupPlan} from './group-reuse.js';
-import {parseYouTubeTab as parseYouTubeVideo} from './youtube-url.js';
+import {parseYouTubeTab as parseYouTubeVideo, canCloseYouTubeSource} from './youtube-url.js';
 // Checkpointed moves of existing tabs. Optional named-group merging only closes
 // confirmed duplicate videos in the destination; it never reopens URLs.
 export function resumableTransfer(job) {
@@ -228,7 +228,9 @@ export async function transferStep(job, ctx, records, {api=chrome, matches, grou
               const [keeper,loser]=await Promise.all([getTab(keeperId),getTab(item.id)]);
               if(keeper&&loser&&keeper.groupId===groupId&&keeper.windowId===item.windowId&&!keeper.pendingUrl&&keeper.status!=='loading'&&
                 !loser.pendingUrl&&loser.status!=='loading'&&!loser.pinned&&matchesRecord(loser,record)&&loser.windowId===item.windowId&&stillPlannedGroup(loser,record,groupId)&&
-                !!keeper.incognito===!!loser.incognito&&parseYouTubeVideo(keeper.url)?.videoId===video&&parseYouTubeVideo(loser.url)?.videoId===video) {
+                !!keeper.incognito===!!loser.incognito&&parseYouTubeVideo(keeper.url)?.videoId===video&&parseYouTubeVideo(loser.url)?.videoId===video&&
+                // Same rule as automatic cleanup: an unverified Parker page may neither be closed nor justify closing another tab.
+                canCloseYouTubeSource(keeper.url)&&canCloseYouTubeSource(loser.url)) {
                 if(ctx.cancelled())return;
                 await api.tabs.remove(item.id);state.duplicatesClosed++;await onMoved(item.id);
                 state.groupPending=null;state.groupCursor++;job.processed=state.groupCursor;return;
