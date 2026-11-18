@@ -2,6 +2,7 @@ import './i18n.js';
 import {installAutomaticMetadata} from './automatic-metadata.js';
 import {channelIdentity,channelIdentityKeys,hasCardDuration,preferredVideoTitle} from './youtube-metadata.js';
 import {installParkerUpdate} from "./parker-update.js";
+import {installParkerPairing} from "./parker-pairing.js";
 import { installInbox } from "./inbox-service.js";
 import { transferStep } from "./tab-transfer.js";
 import { isTrustedPage, validateWindowId } from "./extension-pages.js";
@@ -1552,6 +1553,7 @@ export {inbox};
 tasks.resume().catch(error=>console.warn(globalThis.atelierI18n.t("ui_resuming_tasks_fb1fc1"),error));
 
 installParkerUpdate(chrome);
+installParkerPairing(chrome);
 
 
 

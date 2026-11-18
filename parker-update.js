@@ -1,6 +1,6 @@
 import './i18n.js';
 import {isTrustedPage} from './extension-pages.js';
-import {discoverTabParkers,tabParkerTarget,identifyTabParker} from './youtube-url.js';
+import {discoverTabParkers,tabParkerTarget,identifyTabParker,findTabParkerBase} from './youtube-url.js';
 import {runExclusive} from './action-coordinator.js';
 export const UPDATE_JOURNAL='parkerUpdateHoldV1';
 export function installParkerUpdate(api){
@@ -8,6 +8,9 @@ export function installParkerUpdate(api){
   const read=async()=> (await api.storage.local.get(UPDATE_JOURNAL))[UPDATE_JOURNAL]||[];
   const getTab = id => api.tabs.get(id).catch(() => null);
   const settled = (tab,url) => tab?.url===url && !tab.pendingUrl && tab.status!=='loading';
+  // A migrated record is restored to a trusted Parker under a new ID (e.g. after
+  // Parker gained a fixed manifest key); otherwise to its original address.
+  const restoreUrl = record => record.restoreUrl || record.originalUrl;
   const sameParkedSource = (actual, original) => {
     const target=tabParkerTarget(original,true);
     return !!target && tabParkerTarget(actual,true)===target && new URL(actual).host===new URL(original).host;
@@ -28,7 +31,7 @@ export function installParkerUpdate(api){
     const entries=records.map(record=>{
       const tab=live.get(record.tabId);
       const canPrepare=!record.restoring&&settled(tab,record.originalUrl);
-      const canRestore=settled(tab,record.holdUrl)||Boolean(record.restoring&&tab&&!tab.pendingUrl&&tab.status!=='loading'&&sameParkedSource(tab.url,record.originalUrl));
+      const canRestore=settled(tab,record.holdUrl)||Boolean(record.restoring&&tab&&!tab.pendingUrl&&tab.status!=='loading'&&sameParkedSource(tab.url,restoreUrl(record)));
       const title=new URL(record.originalUrl).searchParams.get('title')||tabParkerTarget(record.originalUrl)||String(record.tabId);
       return {tabId:record.tabId,title,ownerId:new URL(record.originalUrl).host,canPrepare,canRestore};
     });
@@ -62,7 +65,17 @@ export function installParkerUpdate(api){
       if(!owners.has(id))owners.set(id,readyOwners.includes(id)?Promise.resolve(true):identifyTabParker(api,id));
       return owners.get(id);
     }
-    let unavailable=0;
+    let unavailable=0,base;
+    // Only when the original owner no longer answers: move the placeholder to a
+    // pinned or user-paired Parker, keeping title, channel and target unchanged.
+    async function migratedUrl(record){
+      const found=await (base??=findTabParkerBase(api,[]));
+      if(!found)return null;
+      const old=new URL(record.originalUrl),next=`${found}parked.html${old.search}${old.hash}`;
+      if(new URL(found).host===old.host)return null;
+      const target=tabParkerTarget(next);
+      return target&&target===tabParkerTarget(record.originalUrl,true)?next:null;
+    }
     const selected=tabId===undefined?records:records.filter(record=>record.tabId===tabId);
     for(let offset=0;offset<selected.length;offset+=8){
       const batch=selected.slice(offset,offset+8);
@@ -70,16 +83,20 @@ export function installParkerUpdate(api){
       for(const record of batch){
         const tab=await getTab(record.tabId);
         if(tab?.pendingUrl||tab?.status==='loading')continue;
-        if(tab&&sameParkedSource(tab.url,record.originalUrl)){
+        if(tab&&sameParkedSource(tab.url,restoreUrl(record))){
           if(record.restoring){
-            if(await parkerReady(record.originalUrl))completed.add(record);
+            if(await parkerReady(restoreUrl(record)))completed.add(record);
             else unavailable++;
           }else skipped.add(record);
           continue;
         }
         if(!tab||tab.url!==record.holdUrl||!!tab.incognito!==record.incognito){skipped.add(record);continue}
-        if(await parkerReady(record.originalUrl))ready.push(record);
-        else unavailable++;
+        if(await parkerReady(record.originalUrl)){delete record.restoreUrl;ready.push(record)}
+        else{
+          const next=await migratedUrl(record);
+          if(next){record.restoreUrl=next;ready.push(record)}
+          else unavailable++;
+        }
       }
       for(const record of ready)record.restoring=true;
       if(ready.length)await api.storage.local.set({[UPDATE_JOURNAL]:records.filter(record=>!completed.has(record)&&!skipped.has(record))});
@@ -87,8 +104,8 @@ export function installParkerUpdate(api){
         const tab=await getTab(record.tabId);
         if(!settled(tab,record.holdUrl))return;
         try{
-          await api.tabs.update(record.tabId,{url:record.originalUrl});
-          if(await waitForTab(record.tabId,record.originalUrl,record.holdUrl,true))completed.add(record);
+          await api.tabs.update(record.tabId,{url:restoreUrl(record)});
+          if(await waitForTab(record.tabId,restoreUrl(record),record.holdUrl,true))completed.add(record);
         }catch{}
       }));
     }

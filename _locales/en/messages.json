@@ -2398,5 +2398,44 @@
   },
   "popupGroupLabelOne": {
     "message": "Group 1 tab from $2"
+  },
+  "ui_parker_pairing_heading": {
+    "message": "Connect Tab Parker"
+  },
+  "ui_parker_pairing_hint": {
+    "message": "Inbox videos open as parked tabs only in a Tab Parker you confirmed. Before confirming, compare the ID with the one shown for Tab Parker in chrome://extensions."
+  },
+  "ui_parker_pairing_builtin": {
+    "message": "Tab Parker connected (built-in ID $1)."
+  },
+  "ui_parker_pairing_paired": {
+    "message": "Confirmed Tab Parker: $1 ($2)"
+  },
+  "ui_parker_pairing_candidate": {
+    "message": "Unconfirmed Tab Parker found: $1"
+  },
+  "ui_parker_pairing_active": {
+    "message": "active"
+  },
+  "ui_parker_pairing_inactive": {
+    "message": "not responding"
+  },
+  "ui_parker_pairing_confirm": {
+    "message": "Trust this Tab Parker"
+  },
+  "ui_parker_pairing_remove": {
+    "message": "Remove"
+  },
+  "ui_parker_pairing_none": {
+    "message": "No unconfirmed Tab Parker found. Open a parked tab or Tab Parker's settings page, then reopen this section."
+  },
+  "ui_parker_pairing_invalid": {
+    "message": "Invalid extension ID."
+  },
+  "ui_parker_pairing_unavailable": {
+    "message": "This Tab Parker is not responding. Make sure it is enabled and try again."
+  },
+  "ui_parker_pairing_saved": {
+    "message": "Saved."
   }
 }

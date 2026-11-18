@@ -33,6 +33,8 @@ Organize open tabs by domain, save YouTube videos to a local Inbox, and reopen v
 
 For an update, keep the same local extension directory so Chrome retains the extension ID and its local settings. Back up your Inbox before changing installations.
 
+If Tab Parker is installed with a different extension ID than the Chrome Web Store version, confirm it once in the Video Inbox under **Connect Tab Parker**. Until then, Inbox videos open directly on YouTube.
+
 ## Screenshots
 
 ![Popup with two domains, one selected and one with its actions expanded](docs/popup.png)

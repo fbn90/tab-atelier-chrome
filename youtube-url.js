@@ -23,6 +23,26 @@ export const TAB_PARKER_UNPACKED_ID = 'pfijnbeaagokdgmnahpegnhgbneoodln';
 // Add other explicitly trusted unpacked installation IDs here when needed.
 const TRUSTED_PARKER_IDS = new Set([TAB_PARKER_STORE_ID, TAB_PARKER_UNPACKED_ID]);
 const TAB_PARKER_IDS = new Set(TRUSTED_PARKER_IDS);
+// Unpacked installs without a manifest key get a path-derived ID. Such an
+// install is trusted only after the user explicitly paired it in the Inbox.
+export const PARKER_APPROVALS_KEY = 'approvedTabParkerIdsV1';
+const APPROVED_PARKER_IDS = new Set();
+const isExtensionId = id => typeof id === 'string' && /^[a-p]{32}$/.test(id);
+export const isTrustedParkerId = id => TRUSTED_PARKER_IDS.has(id) || APPROVED_PARKER_IDS.has(id);
+export const isPinnedParkerId = id => TRUSTED_PARKER_IDS.has(id);
+export function setApprovedParkerIds(ids) {
+  APPROVED_PARKER_IDS.clear();
+  for (const id of Array.isArray(ids) ? ids : []) if (isExtensionId(id)) { APPROVED_PARKER_IDS.add(id); TAB_PARKER_IDS.add(id); }
+}
+export const approvedParkerIds = () => [...APPROVED_PARKER_IDS];
+// Answered the identity probe (display only) but not trusted for navigation or closing.
+export const unpairedParkerIds = () => [...TAB_PARKER_IDS].filter(id => !isTrustedParkerId(id));
+let approvalLoad;
+export function loadApprovedParkerIds(api) {
+  return approvalLoad ??= Promise.resolve(api?.storage?.local?.get?.(PARKER_APPROVALS_KEY))
+    .then(stored => { if (stored) setApprovedParkerIds(stored[PARKER_APPROVALS_KEY]); })
+    .catch(() => { approvalLoad = undefined; });
+}
 export function tabParkerTarget(raw, candidateOnly = false) {
   if (typeof raw !== 'string' || raw.length > 20000) return null;
   try {
@@ -45,7 +65,7 @@ export function tabParkerTarget(raw, candidateOnly = false) {
 // Discovery is useful for display, but cannot grant permission to close tabs.
 export function canCloseYouTubeSource(raw) {
   if (!tabParkerTarget(raw, true)) return true;
-  return TRUSTED_PARKER_IDS.has(new URL(raw).hostname);
+  return isTrustedParkerId(new URL(raw).hostname);
 }
 
 // Keep persisted Inbox URLs independent of an extension installation. The
@@ -121,9 +141,10 @@ export async function discoverTabParkers(api,tabs) {
 
 export async function findTabParkerBase(api,_tabs) {
   // Opening an Inbox video hands its title, channel and URL to the target page.
-  // Any extension can answer the identity probe, so only pinned IDs qualify;
-  // discovered installs stay readable but never receive new navigations.
-  const ids=new Set(TRUSTED_PARKER_IDS);
+  // Any extension can answer the identity probe, so only pinned or user-paired
+  // IDs qualify; discovered installs stay readable but never receive navigations.
+  await loadApprovedParkerIds(api);
+  const ids=new Set([...TRUSTED_PARKER_IDS,...APPROVED_PARKER_IDS]);
   ids.delete(api.runtime.id);
   try {
     return await Promise.any([...ids].map(async id=>{
@@ -151,7 +172,7 @@ export function inboxParkedUrl(base,target,title,channel) {
   if(!video||!label||!base)return target;
   try {
     const owner=new URL(base),source=new URL(target);
-    if(owner.href!==`chrome-extension://${owner.hostname}/`||!TRUSTED_PARKER_IDS.has(owner.hostname)||
+    if(owner.href!==`chrome-extension://${owner.hostname}/`||!isTrustedParkerId(owner.hostname)||
        source.username||source.password||source.port||!['youtube.com','www.youtube.com','m.youtube.com', 'music.youtube.com','youtu.be'].includes(source.hostname))return target;
     // Titles belong to the local placeholder, never to a YouTube request.
     return `${owner.href}parked.html?title=${encodeURIComponent(label)}${meaningfulChannel(channel)?'&channel='+encodeURIComponent(meaningfulChannel(channel)):''}#${target}`;

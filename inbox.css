@@ -64,3 +64,4 @@
 #reviewDialog{width:min(400px,calc(100vw - 40px));max-width:100%;border:1px solid #000;border-radius:12px;padding:20px}
 #reviewDialog form{display:grid;gap:10px}
 #reviewDialog::backdrop{background:#0004}
+.pairing-list{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}.pairing-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;overflow-wrap:anywhere}.pairing-list button{flex-shrink:0}

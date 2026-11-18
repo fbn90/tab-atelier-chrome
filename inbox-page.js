@@ -354,3 +354,31 @@ $('restoreParker').addEventListener('click',async()=>{
   catch(error){$('updateStatus').textContent=error.message;$('restoreParker').disabled=false}
 });
 updateMigrationStatus();
+
+async function updatePairing(result){
+  const t=globalThis.atelierI18n.t,list=$('parkerPairingList');
+  try{result??=await request('parker-pairing-status')}
+  catch(error){$('parkerPairingStatus').textContent=error.message;return}
+  list.replaceChildren();
+  const row=(text,label,approved,id)=>{
+    const item=document.createElement('li'),name=document.createElement('span');
+    name.textContent=text;item.append(name);
+    if(label){
+      const button=document.createElement('button');button.type='button';button.textContent=t(label);
+      button.addEventListener('click',async()=>{
+        button.disabled=true;
+        try{await updatePairing(await request('parker-pairing-set',{id,approved}));$('parkerPairingStatus').textContent=t('ui_parker_pairing_saved')}
+        catch(error){$('parkerPairingStatus').textContent=error.message;button.disabled=false}
+      });
+      item.append(button);
+    }
+    list.append(item);
+  };
+  for(const entry of result.pinned.filter(entry=>entry.active))row(t('ui_parker_pairing_builtin',[entry.id]));
+  for(const entry of result.approved)row(t('ui_parker_pairing_paired',[entry.id,t(entry.active?'ui_parker_pairing_active':'ui_parker_pairing_inactive')]),'ui_parker_pairing_remove',false,entry.id);
+  for(const id of result.candidates)row(t('ui_parker_pairing_candidate',[id]),'ui_parker_pairing_confirm',true,id);
+  if(!result.candidates.length)row(t('ui_parker_pairing_none'));
+  if(result.candidates.length&&!result.approved.length&&!result.pinned.some(entry=>entry.active))$('parkerPairing').open=true;
+}
+$('parkerPairing').addEventListener('toggle',()=>{if($('parkerPairing').open)updatePairing()});
+updatePairing();
